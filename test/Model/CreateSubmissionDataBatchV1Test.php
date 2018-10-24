@@ -1,6 +1,6 @@
 <?php
 /**
- * SubmissionTest
+ * CreateSubmissionDataBatchV1Test
  *
  * PHP version 5
  *
@@ -30,15 +30,15 @@
 namespace FormAPI;
 
 /**
- * SubmissionTest Class Doc Comment
+ * CreateSubmissionDataBatchV1Test Class Doc Comment
  *
  * @category    Class
- * @description Submission
+ * @description CreateSubmissionDataBatchV1
  * @package     FormAPI
  * @author      OpenAPI Generator team
  * @link        https://openapi-generator.tech
  */
-class SubmissionTest extends \PHPUnit_Framework_TestCase
+class CreateSubmissionDataBatchV1Test extends \PHPUnit_Framework_TestCase
 {
 
     /**
@@ -70,16 +70,9 @@ class SubmissionTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Test "Submission"
+     * Test "CreateSubmissionDataBatchV1"
      */
-    public function testSubmission()
-    {
-    }
-
-    /**
-     * Test attribute "id"
-     */
-    public function testPropertyId()
+    public function testCreateSubmissionDataBatchV1()
     {
     }
 
@@ -91,30 +84,23 @@ class SubmissionTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Test attribute "expired"
+     * Test attribute "data"
      */
-    public function testPropertyExpired()
+    public function testPropertyData()
     {
     }
 
     /**
-     * Test attribute "expires_at"
+     * Test attribute "html"
      */
-    public function testPropertyExpiresAt()
+    public function testPropertyHtml()
     {
     }
 
     /**
-     * Test attribute "processed_at"
+     * Test attribute "css"
      */
-    public function testPropertyProcessedAt()
-    {
-    }
-
-    /**
-     * Test attribute "state"
-     */
-    public function testPropertyState()
+    public function testPropertyCss()
     {
     }
 
@@ -122,27 +108,6 @@ class SubmissionTest extends \PHPUnit_Framework_TestCase
      * Test attribute "metadata"
      */
     public function testPropertyMetadata()
-    {
-    }
-
-    /**
-     * Test attribute "download_url"
-     */
-    public function testPropertyDownloadUrl()
-    {
-    }
-
-    /**
-     * Test attribute "batch_id"
-     */
-    public function testPropertyBatchId()
-    {
-    }
-
-    /**
-     * Test attribute "data_requests"
-     */
-    public function testPropertyDataRequests()
     {
     }
 }

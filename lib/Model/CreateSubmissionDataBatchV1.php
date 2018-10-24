@@ -1,6 +1,6 @@
 <?php
 /**
- * CombinedSubmissionData
+ * CreateSubmissionDataBatchV1
  *
  * PHP version 5
  *
@@ -33,14 +33,14 @@ use \ArrayAccess;
 use \FormAPI\ObjectSerializer;
 
 /**
- * CombinedSubmissionData Class Doc Comment
+ * CreateSubmissionDataBatchV1 Class Doc Comment
  *
  * @category Class
  * @package  FormAPI
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  */
-class CombinedSubmissionData implements ModelInterface, ArrayAccess
+class CreateSubmissionDataBatchV1 implements ModelInterface, ArrayAccess
 {
     const DISCRIMINATOR = null;
 
@@ -49,7 +49,7 @@ class CombinedSubmissionData implements ModelInterface, ArrayAccess
       *
       * @var string
       */
-    protected static $openAPIModelName = 'combined_submission_data';
+    protected static $openAPIModelName = 'create_submission_data_batch_v1';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -58,9 +58,10 @@ class CombinedSubmissionData implements ModelInterface, ArrayAccess
       */
     protected static $openAPITypes = [
         'test' => 'bool',
-        'submission_ids' => 'string[]',
-        'metadata' => 'object',
-        'expires_in' => 'int'
+        'data' => 'object',
+        'html' => 'string',
+        'css' => 'string',
+        'metadata' => 'object'
     ];
 
     /**
@@ -70,9 +71,10 @@ class CombinedSubmissionData implements ModelInterface, ArrayAccess
       */
     protected static $openAPIFormats = [
         'test' => null,
-        'submission_ids' => null,
-        'metadata' => null,
-        'expires_in' => null
+        'data' => null,
+        'html' => null,
+        'css' => null,
+        'metadata' => null
     ];
 
     /**
@@ -103,9 +105,10 @@ class CombinedSubmissionData implements ModelInterface, ArrayAccess
      */
     protected static $attributeMap = [
         'test' => 'test',
-        'submission_ids' => 'submission_ids',
-        'metadata' => 'metadata',
-        'expires_in' => 'expires_in'
+        'data' => 'data',
+        'html' => 'html',
+        'css' => 'css',
+        'metadata' => 'metadata'
     ];
 
     /**
@@ -115,9 +118,10 @@ class CombinedSubmissionData implements ModelInterface, ArrayAccess
      */
     protected static $setters = [
         'test' => 'setTest',
-        'submission_ids' => 'setSubmissionIds',
-        'metadata' => 'setMetadata',
-        'expires_in' => 'setExpiresIn'
+        'data' => 'setData',
+        'html' => 'setHtml',
+        'css' => 'setCss',
+        'metadata' => 'setMetadata'
     ];
 
     /**
@@ -127,9 +131,10 @@ class CombinedSubmissionData implements ModelInterface, ArrayAccess
      */
     protected static $getters = [
         'test' => 'getTest',
-        'submission_ids' => 'getSubmissionIds',
-        'metadata' => 'getMetadata',
-        'expires_in' => 'getExpiresIn'
+        'data' => 'getData',
+        'html' => 'getHtml',
+        'css' => 'getCss',
+        'metadata' => 'getMetadata'
     ];
 
     /**
@@ -193,9 +198,10 @@ class CombinedSubmissionData implements ModelInterface, ArrayAccess
     public function __construct(array $data = null)
     {
         $this->container['test'] = isset($data['test']) ? $data['test'] : null;
-        $this->container['submission_ids'] = isset($data['submission_ids']) ? $data['submission_ids'] : null;
+        $this->container['data'] = isset($data['data']) ? $data['data'] : null;
+        $this->container['html'] = isset($data['html']) ? $data['html'] : null;
+        $this->container['css'] = isset($data['css']) ? $data['css'] : null;
         $this->container['metadata'] = isset($data['metadata']) ? $data['metadata'] : null;
-        $this->container['expires_in'] = isset($data['expires_in']) ? $data['expires_in'] : null;
     }
 
     /**
@@ -207,8 +213,8 @@ class CombinedSubmissionData implements ModelInterface, ArrayAccess
     {
         $invalidProperties = [];
 
-        if ($this->container['submission_ids'] === null) {
-            $invalidProperties[] = "'submission_ids' can't be null";
+        if ($this->container['data'] === null) {
+            $invalidProperties[] = "'data' can't be null";
         }
         return $invalidProperties;
     }
@@ -250,25 +256,73 @@ class CombinedSubmissionData implements ModelInterface, ArrayAccess
     }
 
     /**
-     * Gets submission_ids
+     * Gets data
      *
-     * @return string[]
+     * @return object
      */
-    public function getSubmissionIds()
+    public function getData()
     {
-        return $this->container['submission_ids'];
+        return $this->container['data'];
     }
 
     /**
-     * Sets submission_ids
+     * Sets data
      *
-     * @param string[] $submission_ids submission_ids
+     * @param object $data data
      *
      * @return $this
      */
-    public function setSubmissionIds($submission_ids)
+    public function setData($data)
     {
-        $this->container['submission_ids'] = $submission_ids;
+        $this->container['data'] = $data;
+
+        return $this;
+    }
+
+    /**
+     * Gets html
+     *
+     * @return string|null
+     */
+    public function getHtml()
+    {
+        return $this->container['html'];
+    }
+
+    /**
+     * Sets html
+     *
+     * @param string|null $html html
+     *
+     * @return $this
+     */
+    public function setHtml($html)
+    {
+        $this->container['html'] = $html;
+
+        return $this;
+    }
+
+    /**
+     * Gets css
+     *
+     * @return string|null
+     */
+    public function getCss()
+    {
+        return $this->container['css'];
+    }
+
+    /**
+     * Sets css
+     *
+     * @param string|null $css css
+     *
+     * @return $this
+     */
+    public function setCss($css)
+    {
+        $this->container['css'] = $css;
 
         return $this;
     }
@@ -293,30 +347,6 @@ class CombinedSubmissionData implements ModelInterface, ArrayAccess
     public function setMetadata($metadata)
     {
         $this->container['metadata'] = $metadata;
-
-        return $this;
-    }
-
-    /**
-     * Gets expires_in
-     *
-     * @return int|null
-     */
-    public function getExpiresIn()
-    {
-        return $this->container['expires_in'];
-    }
-
-    /**
-     * Sets expires_in
-     *
-     * @param int|null $expires_in expires_in
-     *
-     * @return $this
-     */
-    public function setExpiresIn($expires_in)
-    {
-        $this->container['expires_in'] = $expires_in;
 
         return $this;
     }
