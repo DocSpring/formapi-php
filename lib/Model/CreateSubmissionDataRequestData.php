@@ -1,6 +1,6 @@
 <?php
 /**
- * SubmissionDataRequest
+ * CreateSubmissionDataRequestData
  *
  * PHP version 5
  *
@@ -33,14 +33,14 @@ use \ArrayAccess;
 use \FormAPI\ObjectSerializer;
 
 /**
- * SubmissionDataRequest Class Doc Comment
+ * CreateSubmissionDataRequestData Class Doc Comment
  *
  * @category Class
  * @package  FormAPI
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  */
-class SubmissionDataRequest implements ModelInterface, ArrayAccess
+class CreateSubmissionDataRequestData implements ModelInterface, ArrayAccess
 {
     const DISCRIMINATOR = null;
 
@@ -49,7 +49,7 @@ class SubmissionDataRequest implements ModelInterface, ArrayAccess
       *
       * @var string
       */
-    protected static $openAPIModelName = 'submission_data_request';
+    protected static $openAPIModelName = 'create_submission_data_request_data';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -57,23 +57,19 @@ class SubmissionDataRequest implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $openAPITypes = [
-        'id' => 'string',
-        'name' => 'string',
-        'email' => 'string',
-        'order' => 'int',
-        'fields' => 'string[]',
         'metadata' => 'object',
-        'state' => 'string',
-        'viewed_at' => 'string',
-        'completed_at' => 'string',
         'auth_type' => 'string',
         'auth_second_factor_type' => 'string',
-        'auth_provider' => 'string',
+        'auth_phone_number_hash' => 'string',
         'auth_session_started_at' => 'string',
-        'auth_session_id_hash' => 'string',
         'auth_user_id_hash' => 'string',
+        'auth_session_id_hash' => 'string',
         'auth_username_hash' => 'string',
-        'auth_phone_number_hash' => 'string'
+        'name' => 'string',
+        'fields' => 'string[]',
+        'email' => 'string',
+        'auth_provider' => 'string',
+        'order' => 'int'
     ];
 
     /**
@@ -82,23 +78,19 @@ class SubmissionDataRequest implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $openAPIFormats = [
-        'id' => null,
-        'name' => null,
-        'email' => null,
-        'order' => null,
-        'fields' => null,
         'metadata' => null,
-        'state' => null,
-        'viewed_at' => null,
-        'completed_at' => null,
         'auth_type' => null,
         'auth_second_factor_type' => null,
-        'auth_provider' => null,
+        'auth_phone_number_hash' => null,
         'auth_session_started_at' => null,
-        'auth_session_id_hash' => null,
         'auth_user_id_hash' => null,
+        'auth_session_id_hash' => null,
         'auth_username_hash' => null,
-        'auth_phone_number_hash' => null
+        'name' => null,
+        'fields' => null,
+        'email' => null,
+        'auth_provider' => null,
+        'order' => null
     ];
 
     /**
@@ -128,23 +120,19 @@ class SubmissionDataRequest implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $attributeMap = [
-        'id' => 'id',
-        'name' => 'name',
-        'email' => 'email',
-        'order' => 'order',
-        'fields' => 'fields',
         'metadata' => 'metadata',
-        'state' => 'state',
-        'viewed_at' => 'viewed_at',
-        'completed_at' => 'completed_at',
         'auth_type' => 'auth_type',
         'auth_second_factor_type' => 'auth_second_factor_type',
-        'auth_provider' => 'auth_provider',
+        'auth_phone_number_hash' => 'auth_phone_number_hash',
         'auth_session_started_at' => 'auth_session_started_at',
-        'auth_session_id_hash' => 'auth_session_id_hash',
         'auth_user_id_hash' => 'auth_user_id_hash',
+        'auth_session_id_hash' => 'auth_session_id_hash',
         'auth_username_hash' => 'auth_username_hash',
-        'auth_phone_number_hash' => 'auth_phone_number_hash'
+        'name' => 'name',
+        'fields' => 'fields',
+        'email' => 'email',
+        'auth_provider' => 'auth_provider',
+        'order' => 'order'
     ];
 
     /**
@@ -153,23 +141,19 @@ class SubmissionDataRequest implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $setters = [
-        'id' => 'setId',
-        'name' => 'setName',
-        'email' => 'setEmail',
-        'order' => 'setOrder',
-        'fields' => 'setFields',
         'metadata' => 'setMetadata',
-        'state' => 'setState',
-        'viewed_at' => 'setViewedAt',
-        'completed_at' => 'setCompletedAt',
         'auth_type' => 'setAuthType',
         'auth_second_factor_type' => 'setAuthSecondFactorType',
-        'auth_provider' => 'setAuthProvider',
+        'auth_phone_number_hash' => 'setAuthPhoneNumberHash',
         'auth_session_started_at' => 'setAuthSessionStartedAt',
-        'auth_session_id_hash' => 'setAuthSessionIdHash',
         'auth_user_id_hash' => 'setAuthUserIdHash',
+        'auth_session_id_hash' => 'setAuthSessionIdHash',
         'auth_username_hash' => 'setAuthUsernameHash',
-        'auth_phone_number_hash' => 'setAuthPhoneNumberHash'
+        'name' => 'setName',
+        'fields' => 'setFields',
+        'email' => 'setEmail',
+        'auth_provider' => 'setAuthProvider',
+        'order' => 'setOrder'
     ];
 
     /**
@@ -178,23 +162,19 @@ class SubmissionDataRequest implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $getters = [
-        'id' => 'getId',
-        'name' => 'getName',
-        'email' => 'getEmail',
-        'order' => 'getOrder',
-        'fields' => 'getFields',
         'metadata' => 'getMetadata',
-        'state' => 'getState',
-        'viewed_at' => 'getViewedAt',
-        'completed_at' => 'getCompletedAt',
         'auth_type' => 'getAuthType',
         'auth_second_factor_type' => 'getAuthSecondFactorType',
-        'auth_provider' => 'getAuthProvider',
+        'auth_phone_number_hash' => 'getAuthPhoneNumberHash',
         'auth_session_started_at' => 'getAuthSessionStartedAt',
-        'auth_session_id_hash' => 'getAuthSessionIdHash',
         'auth_user_id_hash' => 'getAuthUserIdHash',
+        'auth_session_id_hash' => 'getAuthSessionIdHash',
         'auth_username_hash' => 'getAuthUsernameHash',
-        'auth_phone_number_hash' => 'getAuthPhoneNumberHash'
+        'name' => 'getName',
+        'fields' => 'getFields',
+        'email' => 'getEmail',
+        'auth_provider' => 'getAuthProvider',
+        'order' => 'getOrder'
     ];
 
     /**
@@ -238,8 +218,6 @@ class SubmissionDataRequest implements ModelInterface, ArrayAccess
         return self::$openAPIModelName;
     }
 
-    const STATE_PENDING = 'pending';
-    const STATE_COMPLETED = 'completed';
     const AUTH_TYPE_NONE = 'none';
     const AUTH_TYPE_PASSWORD = 'password';
     const AUTH_TYPE_OAUTH = 'oauth';
@@ -255,19 +233,6 @@ class SubmissionDataRequest implements ModelInterface, ArrayAccess
     const AUTH_SECOND_FACTOR_TYPE_FINGERPRINT = 'fingerprint';
     
 
-    
-    /**
-     * Gets allowable values of the enum
-     *
-     * @return string[]
-     */
-    public function getStateAllowableValues()
-    {
-        return [
-            self::STATE_PENDING,
-            self::STATE_COMPLETED,
-        ];
-    }
     
     /**
      * Gets allowable values of the enum
@@ -320,23 +285,19 @@ class SubmissionDataRequest implements ModelInterface, ArrayAccess
      */
     public function __construct(array $data = null)
     {
-        $this->container['id'] = isset($data['id']) ? $data['id'] : null;
-        $this->container['name'] = isset($data['name']) ? $data['name'] : null;
-        $this->container['email'] = isset($data['email']) ? $data['email'] : null;
-        $this->container['order'] = isset($data['order']) ? $data['order'] : null;
-        $this->container['fields'] = isset($data['fields']) ? $data['fields'] : null;
         $this->container['metadata'] = isset($data['metadata']) ? $data['metadata'] : null;
-        $this->container['state'] = isset($data['state']) ? $data['state'] : null;
-        $this->container['viewed_at'] = isset($data['viewed_at']) ? $data['viewed_at'] : null;
-        $this->container['completed_at'] = isset($data['completed_at']) ? $data['completed_at'] : null;
         $this->container['auth_type'] = isset($data['auth_type']) ? $data['auth_type'] : null;
         $this->container['auth_second_factor_type'] = isset($data['auth_second_factor_type']) ? $data['auth_second_factor_type'] : null;
-        $this->container['auth_provider'] = isset($data['auth_provider']) ? $data['auth_provider'] : null;
-        $this->container['auth_session_started_at'] = isset($data['auth_session_started_at']) ? $data['auth_session_started_at'] : null;
-        $this->container['auth_session_id_hash'] = isset($data['auth_session_id_hash']) ? $data['auth_session_id_hash'] : null;
-        $this->container['auth_user_id_hash'] = isset($data['auth_user_id_hash']) ? $data['auth_user_id_hash'] : null;
-        $this->container['auth_username_hash'] = isset($data['auth_username_hash']) ? $data['auth_username_hash'] : null;
         $this->container['auth_phone_number_hash'] = isset($data['auth_phone_number_hash']) ? $data['auth_phone_number_hash'] : null;
+        $this->container['auth_session_started_at'] = isset($data['auth_session_started_at']) ? $data['auth_session_started_at'] : null;
+        $this->container['auth_user_id_hash'] = isset($data['auth_user_id_hash']) ? $data['auth_user_id_hash'] : null;
+        $this->container['auth_session_id_hash'] = isset($data['auth_session_id_hash']) ? $data['auth_session_id_hash'] : null;
+        $this->container['auth_username_hash'] = isset($data['auth_username_hash']) ? $data['auth_username_hash'] : null;
+        $this->container['name'] = isset($data['name']) ? $data['name'] : null;
+        $this->container['fields'] = isset($data['fields']) ? $data['fields'] : null;
+        $this->container['email'] = isset($data['email']) ? $data['email'] : null;
+        $this->container['auth_provider'] = isset($data['auth_provider']) ? $data['auth_provider'] : null;
+        $this->container['order'] = isset($data['order']) ? $data['order'] : null;
     }
 
     /**
@@ -347,35 +308,6 @@ class SubmissionDataRequest implements ModelInterface, ArrayAccess
     public function listInvalidProperties()
     {
         $invalidProperties = [];
-
-        if ($this->container['id'] === null) {
-            $invalidProperties[] = "'id' can't be null";
-        }
-        if ($this->container['name'] === null) {
-            $invalidProperties[] = "'name' can't be null";
-        }
-        if ($this->container['email'] === null) {
-            $invalidProperties[] = "'email' can't be null";
-        }
-        if ($this->container['order'] === null) {
-            $invalidProperties[] = "'order' can't be null";
-        }
-        if ($this->container['fields'] === null) {
-            $invalidProperties[] = "'fields' can't be null";
-        }
-        if ($this->container['metadata'] === null) {
-            $invalidProperties[] = "'metadata' can't be null";
-        }
-        if ($this->container['state'] === null) {
-            $invalidProperties[] = "'state' can't be null";
-        }
-        $allowedValues = $this->getStateAllowableValues();
-        if (!is_null($this->container['state']) && !in_array($this->container['state'], $allowedValues, true)) {
-            $invalidProperties[] = sprintf(
-                "invalid value for 'state', must be one of '%s'",
-                implode("', '", $allowedValues)
-            );
-        }
 
         $allowedValues = $this->getAuthTypeAllowableValues();
         if (!is_null($this->container['auth_type']) && !in_array($this->container['auth_type'], $allowedValues, true)) {
@@ -409,129 +341,9 @@ class SubmissionDataRequest implements ModelInterface, ArrayAccess
 
 
     /**
-     * Gets id
-     *
-     * @return string
-     */
-    public function getId()
-    {
-        return $this->container['id'];
-    }
-
-    /**
-     * Sets id
-     *
-     * @param string $id id
-     *
-     * @return $this
-     */
-    public function setId($id)
-    {
-        $this->container['id'] = $id;
-
-        return $this;
-    }
-
-    /**
-     * Gets name
-     *
-     * @return string
-     */
-    public function getName()
-    {
-        return $this->container['name'];
-    }
-
-    /**
-     * Sets name
-     *
-     * @param string $name name
-     *
-     * @return $this
-     */
-    public function setName($name)
-    {
-        $this->container['name'] = $name;
-
-        return $this;
-    }
-
-    /**
-     * Gets email
-     *
-     * @return string
-     */
-    public function getEmail()
-    {
-        return $this->container['email'];
-    }
-
-    /**
-     * Sets email
-     *
-     * @param string $email email
-     *
-     * @return $this
-     */
-    public function setEmail($email)
-    {
-        $this->container['email'] = $email;
-
-        return $this;
-    }
-
-    /**
-     * Gets order
-     *
-     * @return int
-     */
-    public function getOrder()
-    {
-        return $this->container['order'];
-    }
-
-    /**
-     * Sets order
-     *
-     * @param int $order order
-     *
-     * @return $this
-     */
-    public function setOrder($order)
-    {
-        $this->container['order'] = $order;
-
-        return $this;
-    }
-
-    /**
-     * Gets fields
-     *
-     * @return string[]
-     */
-    public function getFields()
-    {
-        return $this->container['fields'];
-    }
-
-    /**
-     * Sets fields
-     *
-     * @param string[] $fields fields
-     *
-     * @return $this
-     */
-    public function setFields($fields)
-    {
-        $this->container['fields'] = $fields;
-
-        return $this;
-    }
-
-    /**
      * Gets metadata
      *
-     * @return object
+     * @return object|null
      */
     public function getMetadata()
     {
@@ -541,94 +353,13 @@ class SubmissionDataRequest implements ModelInterface, ArrayAccess
     /**
      * Sets metadata
      *
-     * @param object $metadata metadata
+     * @param object|null $metadata metadata
      *
      * @return $this
      */
     public function setMetadata($metadata)
     {
         $this->container['metadata'] = $metadata;
-
-        return $this;
-    }
-
-    /**
-     * Gets state
-     *
-     * @return string
-     */
-    public function getState()
-    {
-        return $this->container['state'];
-    }
-
-    /**
-     * Sets state
-     *
-     * @param string $state state
-     *
-     * @return $this
-     */
-    public function setState($state)
-    {
-        $allowedValues = $this->getStateAllowableValues();
-        if (!in_array($state, $allowedValues, true)) {
-            throw new \InvalidArgumentException(
-                sprintf(
-                    "Invalid value for 'state', must be one of '%s'",
-                    implode("', '", $allowedValues)
-                )
-            );
-        }
-        $this->container['state'] = $state;
-
-        return $this;
-    }
-
-    /**
-     * Gets viewed_at
-     *
-     * @return string|null
-     */
-    public function getViewedAt()
-    {
-        return $this->container['viewed_at'];
-    }
-
-    /**
-     * Sets viewed_at
-     *
-     * @param string|null $viewed_at viewed_at
-     *
-     * @return $this
-     */
-    public function setViewedAt($viewed_at)
-    {
-        $this->container['viewed_at'] = $viewed_at;
-
-        return $this;
-    }
-
-    /**
-     * Gets completed_at
-     *
-     * @return string|null
-     */
-    public function getCompletedAt()
-    {
-        return $this->container['completed_at'];
-    }
-
-    /**
-     * Sets completed_at
-     *
-     * @param string|null $completed_at completed_at
-     *
-     * @return $this
-     */
-    public function setCompletedAt($completed_at)
-    {
-        $this->container['completed_at'] = $completed_at;
 
         return $this;
     }
@@ -700,25 +431,25 @@ class SubmissionDataRequest implements ModelInterface, ArrayAccess
     }
 
     /**
-     * Gets auth_provider
+     * Gets auth_phone_number_hash
      *
      * @return string|null
      */
-    public function getAuthProvider()
+    public function getAuthPhoneNumberHash()
     {
-        return $this->container['auth_provider'];
+        return $this->container['auth_phone_number_hash'];
     }
 
     /**
-     * Sets auth_provider
+     * Sets auth_phone_number_hash
      *
-     * @param string|null $auth_provider auth_provider
+     * @param string|null $auth_phone_number_hash auth_phone_number_hash
      *
      * @return $this
      */
-    public function setAuthProvider($auth_provider)
+    public function setAuthPhoneNumberHash($auth_phone_number_hash)
     {
-        $this->container['auth_provider'] = $auth_provider;
+        $this->container['auth_phone_number_hash'] = $auth_phone_number_hash;
 
         return $this;
     }
@@ -748,30 +479,6 @@ class SubmissionDataRequest implements ModelInterface, ArrayAccess
     }
 
     /**
-     * Gets auth_session_id_hash
-     *
-     * @return string|null
-     */
-    public function getAuthSessionIdHash()
-    {
-        return $this->container['auth_session_id_hash'];
-    }
-
-    /**
-     * Sets auth_session_id_hash
-     *
-     * @param string|null $auth_session_id_hash auth_session_id_hash
-     *
-     * @return $this
-     */
-    public function setAuthSessionIdHash($auth_session_id_hash)
-    {
-        $this->container['auth_session_id_hash'] = $auth_session_id_hash;
-
-        return $this;
-    }
-
-    /**
      * Gets auth_user_id_hash
      *
      * @return string|null
@@ -791,6 +498,30 @@ class SubmissionDataRequest implements ModelInterface, ArrayAccess
     public function setAuthUserIdHash($auth_user_id_hash)
     {
         $this->container['auth_user_id_hash'] = $auth_user_id_hash;
+
+        return $this;
+    }
+
+    /**
+     * Gets auth_session_id_hash
+     *
+     * @return string|null
+     */
+    public function getAuthSessionIdHash()
+    {
+        return $this->container['auth_session_id_hash'];
+    }
+
+    /**
+     * Sets auth_session_id_hash
+     *
+     * @param string|null $auth_session_id_hash auth_session_id_hash
+     *
+     * @return $this
+     */
+    public function setAuthSessionIdHash($auth_session_id_hash)
+    {
+        $this->container['auth_session_id_hash'] = $auth_session_id_hash;
 
         return $this;
     }
@@ -820,25 +551,121 @@ class SubmissionDataRequest implements ModelInterface, ArrayAccess
     }
 
     /**
-     * Gets auth_phone_number_hash
+     * Gets name
      *
      * @return string|null
      */
-    public function getAuthPhoneNumberHash()
+    public function getName()
     {
-        return $this->container['auth_phone_number_hash'];
+        return $this->container['name'];
     }
 
     /**
-     * Sets auth_phone_number_hash
+     * Sets name
      *
-     * @param string|null $auth_phone_number_hash auth_phone_number_hash
+     * @param string|null $name name
      *
      * @return $this
      */
-    public function setAuthPhoneNumberHash($auth_phone_number_hash)
+    public function setName($name)
     {
-        $this->container['auth_phone_number_hash'] = $auth_phone_number_hash;
+        $this->container['name'] = $name;
+
+        return $this;
+    }
+
+    /**
+     * Gets fields
+     *
+     * @return string[]|null
+     */
+    public function getFields()
+    {
+        return $this->container['fields'];
+    }
+
+    /**
+     * Sets fields
+     *
+     * @param string[]|null $fields fields
+     *
+     * @return $this
+     */
+    public function setFields($fields)
+    {
+        $this->container['fields'] = $fields;
+
+        return $this;
+    }
+
+    /**
+     * Gets email
+     *
+     * @return string|null
+     */
+    public function getEmail()
+    {
+        return $this->container['email'];
+    }
+
+    /**
+     * Sets email
+     *
+     * @param string|null $email email
+     *
+     * @return $this
+     */
+    public function setEmail($email)
+    {
+        $this->container['email'] = $email;
+
+        return $this;
+    }
+
+    /**
+     * Gets auth_provider
+     *
+     * @return string|null
+     */
+    public function getAuthProvider()
+    {
+        return $this->container['auth_provider'];
+    }
+
+    /**
+     * Sets auth_provider
+     *
+     * @param string|null $auth_provider auth_provider
+     *
+     * @return $this
+     */
+    public function setAuthProvider($auth_provider)
+    {
+        $this->container['auth_provider'] = $auth_provider;
+
+        return $this;
+    }
+
+    /**
+     * Gets order
+     *
+     * @return int|null
+     */
+    public function getOrder()
+    {
+        return $this->container['order'];
+    }
+
+    /**
+     * Sets order
+     *
+     * @param int|null $order order
+     *
+     * @return $this
+     */
+    public function setOrder($order)
+    {
+        $this->container['order'] = $order;
 
         return $this;
     }

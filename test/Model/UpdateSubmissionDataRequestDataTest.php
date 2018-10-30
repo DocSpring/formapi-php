@@ -1,6 +1,6 @@
 <?php
 /**
- * SubmissionDataRequestTest
+ * UpdateSubmissionDataRequestDataTest
  *
  * PHP version 5
  *
@@ -30,15 +30,15 @@
 namespace FormAPI;
 
 /**
- * SubmissionDataRequestTest Class Doc Comment
+ * UpdateSubmissionDataRequestDataTest Class Doc Comment
  *
  * @category    Class
- * @description SubmissionDataRequest
+ * @description UpdateSubmissionDataRequestData
  * @package     FormAPI
  * @author      OpenAPI Generator team
  * @link        https://openapi-generator.tech
  */
-class SubmissionDataRequestTest extends \PHPUnit_Framework_TestCase
+class UpdateSubmissionDataRequestDataTest extends \PHPUnit_Framework_TestCase
 {
 
     /**
@@ -70,16 +70,9 @@ class SubmissionDataRequestTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Test "SubmissionDataRequest"
+     * Test "UpdateSubmissionDataRequestData"
      */
-    public function testSubmissionDataRequest()
-    {
-    }
-
-    /**
-     * Test attribute "id"
-     */
-    public function testPropertyId()
+    public function testUpdateSubmissionDataRequestData()
     {
     }
 
@@ -115,27 +108,6 @@ class SubmissionDataRequestTest extends \PHPUnit_Framework_TestCase
      * Test attribute "metadata"
      */
     public function testPropertyMetadata()
-    {
-    }
-
-    /**
-     * Test attribute "state"
-     */
-    public function testPropertyState()
-    {
-    }
-
-    /**
-     * Test attribute "viewed_at"
-     */
-    public function testPropertyViewedAt()
-    {
-    }
-
-    /**
-     * Test attribute "completed_at"
-     */
-    public function testPropertyCompletedAt()
     {
     }
 

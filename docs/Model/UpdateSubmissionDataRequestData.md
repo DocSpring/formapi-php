@@ -1,17 +1,13 @@
-# SubmissionDataRequest
+# UpdateSubmissionDataRequestData
 
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**id** | **string** |  | 
-**name** | **string** |  | 
-**email** | **string** |  | 
-**order** | **int** |  | 
-**fields** | **string[]** |  | 
-**metadata** | **object** |  | 
-**state** | **string** |  | 
-**viewed_at** | **string** |  | [optional] 
-**completed_at** | **string** |  | [optional] 
+**name** | **string** |  | [optional] 
+**email** | **string** |  | [optional] 
+**order** | **int** |  | [optional] 
+**fields** | **string[]** |  | [optional] 
+**metadata** | **object** |  | [optional] 
 **auth_type** | **string** |  | [optional] 
 **auth_second_factor_type** | **string** |  | [optional] 
 **auth_provider** | **string** |  | [optional] 

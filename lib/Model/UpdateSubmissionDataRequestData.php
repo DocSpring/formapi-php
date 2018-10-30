@@ -1,6 +1,6 @@
 <?php
 /**
- * SubmissionDataRequest
+ * UpdateSubmissionDataRequestData
  *
  * PHP version 5
  *
@@ -33,14 +33,14 @@ use \ArrayAccess;
 use \FormAPI\ObjectSerializer;
 
 /**
- * SubmissionDataRequest Class Doc Comment
+ * UpdateSubmissionDataRequestData Class Doc Comment
  *
  * @category Class
  * @package  FormAPI
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  */
-class SubmissionDataRequest implements ModelInterface, ArrayAccess
+class UpdateSubmissionDataRequestData implements ModelInterface, ArrayAccess
 {
     const DISCRIMINATOR = null;
 
@@ -49,7 +49,7 @@ class SubmissionDataRequest implements ModelInterface, ArrayAccess
       *
       * @var string
       */
-    protected static $openAPIModelName = 'submission_data_request';
+    protected static $openAPIModelName = 'update_submission_data_request_data';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -57,15 +57,11 @@ class SubmissionDataRequest implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $openAPITypes = [
-        'id' => 'string',
         'name' => 'string',
         'email' => 'string',
         'order' => 'int',
         'fields' => 'string[]',
         'metadata' => 'object',
-        'state' => 'string',
-        'viewed_at' => 'string',
-        'completed_at' => 'string',
         'auth_type' => 'string',
         'auth_second_factor_type' => 'string',
         'auth_provider' => 'string',
@@ -82,15 +78,11 @@ class SubmissionDataRequest implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $openAPIFormats = [
-        'id' => null,
         'name' => null,
         'email' => null,
         'order' => null,
         'fields' => null,
         'metadata' => null,
-        'state' => null,
-        'viewed_at' => null,
-        'completed_at' => null,
         'auth_type' => null,
         'auth_second_factor_type' => null,
         'auth_provider' => null,
@@ -128,15 +120,11 @@ class SubmissionDataRequest implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $attributeMap = [
-        'id' => 'id',
         'name' => 'name',
         'email' => 'email',
         'order' => 'order',
         'fields' => 'fields',
         'metadata' => 'metadata',
-        'state' => 'state',
-        'viewed_at' => 'viewed_at',
-        'completed_at' => 'completed_at',
         'auth_type' => 'auth_type',
         'auth_second_factor_type' => 'auth_second_factor_type',
         'auth_provider' => 'auth_provider',
@@ -153,15 +141,11 @@ class SubmissionDataRequest implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $setters = [
-        'id' => 'setId',
         'name' => 'setName',
         'email' => 'setEmail',
         'order' => 'setOrder',
         'fields' => 'setFields',
         'metadata' => 'setMetadata',
-        'state' => 'setState',
-        'viewed_at' => 'setViewedAt',
-        'completed_at' => 'setCompletedAt',
         'auth_type' => 'setAuthType',
         'auth_second_factor_type' => 'setAuthSecondFactorType',
         'auth_provider' => 'setAuthProvider',
@@ -178,15 +162,11 @@ class SubmissionDataRequest implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $getters = [
-        'id' => 'getId',
         'name' => 'getName',
         'email' => 'getEmail',
         'order' => 'getOrder',
         'fields' => 'getFields',
         'metadata' => 'getMetadata',
-        'state' => 'getState',
-        'viewed_at' => 'getViewedAt',
-        'completed_at' => 'getCompletedAt',
         'auth_type' => 'getAuthType',
         'auth_second_factor_type' => 'getAuthSecondFactorType',
         'auth_provider' => 'getAuthProvider',
@@ -238,8 +218,6 @@ class SubmissionDataRequest implements ModelInterface, ArrayAccess
         return self::$openAPIModelName;
     }
 
-    const STATE_PENDING = 'pending';
-    const STATE_COMPLETED = 'completed';
     const AUTH_TYPE_NONE = 'none';
     const AUTH_TYPE_PASSWORD = 'password';
     const AUTH_TYPE_OAUTH = 'oauth';
@@ -255,19 +233,6 @@ class SubmissionDataRequest implements ModelInterface, ArrayAccess
     const AUTH_SECOND_FACTOR_TYPE_FINGERPRINT = 'fingerprint';
     
 
-    
-    /**
-     * Gets allowable values of the enum
-     *
-     * @return string[]
-     */
-    public function getStateAllowableValues()
-    {
-        return [
-            self::STATE_PENDING,
-            self::STATE_COMPLETED,
-        ];
-    }
     
     /**
      * Gets allowable values of the enum
@@ -320,15 +285,11 @@ class SubmissionDataRequest implements ModelInterface, ArrayAccess
      */
     public function __construct(array $data = null)
     {
-        $this->container['id'] = isset($data['id']) ? $data['id'] : null;
         $this->container['name'] = isset($data['name']) ? $data['name'] : null;
         $this->container['email'] = isset($data['email']) ? $data['email'] : null;
         $this->container['order'] = isset($data['order']) ? $data['order'] : null;
         $this->container['fields'] = isset($data['fields']) ? $data['fields'] : null;
         $this->container['metadata'] = isset($data['metadata']) ? $data['metadata'] : null;
-        $this->container['state'] = isset($data['state']) ? $data['state'] : null;
-        $this->container['viewed_at'] = isset($data['viewed_at']) ? $data['viewed_at'] : null;
-        $this->container['completed_at'] = isset($data['completed_at']) ? $data['completed_at'] : null;
         $this->container['auth_type'] = isset($data['auth_type']) ? $data['auth_type'] : null;
         $this->container['auth_second_factor_type'] = isset($data['auth_second_factor_type']) ? $data['auth_second_factor_type'] : null;
         $this->container['auth_provider'] = isset($data['auth_provider']) ? $data['auth_provider'] : null;
@@ -347,35 +308,6 @@ class SubmissionDataRequest implements ModelInterface, ArrayAccess
     public function listInvalidProperties()
     {
         $invalidProperties = [];
-
-        if ($this->container['id'] === null) {
-            $invalidProperties[] = "'id' can't be null";
-        }
-        if ($this->container['name'] === null) {
-            $invalidProperties[] = "'name' can't be null";
-        }
-        if ($this->container['email'] === null) {
-            $invalidProperties[] = "'email' can't be null";
-        }
-        if ($this->container['order'] === null) {
-            $invalidProperties[] = "'order' can't be null";
-        }
-        if ($this->container['fields'] === null) {
-            $invalidProperties[] = "'fields' can't be null";
-        }
-        if ($this->container['metadata'] === null) {
-            $invalidProperties[] = "'metadata' can't be null";
-        }
-        if ($this->container['state'] === null) {
-            $invalidProperties[] = "'state' can't be null";
-        }
-        $allowedValues = $this->getStateAllowableValues();
-        if (!is_null($this->container['state']) && !in_array($this->container['state'], $allowedValues, true)) {
-            $invalidProperties[] = sprintf(
-                "invalid value for 'state', must be one of '%s'",
-                implode("', '", $allowedValues)
-            );
-        }
 
         $allowedValues = $this->getAuthTypeAllowableValues();
         if (!is_null($this->container['auth_type']) && !in_array($this->container['auth_type'], $allowedValues, true)) {
@@ -409,33 +341,9 @@ class SubmissionDataRequest implements ModelInterface, ArrayAccess
 
 
     /**
-     * Gets id
-     *
-     * @return string
-     */
-    public function getId()
-    {
-        return $this->container['id'];
-    }
-
-    /**
-     * Sets id
-     *
-     * @param string $id id
-     *
-     * @return $this
-     */
-    public function setId($id)
-    {
-        $this->container['id'] = $id;
-
-        return $this;
-    }
-
-    /**
      * Gets name
      *
-     * @return string
+     * @return string|null
      */
     public function getName()
     {
@@ -445,7 +353,7 @@ class SubmissionDataRequest implements ModelInterface, ArrayAccess
     /**
      * Sets name
      *
-     * @param string $name name
+     * @param string|null $name name
      *
      * @return $this
      */
@@ -459,7 +367,7 @@ class SubmissionDataRequest implements ModelInterface, ArrayAccess
     /**
      * Gets email
      *
-     * @return string
+     * @return string|null
      */
     public function getEmail()
     {
@@ -469,7 +377,7 @@ class SubmissionDataRequest implements ModelInterface, ArrayAccess
     /**
      * Sets email
      *
-     * @param string $email email
+     * @param string|null $email email
      *
      * @return $this
      */
@@ -483,7 +391,7 @@ class SubmissionDataRequest implements ModelInterface, ArrayAccess
     /**
      * Gets order
      *
-     * @return int
+     * @return int|null
      */
     public function getOrder()
     {
@@ -493,7 +401,7 @@ class SubmissionDataRequest implements ModelInterface, ArrayAccess
     /**
      * Sets order
      *
-     * @param int $order order
+     * @param int|null $order order
      *
      * @return $this
      */
@@ -507,7 +415,7 @@ class SubmissionDataRequest implements ModelInterface, ArrayAccess
     /**
      * Gets fields
      *
-     * @return string[]
+     * @return string[]|null
      */
     public function getFields()
     {
@@ -517,7 +425,7 @@ class SubmissionDataRequest implements ModelInterface, ArrayAccess
     /**
      * Sets fields
      *
-     * @param string[] $fields fields
+     * @param string[]|null $fields fields
      *
      * @return $this
      */
@@ -531,7 +439,7 @@ class SubmissionDataRequest implements ModelInterface, ArrayAccess
     /**
      * Gets metadata
      *
-     * @return object
+     * @return object|null
      */
     public function getMetadata()
     {
@@ -541,94 +449,13 @@ class SubmissionDataRequest implements ModelInterface, ArrayAccess
     /**
      * Sets metadata
      *
-     * @param object $metadata metadata
+     * @param object|null $metadata metadata
      *
      * @return $this
      */
     public function setMetadata($metadata)
     {
         $this->container['metadata'] = $metadata;
-
-        return $this;
-    }
-
-    /**
-     * Gets state
-     *
-     * @return string
-     */
-    public function getState()
-    {
-        return $this->container['state'];
-    }
-
-    /**
-     * Sets state
-     *
-     * @param string $state state
-     *
-     * @return $this
-     */
-    public function setState($state)
-    {
-        $allowedValues = $this->getStateAllowableValues();
-        if (!in_array($state, $allowedValues, true)) {
-            throw new \InvalidArgumentException(
-                sprintf(
-                    "Invalid value for 'state', must be one of '%s'",
-                    implode("', '", $allowedValues)
-                )
-            );
-        }
-        $this->container['state'] = $state;
-
-        return $this;
-    }
-
-    /**
-     * Gets viewed_at
-     *
-     * @return string|null
-     */
-    public function getViewedAt()
-    {
-        return $this->container['viewed_at'];
-    }
-
-    /**
-     * Sets viewed_at
-     *
-     * @param string|null $viewed_at viewed_at
-     *
-     * @return $this
-     */
-    public function setViewedAt($viewed_at)
-    {
-        $this->container['viewed_at'] = $viewed_at;
-
-        return $this;
-    }
-
-    /**
-     * Gets completed_at
-     *
-     * @return string|null
-     */
-    public function getCompletedAt()
-    {
-        return $this->container['completed_at'];
-    }
-
-    /**
-     * Sets completed_at
-     *
-     * @param string|null $completed_at completed_at
-     *
-     * @return $this
-     */
-    public function setCompletedAt($completed_at)
-    {
-        $this->container['completed_at'] = $completed_at;
 
         return $this;
     }
