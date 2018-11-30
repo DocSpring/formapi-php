@@ -133,6 +133,19 @@ class PDFApiTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test case for createTemplate
+     *
+     * Upload a new PDF template.
+     *
+     */
+    public function testCreateTemplate()
+    {
+      $template_document = "/path/to/file.txt"; // \SplFileObject | 
+      $template_name = 'template_name_example'; // string | 
+      $result = $apiInstance->createTemplate($template_document, $template_name);
+    }
+
+    /**
      * Test case for expireCombinedSubmission
      *
      * Expire a combined submission.
@@ -216,6 +229,30 @@ class PDFApiTest extends \PHPUnit_Framework_TestCase
       $submission_batch_id = sba_000000000000000001; // string | 
       $include_submissions = true; // bool | 
       $result = $apiInstance->getSubmissionBatch($submission_batch_id, $include_submissions);
+    }
+
+    /**
+     * Test case for getTemplate
+     *
+     * Check the status of an uploaded template.
+     *
+     */
+    public function testGetTemplate()
+    {
+      $template_id = tpl_000000000000000001; // string | 
+      $result = $apiInstance->getTemplate($template_id);
+    }
+
+    /**
+     * Test case for getTemplateSchema
+     *
+     * Fetch the JSON schema for a template.
+     *
+     */
+    public function testGetTemplateSchema()
+    {
+      $template_id = tpl_000000000000000001; // string | 
+      $result = $apiInstance->getTemplateSchema($template_id);
     }
 
     /**
