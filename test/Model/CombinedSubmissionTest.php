@@ -124,4 +124,11 @@ class CombinedSubmissionTest extends \PHPUnit_Framework_TestCase
     public function testPropertyState()
     {
     }
+
+    /**
+     * Test attribute "actions"
+     */
+    public function testPropertyActions()
+    {
+    }
 }

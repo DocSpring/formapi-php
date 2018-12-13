@@ -1471,7 +1471,7 @@ class PDFApi
      *
      * @throws \FormAPI\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return \FormAPI\Model\Template1
+     * @return \FormAPI\Model\PendingTemplate
      */
     public function createTemplate($template_document, $template_name)
     {
@@ -1489,7 +1489,7 @@ class PDFApi
      *
      * @throws \FormAPI\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return array of \FormAPI\Model\Template1, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \FormAPI\Model\PendingTemplate, HTTP status code, HTTP response headers (array of strings)
      */
     public function createTemplateWithHttpInfo($template_document, $template_name)
     {
@@ -1526,23 +1526,23 @@ class PDFApi
             $responseBody = $response->getBody();
             switch($statusCode) {
                 case 201:
-                    if ('\FormAPI\Model\Template1' === '\SplFileObject') {
+                    if ('\FormAPI\Model\PendingTemplate' === '\SplFileObject') {
                         $content = $responseBody; //stream goes to serializer
                     } else {
                         $content = $responseBody->getContents();
-                        if ('\FormAPI\Model\Template1' !== 'string') {
+                        if ('\FormAPI\Model\PendingTemplate' !== 'string') {
                             $content = json_decode($content);
                         }
                     }
 
                     return [
-                        ObjectSerializer::deserialize($content, '\FormAPI\Model\Template1', []),
+                        ObjectSerializer::deserialize($content, '\FormAPI\Model\PendingTemplate', []),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
             }
 
-            $returnType = '\FormAPI\Model\Template1';
+            $returnType = '\FormAPI\Model\PendingTemplate';
             $responseBody = $response->getBody();
             if ($returnType === '\SplFileObject') {
                 $content = $responseBody; //stream goes to serializer
@@ -1564,7 +1564,7 @@ class PDFApi
                 case 201:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\FormAPI\Model\Template1',
+                        '\FormAPI\Model\PendingTemplate',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -1608,7 +1608,7 @@ class PDFApi
      */
     public function createTemplateAsyncWithHttpInfo($template_document, $template_name)
     {
-        $returnType = '\FormAPI\Model\Template1';
+        $returnType = '\FormAPI\Model\PendingTemplate';
         $request = $this->createTemplateRequest($template_document, $template_name);
 
         return $this->client

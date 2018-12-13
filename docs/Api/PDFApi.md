@@ -242,7 +242,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
 
 # **createTemplate**
-> \FormAPI\Model\Template1 createTemplate($template_document, $template_name)
+> \FormAPI\Model\PendingTemplate createTemplate($template_document, $template_name)
 
 Upload a new PDF template
 
@@ -284,7 +284,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**\FormAPI\Model\Template1**](../Model/Template1.md)
+[**\FormAPI\Model\PendingTemplate**](../Model/PendingTemplate.md)
 
 ### Authorization
 

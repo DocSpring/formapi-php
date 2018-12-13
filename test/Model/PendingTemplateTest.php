@@ -1,6 +1,6 @@
 <?php
 /**
- * Template1Test
+ * PendingTemplateTest
  *
  * PHP version 5
  *
@@ -30,15 +30,15 @@
 namespace FormAPI;
 
 /**
- * Template1Test Class Doc Comment
+ * PendingTemplateTest Class Doc Comment
  *
  * @category    Class
- * @description Template1
+ * @description PendingTemplate
  * @package     FormAPI
  * @author      OpenAPI Generator team
  * @link        https://openapi-generator.tech
  */
-class Template1Test extends \PHPUnit_Framework_TestCase
+class PendingTemplateTest extends \PHPUnit_Framework_TestCase
 {
 
     /**
@@ -70,9 +70,9 @@ class Template1Test extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Test "Template1"
+     * Test "PendingTemplate"
      */
-    public function testTemplate1()
+    public function testPendingTemplate()
     {
     }
 

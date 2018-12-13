@@ -13,6 +13,7 @@ Name | Type | Description | Notes
 **download_url** | **string** |  | [optional] 
 **batch_id** | **string** |  | [optional] 
 **data_requests** | [**\FormAPI\Model\SubmissionDataRequest[]**](SubmissionDataRequest.md) |  | [optional] 
+**actions** | [**\FormAPI\Model\SubmissionAction[]**](SubmissionAction.md) |  | [optional] 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

@@ -1,6 +1,6 @@
 <?php
 /**
- * SubmissionTest
+ * SubmissionActionTest
  *
  * PHP version 5
  *
@@ -30,15 +30,15 @@
 namespace FormAPI;
 
 /**
- * SubmissionTest Class Doc Comment
+ * SubmissionActionTest Class Doc Comment
  *
  * @category    Class
- * @description Submission
+ * @description SubmissionAction
  * @package     FormAPI
  * @author      OpenAPI Generator team
  * @link        https://openapi-generator.tech
  */
-class SubmissionTest extends \PHPUnit_Framework_TestCase
+class SubmissionActionTest extends \PHPUnit_Framework_TestCase
 {
 
     /**
@@ -70,9 +70,9 @@ class SubmissionTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Test "Submission"
+     * Test "SubmissionAction"
      */
-    public function testSubmission()
+    public function testSubmissionAction()
     {
     }
 
@@ -84,30 +84,9 @@ class SubmissionTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Test attribute "test"
+     * Test attribute "integration_id"
      */
-    public function testPropertyTest()
-    {
-    }
-
-    /**
-     * Test attribute "expired"
-     */
-    public function testPropertyExpired()
-    {
-    }
-
-    /**
-     * Test attribute "expires_at"
-     */
-    public function testPropertyExpiresAt()
-    {
-    }
-
-    /**
-     * Test attribute "processed_at"
-     */
-    public function testPropertyProcessedAt()
+    public function testPropertyIntegrationId()
     {
     }
 
@@ -119,37 +98,23 @@ class SubmissionTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Test attribute "metadata"
+     * Test attribute "action_category"
      */
-    public function testPropertyMetadata()
+    public function testPropertyActionCategory()
     {
     }
 
     /**
-     * Test attribute "download_url"
+     * Test attribute "action_type"
      */
-    public function testPropertyDownloadUrl()
+    public function testPropertyActionType()
     {
     }
 
     /**
-     * Test attribute "batch_id"
+     * Test attribute "result_data"
      */
-    public function testPropertyBatchId()
-    {
-    }
-
-    /**
-     * Test attribute "data_requests"
-     */
-    public function testPropertyDataRequests()
-    {
-    }
-
-    /**
-     * Test attribute "actions"
-     */
-    public function testPropertyActions()
+    public function testPropertyResultData()
     {
     }
 }

@@ -1,6 +1,6 @@
 <?php
 /**
- * CombinedSubmission
+ * SubmissionAction
  *
  * PHP version 5
  *
@@ -33,14 +33,14 @@ use \ArrayAccess;
 use \FormAPI\ObjectSerializer;
 
 /**
- * CombinedSubmission Class Doc Comment
+ * SubmissionAction Class Doc Comment
  *
  * @category Class
  * @package  FormAPI
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  */
-class CombinedSubmission implements ModelInterface, ArrayAccess
+class SubmissionAction implements ModelInterface, ArrayAccess
 {
     const DISCRIMINATOR = null;
 
@@ -49,7 +49,7 @@ class CombinedSubmission implements ModelInterface, ArrayAccess
       *
       * @var string
       */
-    protected static $openAPIModelName = 'combined_submission';
+    protected static $openAPIModelName = 'submission_action';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -57,14 +57,12 @@ class CombinedSubmission implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $openAPITypes = [
-        'metadata' => 'object',
-        'expired' => 'bool',
-        'expires_at' => 'string',
-        'download_url' => 'string',
-        'submission_ids' => 'string[]',
         'id' => 'string',
+        'integration_id' => 'string',
         'state' => 'string',
-        'actions' => '\FormAPI\Model\CombinedSubmissionAction[]'
+        'action_category' => 'string',
+        'action_type' => 'string',
+        'result_data' => 'object'
     ];
 
     /**
@@ -73,14 +71,12 @@ class CombinedSubmission implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $openAPIFormats = [
-        'metadata' => null,
-        'expired' => null,
-        'expires_at' => null,
-        'download_url' => null,
-        'submission_ids' => null,
         'id' => null,
+        'integration_id' => null,
         'state' => null,
-        'actions' => null
+        'action_category' => null,
+        'action_type' => null,
+        'result_data' => null
     ];
 
     /**
@@ -110,14 +106,12 @@ class CombinedSubmission implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $attributeMap = [
-        'metadata' => 'metadata',
-        'expired' => 'expired',
-        'expires_at' => 'expires_at',
-        'download_url' => 'download_url',
-        'submission_ids' => 'submission_ids',
         'id' => 'id',
+        'integration_id' => 'integration_id',
         'state' => 'state',
-        'actions' => 'actions'
+        'action_category' => 'action_category',
+        'action_type' => 'action_type',
+        'result_data' => 'result_data'
     ];
 
     /**
@@ -126,14 +120,12 @@ class CombinedSubmission implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $setters = [
-        'metadata' => 'setMetadata',
-        'expired' => 'setExpired',
-        'expires_at' => 'setExpiresAt',
-        'download_url' => 'setDownloadUrl',
-        'submission_ids' => 'setSubmissionIds',
         'id' => 'setId',
+        'integration_id' => 'setIntegrationId',
         'state' => 'setState',
-        'actions' => 'setActions'
+        'action_category' => 'setActionCategory',
+        'action_type' => 'setActionType',
+        'result_data' => 'setResultData'
     ];
 
     /**
@@ -142,14 +134,12 @@ class CombinedSubmission implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $getters = [
-        'metadata' => 'getMetadata',
-        'expired' => 'getExpired',
-        'expires_at' => 'getExpiresAt',
-        'download_url' => 'getDownloadUrl',
-        'submission_ids' => 'getSubmissionIds',
         'id' => 'getId',
+        'integration_id' => 'getIntegrationId',
         'state' => 'getState',
-        'actions' => 'getActions'
+        'action_category' => 'getActionCategory',
+        'action_type' => 'getActionType',
+        'result_data' => 'getResultData'
     ];
 
     /**
@@ -195,7 +185,14 @@ class CombinedSubmission implements ModelInterface, ArrayAccess
 
     const STATE_PENDING = 'pending';
     const STATE_PROCESSED = 'processed';
+    const STATE_FAILED = 'failed';
     const STATE_ERROR = 'error';
+    const ACTION_CATEGORY_NOTIFICATION = 'notification';
+    const ACTION_CATEGORY_FILE_UPLOAD = 'file_upload';
+    const ACTION_TYPE_WEBHOOK = 'webhook';
+    const ACTION_TYPE_SLACK_WEBHOOK = 'slack_webhook';
+    const ACTION_TYPE_EMAIL = 'email';
+    const ACTION_TYPE_AWS_S3_UPLOAD = 'aws_s3_upload';
     
 
     
@@ -209,7 +206,36 @@ class CombinedSubmission implements ModelInterface, ArrayAccess
         return [
             self::STATE_PENDING,
             self::STATE_PROCESSED,
+            self::STATE_FAILED,
             self::STATE_ERROR,
+        ];
+    }
+    
+    /**
+     * Gets allowable values of the enum
+     *
+     * @return string[]
+     */
+    public function getActionCategoryAllowableValues()
+    {
+        return [
+            self::ACTION_CATEGORY_NOTIFICATION,
+            self::ACTION_CATEGORY_FILE_UPLOAD,
+        ];
+    }
+    
+    /**
+     * Gets allowable values of the enum
+     *
+     * @return string[]
+     */
+    public function getActionTypeAllowableValues()
+    {
+        return [
+            self::ACTION_TYPE_WEBHOOK,
+            self::ACTION_TYPE_SLACK_WEBHOOK,
+            self::ACTION_TYPE_EMAIL,
+            self::ACTION_TYPE_AWS_S3_UPLOAD,
         ];
     }
     
@@ -229,14 +255,12 @@ class CombinedSubmission implements ModelInterface, ArrayAccess
      */
     public function __construct(array $data = null)
     {
-        $this->container['metadata'] = isset($data['metadata']) ? $data['metadata'] : null;
-        $this->container['expired'] = isset($data['expired']) ? $data['expired'] : null;
-        $this->container['expires_at'] = isset($data['expires_at']) ? $data['expires_at'] : null;
-        $this->container['download_url'] = isset($data['download_url']) ? $data['download_url'] : null;
-        $this->container['submission_ids'] = isset($data['submission_ids']) ? $data['submission_ids'] : null;
         $this->container['id'] = isset($data['id']) ? $data['id'] : null;
+        $this->container['integration_id'] = isset($data['integration_id']) ? $data['integration_id'] : null;
         $this->container['state'] = isset($data['state']) ? $data['state'] : null;
-        $this->container['actions'] = isset($data['actions']) ? $data['actions'] : null;
+        $this->container['action_category'] = isset($data['action_category']) ? $data['action_category'] : null;
+        $this->container['action_type'] = isset($data['action_type']) ? $data['action_type'] : null;
+        $this->container['result_data'] = isset($data['result_data']) ? $data['result_data'] : null;
     }
 
     /**
@@ -248,6 +272,15 @@ class CombinedSubmission implements ModelInterface, ArrayAccess
     {
         $invalidProperties = [];
 
+        if ($this->container['id'] === null) {
+            $invalidProperties[] = "'id' can't be null";
+        }
+        if ($this->container['integration_id'] === null) {
+            $invalidProperties[] = "'integration_id' can't be null";
+        }
+        if ($this->container['state'] === null) {
+            $invalidProperties[] = "'state' can't be null";
+        }
         $allowedValues = $this->getStateAllowableValues();
         if (!is_null($this->container['state']) && !in_array($this->container['state'], $allowedValues, true)) {
             $invalidProperties[] = sprintf(
@@ -256,6 +289,31 @@ class CombinedSubmission implements ModelInterface, ArrayAccess
             );
         }
 
+        if ($this->container['action_category'] === null) {
+            $invalidProperties[] = "'action_category' can't be null";
+        }
+        $allowedValues = $this->getActionCategoryAllowableValues();
+        if (!is_null($this->container['action_category']) && !in_array($this->container['action_category'], $allowedValues, true)) {
+            $invalidProperties[] = sprintf(
+                "invalid value for 'action_category', must be one of '%s'",
+                implode("', '", $allowedValues)
+            );
+        }
+
+        if ($this->container['action_type'] === null) {
+            $invalidProperties[] = "'action_type' can't be null";
+        }
+        $allowedValues = $this->getActionTypeAllowableValues();
+        if (!is_null($this->container['action_type']) && !in_array($this->container['action_type'], $allowedValues, true)) {
+            $invalidProperties[] = sprintf(
+                "invalid value for 'action_type', must be one of '%s'",
+                implode("', '", $allowedValues)
+            );
+        }
+
+        if ($this->container['result_data'] === null) {
+            $invalidProperties[] = "'result_data' can't be null";
+        }
         return $invalidProperties;
     }
 
@@ -272,129 +330,9 @@ class CombinedSubmission implements ModelInterface, ArrayAccess
 
 
     /**
-     * Gets metadata
-     *
-     * @return object|null
-     */
-    public function getMetadata()
-    {
-        return $this->container['metadata'];
-    }
-
-    /**
-     * Sets metadata
-     *
-     * @param object|null $metadata metadata
-     *
-     * @return $this
-     */
-    public function setMetadata($metadata)
-    {
-        $this->container['metadata'] = $metadata;
-
-        return $this;
-    }
-
-    /**
-     * Gets expired
-     *
-     * @return bool|null
-     */
-    public function getExpired()
-    {
-        return $this->container['expired'];
-    }
-
-    /**
-     * Sets expired
-     *
-     * @param bool|null $expired expired
-     *
-     * @return $this
-     */
-    public function setExpired($expired)
-    {
-        $this->container['expired'] = $expired;
-
-        return $this;
-    }
-
-    /**
-     * Gets expires_at
-     *
-     * @return string|null
-     */
-    public function getExpiresAt()
-    {
-        return $this->container['expires_at'];
-    }
-
-    /**
-     * Sets expires_at
-     *
-     * @param string|null $expires_at expires_at
-     *
-     * @return $this
-     */
-    public function setExpiresAt($expires_at)
-    {
-        $this->container['expires_at'] = $expires_at;
-
-        return $this;
-    }
-
-    /**
-     * Gets download_url
-     *
-     * @return string|null
-     */
-    public function getDownloadUrl()
-    {
-        return $this->container['download_url'];
-    }
-
-    /**
-     * Sets download_url
-     *
-     * @param string|null $download_url download_url
-     *
-     * @return $this
-     */
-    public function setDownloadUrl($download_url)
-    {
-        $this->container['download_url'] = $download_url;
-
-        return $this;
-    }
-
-    /**
-     * Gets submission_ids
-     *
-     * @return string[]|null
-     */
-    public function getSubmissionIds()
-    {
-        return $this->container['submission_ids'];
-    }
-
-    /**
-     * Sets submission_ids
-     *
-     * @param string[]|null $submission_ids submission_ids
-     *
-     * @return $this
-     */
-    public function setSubmissionIds($submission_ids)
-    {
-        $this->container['submission_ids'] = $submission_ids;
-
-        return $this;
-    }
-
-    /**
      * Gets id
      *
-     * @return string|null
+     * @return string
      */
     public function getId()
     {
@@ -404,7 +342,7 @@ class CombinedSubmission implements ModelInterface, ArrayAccess
     /**
      * Sets id
      *
-     * @param string|null $id id
+     * @param string $id id
      *
      * @return $this
      */
@@ -416,9 +354,33 @@ class CombinedSubmission implements ModelInterface, ArrayAccess
     }
 
     /**
+     * Gets integration_id
+     *
+     * @return string
+     */
+    public function getIntegrationId()
+    {
+        return $this->container['integration_id'];
+    }
+
+    /**
+     * Sets integration_id
+     *
+     * @param string $integration_id integration_id
+     *
+     * @return $this
+     */
+    public function setIntegrationId($integration_id)
+    {
+        $this->container['integration_id'] = $integration_id;
+
+        return $this;
+    }
+
+    /**
      * Gets state
      *
-     * @return string|null
+     * @return string
      */
     public function getState()
     {
@@ -428,14 +390,14 @@ class CombinedSubmission implements ModelInterface, ArrayAccess
     /**
      * Sets state
      *
-     * @param string|null $state state
+     * @param string $state state
      *
      * @return $this
      */
     public function setState($state)
     {
         $allowedValues = $this->getStateAllowableValues();
-        if (!is_null($state) && !in_array($state, $allowedValues, true)) {
+        if (!in_array($state, $allowedValues, true)) {
             throw new \InvalidArgumentException(
                 sprintf(
                     "Invalid value for 'state', must be one of '%s'",
@@ -449,25 +411,91 @@ class CombinedSubmission implements ModelInterface, ArrayAccess
     }
 
     /**
-     * Gets actions
+     * Gets action_category
      *
-     * @return \FormAPI\Model\CombinedSubmissionAction[]|null
+     * @return string
      */
-    public function getActions()
+    public function getActionCategory()
     {
-        return $this->container['actions'];
+        return $this->container['action_category'];
     }
 
     /**
-     * Sets actions
+     * Sets action_category
      *
-     * @param \FormAPI\Model\CombinedSubmissionAction[]|null $actions actions
+     * @param string $action_category action_category
      *
      * @return $this
      */
-    public function setActions($actions)
+    public function setActionCategory($action_category)
     {
-        $this->container['actions'] = $actions;
+        $allowedValues = $this->getActionCategoryAllowableValues();
+        if (!in_array($action_category, $allowedValues, true)) {
+            throw new \InvalidArgumentException(
+                sprintf(
+                    "Invalid value for 'action_category', must be one of '%s'",
+                    implode("', '", $allowedValues)
+                )
+            );
+        }
+        $this->container['action_category'] = $action_category;
+
+        return $this;
+    }
+
+    /**
+     * Gets action_type
+     *
+     * @return string
+     */
+    public function getActionType()
+    {
+        return $this->container['action_type'];
+    }
+
+    /**
+     * Sets action_type
+     *
+     * @param string $action_type action_type
+     *
+     * @return $this
+     */
+    public function setActionType($action_type)
+    {
+        $allowedValues = $this->getActionTypeAllowableValues();
+        if (!in_array($action_type, $allowedValues, true)) {
+            throw new \InvalidArgumentException(
+                sprintf(
+                    "Invalid value for 'action_type', must be one of '%s'",
+                    implode("', '", $allowedValues)
+                )
+            );
+        }
+        $this->container['action_type'] = $action_type;
+
+        return $this;
+    }
+
+    /**
+     * Gets result_data
+     *
+     * @return object
+     */
+    public function getResultData()
+    {
+        return $this->container['result_data'];
+    }
+
+    /**
+     * Sets result_data
+     *
+     * @param object $result_data result_data
+     *
+     * @return $this
+     */
+    public function setResultData($result_data)
+    {
+        $this->container['result_data'] = $result_data;
 
         return $this;
     }

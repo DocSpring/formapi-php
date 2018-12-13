@@ -1,6 +1,6 @@
 <?php
 /**
- * Template1
+ * PendingTemplate
  *
  * PHP version 5
  *
@@ -33,14 +33,14 @@ use \ArrayAccess;
 use \FormAPI\ObjectSerializer;
 
 /**
- * Template1 Class Doc Comment
+ * PendingTemplate Class Doc Comment
  *
  * @category Class
  * @package  FormAPI
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  */
-class Template1 implements ModelInterface, ArrayAccess
+class PendingTemplate implements ModelInterface, ArrayAccess
 {
     const DISCRIMINATOR = null;
 
@@ -49,7 +49,7 @@ class Template1 implements ModelInterface, ArrayAccess
       *
       * @var string
       */
-    protected static $openAPIModelName = 'template_1';
+    protected static $openAPIModelName = 'pending_template';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
