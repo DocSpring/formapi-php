@@ -1,12 +1,11 @@
-# SubmissionBatchData
+# Templatesv2TemplateDocumentMetadata
 
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**metadata** | **object** |  | [optional] 
-**test** | **bool** |  | [optional] 
-**template_id** | **string** |  | [optional] 
-**submissions** | [**\FormAPI\Model\SubmissionDataBatchRequest[]**](SubmissionDataBatchRequest.md) |  | 
+**filename** | **string** |  | [optional] 
+**size** | **int** |  | [optional] 
+**mime_type** | **string** |  | [optional] 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

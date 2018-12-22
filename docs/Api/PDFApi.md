@@ -6,14 +6,18 @@ Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**batchGeneratePdfV1**](PDFApi.md#batchGeneratePdfV1) | **POST** /templates/{template_id}/submissions/batch | Generates multiple PDFs
 [**batchGeneratePdfs**](PDFApi.md#batchGeneratePdfs) | **POST** /submissions/batches | Generates multiple PDFs
+[**combinePdfs**](PDFApi.md#combinePdfs) | **POST** /combined_submissions?v&#x3D;2 | Merge submission PDFs, template PDFs, or custom files
 [**combineSubmissions**](PDFApi.md#combineSubmissions) | **POST** /combined_submissions | Merge generated PDFs together
+[**createCustomFileFromUpload**](PDFApi.md#createCustomFileFromUpload) | **POST** /custom_files | Create a new custom file from a cached presign upload
 [**createDataRequestToken**](PDFApi.md#createDataRequestToken) | **POST** /data_requests/{data_request_id}/tokens | Creates a new data request token for form authentication
-[**createTemplate**](PDFApi.md#createTemplate) | **POST** /templates | Upload a new PDF template
+[**createTemplate**](PDFApi.md#createTemplate) | **POST** /templates | Upload a new PDF template with a file upload
+[**createTemplateFromUpload**](PDFApi.md#createTemplateFromUpload) | **POST** /templates?v&#x3D;2 | Create a new PDF template from a cached presign upload
 [**expireCombinedSubmission**](PDFApi.md#expireCombinedSubmission) | **DELETE** /combined_submissions/{combined_submission_id} | Expire a combined submission
 [**expireSubmission**](PDFApi.md#expireSubmission) | **DELETE** /submissions/{submission_id} | Expire a PDF submission
 [**generatePDF**](PDFApi.md#generatePDF) | **POST** /templates/{template_id}/submissions | Generates a new PDF
 [**getCombinedSubmission**](PDFApi.md#getCombinedSubmission) | **GET** /combined_submissions/{combined_submission_id} | Check the status of a combined submission (merged PDFs)
 [**getDataRequest**](PDFApi.md#getDataRequest) | **GET** /data_requests/{data_request_id} | Look up a submission data request
+[**getPresignUrl**](PDFApi.md#getPresignUrl) | **GET** /uploads/presign | Get a presigned URL so that you can upload a file to our AWS S3 bucket
 [**getSubmission**](PDFApi.md#getSubmission) | **GET** /submissions/{submission_id} | Check the status of a PDF
 [**getSubmissionBatch**](PDFApi.md#getSubmissionBatch) | **GET** /submissions/batches/{submission_batch_id} | Check the status of a submission batch job
 [**getTemplate**](PDFApi.md#getTemplate) | **GET** /templates/{template_id} | Check the status of an uploaded template
@@ -24,7 +28,7 @@ Method | HTTP request | Description
 
 
 # **batchGeneratePdfV1**
-> \FormAPI\Model\CreateSubmissionResponse[] batchGeneratePdfV1($template_id, $create_submission_data_batch_v1)
+> \FormAPI\Model\CreateSubmissionResponse[] batchGeneratePdfV1($template_id, $request_body)
 
 Generates multiple PDFs
 
@@ -46,10 +50,10 @@ $apiInstance = new FormAPI\Api\PDFApi(
     $config
 );
 $template_id = tpl_000000000000000001; // string | 
-$create_submission_data_batch_v1 = array(new \FormAPI\Model\array()); // \FormAPI\Model\CreateSubmissionDataBatchV1[] | 
+$request_body = array(new \FormAPI\Model\array()); // object[] | 
 
 try {
-    $result = $apiInstance->batchGeneratePdfV1($template_id, $create_submission_data_batch_v1);
+    $result = $apiInstance->batchGeneratePdfV1($template_id, $request_body);
     print_r($result);
 } catch (Exception $e) {
     echo 'Exception when calling PDFApi->batchGeneratePdfV1: ', $e->getMessage(), PHP_EOL;
@@ -62,7 +66,7 @@ try {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **template_id** | **string**|  |
- **create_submission_data_batch_v1** | [**\FormAPI\Model\CreateSubmissionDataBatchV1[]**](../Model/array.md)|  |
+ **request_body** | [**object[]**](../Model/array.md)|  |
 
 ### Return type
 
@@ -133,6 +137,60 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
 
+# **combinePdfs**
+> \FormAPI\Model\CreateCombinedSubmissionResponse combinePdfs($combine_pdfs_data)
+
+Merge submission PDFs, template PDFs, or custom files
+
+### Example
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+// Configure HTTP basic authorization: api_token_basic
+$config = FormAPI\Configuration::getDefaultConfiguration()
+              ->setUsername('YOUR_USERNAME')
+              ->setPassword('YOUR_PASSWORD');
+
+
+$apiInstance = new FormAPI\Api\PDFApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client(),
+    $config
+);
+$combine_pdfs_data = new \FormAPI\Model\CombinePdfsData(); // \FormAPI\Model\CombinePdfsData | 
+
+try {
+    $result = $apiInstance->combinePdfs($combine_pdfs_data);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling PDFApi->combinePdfs: ', $e->getMessage(), PHP_EOL;
+}
+?>
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **combine_pdfs_data** | [**\FormAPI\Model\CombinePdfsData**](../Model/CombinePdfsData.md)|  |
+
+### Return type
+
+[**\FormAPI\Model\CreateCombinedSubmissionResponse**](../Model/CreateCombinedSubmissionResponse.md)
+
+### Authorization
+
+[api_token_basic](../../README.md#api_token_basic)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
+
 # **combineSubmissions**
 > \FormAPI\Model\CreateCombinedSubmissionResponse combineSubmissions($combined_submission_data)
 
@@ -175,6 +233,60 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**\FormAPI\Model\CreateCombinedSubmissionResponse**](../Model/CreateCombinedSubmissionResponse.md)
+
+### Authorization
+
+[api_token_basic](../../README.md#api_token_basic)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
+
+# **createCustomFileFromUpload**
+> \FormAPI\Model\CreateCustomFileResponse createCustomFileFromUpload($create_custom_file_data)
+
+Create a new custom file from a cached presign upload
+
+### Example
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+// Configure HTTP basic authorization: api_token_basic
+$config = FormAPI\Configuration::getDefaultConfiguration()
+              ->setUsername('YOUR_USERNAME')
+              ->setPassword('YOUR_PASSWORD');
+
+
+$apiInstance = new FormAPI\Api\PDFApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client(),
+    $config
+);
+$create_custom_file_data = new \FormAPI\Model\CreateCustomFileData(); // \FormAPI\Model\CreateCustomFileData | 
+
+try {
+    $result = $apiInstance->createCustomFileFromUpload($create_custom_file_data);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling PDFApi->createCustomFileFromUpload: ', $e->getMessage(), PHP_EOL;
+}
+?>
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **create_custom_file_data** | [**\FormAPI\Model\CreateCustomFileData**](../Model/CreateCustomFileData.md)|  |
+
+### Return type
+
+[**\FormAPI\Model\CreateCustomFileResponse**](../Model/CreateCustomFileResponse.md)
 
 ### Authorization
 
@@ -244,7 +356,7 @@ Name | Type | Description  | Notes
 # **createTemplate**
 > \FormAPI\Model\PendingTemplate createTemplate($template_document, $template_name)
 
-Upload a new PDF template
+Upload a new PDF template with a file upload
 
 ### Example
 ```php
@@ -293,6 +405,60 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
  - **Content-Type**: multipart/form-data
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
+
+# **createTemplateFromUpload**
+> \FormAPI\Model\PendingTemplate createTemplateFromUpload($create_template_data)
+
+Create a new PDF template from a cached presign upload
+
+### Example
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+// Configure HTTP basic authorization: api_token_basic
+$config = FormAPI\Configuration::getDefaultConfiguration()
+              ->setUsername('YOUR_USERNAME')
+              ->setPassword('YOUR_PASSWORD');
+
+
+$apiInstance = new FormAPI\Api\PDFApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client(),
+    $config
+);
+$create_template_data = new \FormAPI\Model\CreateTemplateData(); // \FormAPI\Model\CreateTemplateData | 
+
+try {
+    $result = $apiInstance->createTemplateFromUpload($create_template_data);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling PDFApi->createTemplateFromUpload: ', $e->getMessage(), PHP_EOL;
+}
+?>
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **create_template_data** | [**\FormAPI\Model\CreateTemplateData**](../Model/CreateTemplateData.md)|  |
+
+### Return type
+
+[**\FormAPI\Model\PendingTemplate**](../Model/PendingTemplate.md)
+
+### Authorization
+
+[api_token_basic](../../README.md#api_token_basic)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
  - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
@@ -406,7 +572,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
 
 # **generatePDF**
-> \FormAPI\Model\CreateSubmissionResponse generatePDF($template_id, $create_submission_data)
+> \FormAPI\Model\CreateSubmissionResponse generatePDF($template_id, $submission_data)
 
 Generates a new PDF
 
@@ -428,10 +594,10 @@ $apiInstance = new FormAPI\Api\PDFApi(
     $config
 );
 $template_id = tpl_000000000000000001; // string | 
-$create_submission_data = new \FormAPI\Model\CreateSubmissionData(); // \FormAPI\Model\CreateSubmissionData | 
+$submission_data = new \FormAPI\Model\SubmissionData(); // \FormAPI\Model\SubmissionData | 
 
 try {
-    $result = $apiInstance->generatePDF($template_id, $create_submission_data);
+    $result = $apiInstance->generatePDF($template_id, $submission_data);
     print_r($result);
 } catch (Exception $e) {
     echo 'Exception when calling PDFApi->generatePDF: ', $e->getMessage(), PHP_EOL;
@@ -444,7 +610,7 @@ try {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **template_id** | **string**|  |
- **create_submission_data** | [**\FormAPI\Model\CreateSubmissionData**](../Model/CreateSubmissionData.md)|  |
+ **submission_data** | [**\FormAPI\Model\SubmissionData**](../Model/SubmissionData.md)|  |
 
 ### Return type
 
@@ -569,6 +735,56 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
 
+# **getPresignUrl**
+> map[string,object] getPresignUrl()
+
+Get a presigned URL so that you can upload a file to our AWS S3 bucket
+
+### Example
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+// Configure HTTP basic authorization: api_token_basic
+$config = FormAPI\Configuration::getDefaultConfiguration()
+              ->setUsername('YOUR_USERNAME')
+              ->setPassword('YOUR_PASSWORD');
+
+
+$apiInstance = new FormAPI\Api\PDFApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client(),
+    $config
+);
+
+try {
+    $result = $apiInstance->getPresignUrl();
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling PDFApi->getPresignUrl: ', $e->getMessage(), PHP_EOL;
+}
+?>
+```
+
+### Parameters
+This endpoint does not need any parameter.
+
+### Return type
+
+**map[string,object]**
+
+### Authorization
+
+[api_token_basic](../../README.md#api_token_basic)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
+
 # **getSubmission**
 > \FormAPI\Model\Submission getSubmission($submission_id)
 
@@ -645,7 +861,7 @@ $apiInstance = new FormAPI\Api\PDFApi(
     new GuzzleHttp\Client(),
     $config
 );
-$submission_batch_id = sba_000000000000000001; // string | 
+$submission_batch_id = sbb_000000000000000001; // string | 
 $include_submissions = true; // bool | 
 
 try {

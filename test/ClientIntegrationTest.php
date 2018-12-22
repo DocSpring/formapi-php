@@ -58,7 +58,7 @@ class ClientTest extends \PHPUnit_Framework_TestCase
       $this->client->getConfig()
         ->setUsername("api_token123")
         ->setPassword('testsecret123')
-        ->setHost('http://localhost:31337/api/v1');
+        ->setHost('http://api.formapi.local:31337/api/v1');
     }
 
     /**
@@ -84,7 +84,7 @@ class ClientTest extends \PHPUnit_Framework_TestCase
     public function testGeneratePDF()
     {
       $template_id = 'tpl_000000000000000001'; // string |
-      $submission_data = new Model\CreateSubmissionData();
+      $submission_data = new Model\SubmissionData();
       $submission_data->setData([
         "title" => 'Test PDF',
         "description" => 'This PDF is great!',

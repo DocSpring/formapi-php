@@ -1,6 +1,6 @@
 <?php
 /**
- * CombinedSubmissionTest
+ * CustomFileTest
  *
  * PHP version 5
  *
@@ -30,15 +30,15 @@
 namespace FormAPI;
 
 /**
- * CombinedSubmissionTest Class Doc Comment
+ * CustomFileTest Class Doc Comment
  *
  * @category    Class
- * @description CombinedSubmission
+ * @description CustomFile
  * @package     FormAPI
  * @author      OpenAPI Generator team
  * @link        https://openapi-generator.tech
  */
-class CombinedSubmissionTest extends \PHPUnit_Framework_TestCase
+class CustomFileTest extends \PHPUnit_Framework_TestCase
 {
 
     /**
@@ -70,51 +70,9 @@ class CombinedSubmissionTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Test "CombinedSubmission"
+     * Test "CustomFile"
      */
-    public function testCombinedSubmission()
-    {
-    }
-
-    /**
-     * Test attribute "metadata"
-     */
-    public function testPropertyMetadata()
-    {
-    }
-
-    /**
-     * Test attribute "expired"
-     */
-    public function testPropertyExpired()
-    {
-    }
-
-    /**
-     * Test attribute "expires_at"
-     */
-    public function testPropertyExpiresAt()
-    {
-    }
-
-    /**
-     * Test attribute "source_pdfs"
-     */
-    public function testPropertySourcePdfs()
-    {
-    }
-
-    /**
-     * Test attribute "download_url"
-     */
-    public function testPropertyDownloadUrl()
-    {
-    }
-
-    /**
-     * Test attribute "submission_ids"
-     */
-    public function testPropertySubmissionIds()
+    public function testCustomFile()
     {
     }
 
@@ -126,16 +84,9 @@ class CombinedSubmissionTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Test attribute "state"
+     * Test attribute "url"
      */
-    public function testPropertyState()
-    {
-    }
-
-    /**
-     * Test attribute "actions"
-     */
-    public function testPropertyActions()
+    public function testPropertyUrl()
     {
     }
 }

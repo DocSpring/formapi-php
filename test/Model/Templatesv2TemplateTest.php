@@ -1,6 +1,6 @@
 <?php
 /**
- * CombinedSubmissionTest
+ * Templatesv2TemplateTest
  *
  * PHP version 5
  *
@@ -30,15 +30,15 @@
 namespace FormAPI;
 
 /**
- * CombinedSubmissionTest Class Doc Comment
+ * Templatesv2TemplateTest Class Doc Comment
  *
  * @category    Class
- * @description CombinedSubmission
+ * @description Templatesv2Template
  * @package     FormAPI
  * @author      OpenAPI Generator team
  * @link        https://openapi-generator.tech
  */
-class CombinedSubmissionTest extends \PHPUnit_Framework_TestCase
+class Templatesv2TemplateTest extends \PHPUnit_Framework_TestCase
 {
 
     /**
@@ -70,72 +70,93 @@ class CombinedSubmissionTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Test "CombinedSubmission"
+     * Test "Templatesv2Template"
      */
-    public function testCombinedSubmission()
+    public function testTemplatesv2Template()
     {
     }
 
     /**
-     * Test attribute "metadata"
+     * Test attribute "expiration_interval"
      */
-    public function testPropertyMetadata()
+    public function testPropertyExpirationInterval()
     {
     }
 
     /**
-     * Test attribute "expired"
+     * Test attribute "public_web_form"
      */
-    public function testPropertyExpired()
+    public function testPropertyPublicWebForm()
     {
     }
 
     /**
-     * Test attribute "expires_at"
+     * Test attribute "webhook_url"
      */
-    public function testPropertyExpiresAt()
+    public function testPropertyWebhookUrl()
     {
     }
 
     /**
-     * Test attribute "source_pdfs"
+     * Test attribute "expire_submissions"
      */
-    public function testPropertySourcePdfs()
+    public function testPropertyExpireSubmissions()
     {
     }
 
     /**
-     * Test attribute "download_url"
+     * Test attribute "expire_after"
      */
-    public function testPropertyDownloadUrl()
+    public function testPropertyExpireAfter()
     {
     }
 
     /**
-     * Test attribute "submission_ids"
+     * Test attribute "allow_additional_properties"
      */
-    public function testPropertySubmissionIds()
+    public function testPropertyAllowAdditionalProperties()
     {
     }
 
     /**
-     * Test attribute "id"
+     * Test attribute "document"
      */
-    public function testPropertyId()
+    public function testPropertyDocument()
     {
     }
 
     /**
-     * Test attribute "state"
+     * Test attribute "name"
      */
-    public function testPropertyState()
+    public function testPropertyName()
     {
     }
 
     /**
-     * Test attribute "actions"
+     * Test attribute "public_submissions"
      */
-    public function testPropertyActions()
+    public function testPropertyPublicSubmissions()
+    {
+    }
+
+    /**
+     * Test attribute "slack_webhook_url"
+     */
+    public function testPropertySlackWebhookUrl()
+    {
+    }
+
+    /**
+     * Test attribute "redirect_url"
+     */
+    public function testPropertyRedirectUrl()
+    {
+    }
+
+    /**
+     * Test attribute "blockchain_timestamp_verification"
+     */
+    public function testPropertyBlockchainTimestampVerification()
     {
     }
 }

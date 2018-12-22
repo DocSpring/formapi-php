@@ -52,7 +52,7 @@ class PDFApiTest extends \PHPUnit_Framework_TestCase
       $config = FormAPI\Configuration::getDefaultConfiguration()
                     ->setUsername('api_token123')
                     ->setPassword('testsecret123')
-                    ->setHost('localhost:31337')
+                    ->setHost('api.formapi.local:31337')
                     ->setScheme('http');
       $apiInstance = new FormAPI\Api\PDFApi(
           // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
@@ -92,8 +92,8 @@ class PDFApiTest extends \PHPUnit_Framework_TestCase
     public function testBatchGeneratePdfV1()
     {
       $template_id = tpl_000000000000000001; // string | 
-      $create_submission_data_batch_v1 = array(new \FormAPI\Model\array()); // \FormAPI\Model\CreateSubmissionDataBatchV1[] | 
-      $result = $apiInstance->batchGeneratePdfV1($template_id, $create_submission_data_batch_v1);
+      $request_body = array(new \FormAPI\Model\array()); // object[] | 
+      $result = $apiInstance->batchGeneratePdfV1($template_id, $request_body);
     }
 
     /**
@@ -109,6 +109,18 @@ class PDFApiTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test case for combinePdfs
+     *
+     * Merge submission PDFs, template PDFs, or custom files.
+     *
+     */
+    public function testCombinePdfs()
+    {
+      $combine_pdfs_data = new \FormAPI\Model\CombinePdfsData(); // \FormAPI\Model\CombinePdfsData | 
+      $result = $apiInstance->combinePdfs($combine_pdfs_data);
+    }
+
+    /**
      * Test case for combineSubmissions
      *
      * Merge generated PDFs together.
@@ -118,6 +130,18 @@ class PDFApiTest extends \PHPUnit_Framework_TestCase
     {
       $combined_submission_data = new \FormAPI\Model\CombinedSubmissionData(); // \FormAPI\Model\CombinedSubmissionData | 
       $result = $apiInstance->combineSubmissions($combined_submission_data);
+    }
+
+    /**
+     * Test case for createCustomFileFromUpload
+     *
+     * Create a new custom file from a cached presign upload.
+     *
+     */
+    public function testCreateCustomFileFromUpload()
+    {
+      $create_custom_file_data = new \FormAPI\Model\CreateCustomFileData(); // \FormAPI\Model\CreateCustomFileData | 
+      $result = $apiInstance->createCustomFileFromUpload($create_custom_file_data);
     }
 
     /**
@@ -135,7 +159,7 @@ class PDFApiTest extends \PHPUnit_Framework_TestCase
     /**
      * Test case for createTemplate
      *
-     * Upload a new PDF template.
+     * Upload a new PDF template with a file upload.
      *
      */
     public function testCreateTemplate()
@@ -143,6 +167,18 @@ class PDFApiTest extends \PHPUnit_Framework_TestCase
       $template_document = "/path/to/file.txt"; // \SplFileObject | 
       $template_name = 'template_name_example'; // string | 
       $result = $apiInstance->createTemplate($template_document, $template_name);
+    }
+
+    /**
+     * Test case for createTemplateFromUpload
+     *
+     * Create a new PDF template from a cached presign upload.
+     *
+     */
+    public function testCreateTemplateFromUpload()
+    {
+      $create_template_data = new \FormAPI\Model\CreateTemplateData(); // \FormAPI\Model\CreateTemplateData | 
+      $result = $apiInstance->createTemplateFromUpload($create_template_data);
     }
 
     /**
@@ -178,8 +214,8 @@ class PDFApiTest extends \PHPUnit_Framework_TestCase
     public function testGeneratePDF()
     {
       $template_id = tpl_000000000000000001; // string | 
-      $create_submission_data = new \FormAPI\Model\CreateSubmissionData(); // \FormAPI\Model\CreateSubmissionData | 
-      $result = $apiInstance->generatePDF($template_id, $create_submission_data);
+      $submission_data = new \FormAPI\Model\SubmissionData(); // \FormAPI\Model\SubmissionData | 
+      $result = $apiInstance->generatePDF($template_id, $submission_data);
     }
 
     /**
@@ -207,6 +243,17 @@ class PDFApiTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test case for getPresignUrl
+     *
+     * Get a presigned URL so that you can upload a file to our AWS S3 bucket.
+     *
+     */
+    public function testGetPresignUrl()
+    {
+      $result = $apiInstance->getPresignUrl();
+    }
+
+    /**
      * Test case for getSubmission
      *
      * Check the status of a PDF.
@@ -226,7 +273,7 @@ class PDFApiTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetSubmissionBatch()
     {
-      $submission_batch_id = sba_000000000000000001; // string | 
+      $submission_batch_id = sbb_000000000000000001; // string | 
       $include_submissions = true; // bool | 
       $result = $apiInstance->getSubmissionBatch($submission_batch_id, $include_submissions);
     }

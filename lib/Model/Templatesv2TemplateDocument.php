@@ -1,6 +1,6 @@
 <?php
 /**
- * SubmissionBatchData
+ * Templatesv2TemplateDocument
  *
  * PHP version 5
  *
@@ -33,14 +33,14 @@ use \ArrayAccess;
 use \FormAPI\ObjectSerializer;
 
 /**
- * SubmissionBatchData Class Doc Comment
+ * Templatesv2TemplateDocument Class Doc Comment
  *
  * @category Class
  * @package  FormAPI
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  */
-class SubmissionBatchData implements ModelInterface, ArrayAccess
+class Templatesv2TemplateDocument implements ModelInterface, ArrayAccess
 {
     const DISCRIMINATOR = null;
 
@@ -49,7 +49,7 @@ class SubmissionBatchData implements ModelInterface, ArrayAccess
       *
       * @var string
       */
-    protected static $openAPIModelName = 'submission_batch_data';
+    protected static $openAPIModelName = 'templatesv2_template_document';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -57,10 +57,9 @@ class SubmissionBatchData implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $openAPITypes = [
-        'metadata' => 'object',
-        'test' => 'bool',
-        'template_id' => 'string',
-        'submissions' => '\FormAPI\Model\SubmissionDataBatchRequest[]'
+        'metadata' => '\FormAPI\Model\Templatesv2TemplateDocumentMetadata',
+        'id' => 'string',
+        'storage' => 'string'
     ];
 
     /**
@@ -70,9 +69,8 @@ class SubmissionBatchData implements ModelInterface, ArrayAccess
       */
     protected static $openAPIFormats = [
         'metadata' => null,
-        'test' => null,
-        'template_id' => null,
-        'submissions' => null
+        'id' => null,
+        'storage' => null
     ];
 
     /**
@@ -103,9 +101,8 @@ class SubmissionBatchData implements ModelInterface, ArrayAccess
      */
     protected static $attributeMap = [
         'metadata' => 'metadata',
-        'test' => 'test',
-        'template_id' => 'template_id',
-        'submissions' => 'submissions'
+        'id' => 'id',
+        'storage' => 'storage'
     ];
 
     /**
@@ -115,9 +112,8 @@ class SubmissionBatchData implements ModelInterface, ArrayAccess
      */
     protected static $setters = [
         'metadata' => 'setMetadata',
-        'test' => 'setTest',
-        'template_id' => 'setTemplateId',
-        'submissions' => 'setSubmissions'
+        'id' => 'setId',
+        'storage' => 'setStorage'
     ];
 
     /**
@@ -127,9 +123,8 @@ class SubmissionBatchData implements ModelInterface, ArrayAccess
      */
     protected static $getters = [
         'metadata' => 'getMetadata',
-        'test' => 'getTest',
-        'template_id' => 'getTemplateId',
-        'submissions' => 'getSubmissions'
+        'id' => 'getId',
+        'storage' => 'getStorage'
     ];
 
     /**
@@ -173,8 +168,21 @@ class SubmissionBatchData implements ModelInterface, ArrayAccess
         return self::$openAPIModelName;
     }
 
+    const STORAGE_CACHE = 'cache';
     
 
+    
+    /**
+     * Gets allowable values of the enum
+     *
+     * @return string[]
+     */
+    public function getStorageAllowableValues()
+    {
+        return [
+            self::STORAGE_CACHE,
+        ];
+    }
     
 
     /**
@@ -193,9 +201,8 @@ class SubmissionBatchData implements ModelInterface, ArrayAccess
     public function __construct(array $data = null)
     {
         $this->container['metadata'] = isset($data['metadata']) ? $data['metadata'] : null;
-        $this->container['test'] = isset($data['test']) ? $data['test'] : null;
-        $this->container['template_id'] = isset($data['template_id']) ? $data['template_id'] : null;
-        $this->container['submissions'] = isset($data['submissions']) ? $data['submissions'] : null;
+        $this->container['id'] = isset($data['id']) ? $data['id'] : null;
+        $this->container['storage'] = isset($data['storage']) ? $data['storage'] : null;
     }
 
     /**
@@ -207,9 +214,14 @@ class SubmissionBatchData implements ModelInterface, ArrayAccess
     {
         $invalidProperties = [];
 
-        if ($this->container['submissions'] === null) {
-            $invalidProperties[] = "'submissions' can't be null";
+        $allowedValues = $this->getStorageAllowableValues();
+        if (!is_null($this->container['storage']) && !in_array($this->container['storage'], $allowedValues, true)) {
+            $invalidProperties[] = sprintf(
+                "invalid value for 'storage', must be one of '%s'",
+                implode("', '", $allowedValues)
+            );
         }
+
         return $invalidProperties;
     }
 
@@ -228,7 +240,7 @@ class SubmissionBatchData implements ModelInterface, ArrayAccess
     /**
      * Gets metadata
      *
-     * @return object|null
+     * @return \FormAPI\Model\Templatesv2TemplateDocumentMetadata|null
      */
     public function getMetadata()
     {
@@ -238,7 +250,7 @@ class SubmissionBatchData implements ModelInterface, ArrayAccess
     /**
      * Sets metadata
      *
-     * @param object|null $metadata metadata
+     * @param \FormAPI\Model\Templatesv2TemplateDocumentMetadata|null $metadata metadata
      *
      * @return $this
      */
@@ -250,73 +262,58 @@ class SubmissionBatchData implements ModelInterface, ArrayAccess
     }
 
     /**
-     * Gets test
-     *
-     * @return bool|null
-     */
-    public function getTest()
-    {
-        return $this->container['test'];
-    }
-
-    /**
-     * Sets test
-     *
-     * @param bool|null $test test
-     *
-     * @return $this
-     */
-    public function setTest($test)
-    {
-        $this->container['test'] = $test;
-
-        return $this;
-    }
-
-    /**
-     * Gets template_id
+     * Gets id
      *
      * @return string|null
      */
-    public function getTemplateId()
+    public function getId()
     {
-        return $this->container['template_id'];
+        return $this->container['id'];
     }
 
     /**
-     * Sets template_id
+     * Sets id
      *
-     * @param string|null $template_id template_id
+     * @param string|null $id id
      *
      * @return $this
      */
-    public function setTemplateId($template_id)
+    public function setId($id)
     {
-        $this->container['template_id'] = $template_id;
+        $this->container['id'] = $id;
 
         return $this;
     }
 
     /**
-     * Gets submissions
+     * Gets storage
      *
-     * @return \FormAPI\Model\SubmissionDataBatchRequest[]
+     * @return string|null
      */
-    public function getSubmissions()
+    public function getStorage()
     {
-        return $this->container['submissions'];
+        return $this->container['storage'];
     }
 
     /**
-     * Sets submissions
+     * Sets storage
      *
-     * @param \FormAPI\Model\SubmissionDataBatchRequest[] $submissions submissions
+     * @param string|null $storage storage
      *
      * @return $this
      */
-    public function setSubmissions($submissions)
+    public function setStorage($storage)
     {
-        $this->container['submissions'] = $submissions;
+        $allowedValues = $this->getStorageAllowableValues();
+        if (!is_null($storage) && !in_array($storage, $allowedValues, true)) {
+            throw new \InvalidArgumentException(
+                sprintf(
+                    "Invalid value for 'storage', must be one of '%s'",
+                    implode("', '", $allowedValues)
+                )
+            );
+        }
+        $this->container['storage'] = $storage;
 
         return $this;
     }

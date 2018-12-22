@@ -1,6 +1,6 @@
 <?php
 /**
- * SubmissionBatchData
+ * CustomFile
  *
  * PHP version 5
  *
@@ -33,14 +33,14 @@ use \ArrayAccess;
 use \FormAPI\ObjectSerializer;
 
 /**
- * SubmissionBatchData Class Doc Comment
+ * CustomFile Class Doc Comment
  *
  * @category Class
  * @package  FormAPI
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  */
-class SubmissionBatchData implements ModelInterface, ArrayAccess
+class CustomFile implements ModelInterface, ArrayAccess
 {
     const DISCRIMINATOR = null;
 
@@ -49,7 +49,7 @@ class SubmissionBatchData implements ModelInterface, ArrayAccess
       *
       * @var string
       */
-    protected static $openAPIModelName = 'submission_batch_data';
+    protected static $openAPIModelName = 'custom_file';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -57,10 +57,8 @@ class SubmissionBatchData implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $openAPITypes = [
-        'metadata' => 'object',
-        'test' => 'bool',
-        'template_id' => 'string',
-        'submissions' => '\FormAPI\Model\SubmissionDataBatchRequest[]'
+        'id' => 'string',
+        'url' => 'string'
     ];
 
     /**
@@ -69,10 +67,8 @@ class SubmissionBatchData implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $openAPIFormats = [
-        'metadata' => null,
-        'test' => null,
-        'template_id' => null,
-        'submissions' => null
+        'id' => null,
+        'url' => null
     ];
 
     /**
@@ -102,10 +98,8 @@ class SubmissionBatchData implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $attributeMap = [
-        'metadata' => 'metadata',
-        'test' => 'test',
-        'template_id' => 'template_id',
-        'submissions' => 'submissions'
+        'id' => 'id',
+        'url' => 'url'
     ];
 
     /**
@@ -114,10 +108,8 @@ class SubmissionBatchData implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $setters = [
-        'metadata' => 'setMetadata',
-        'test' => 'setTest',
-        'template_id' => 'setTemplateId',
-        'submissions' => 'setSubmissions'
+        'id' => 'setId',
+        'url' => 'setUrl'
     ];
 
     /**
@@ -126,10 +118,8 @@ class SubmissionBatchData implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $getters = [
-        'metadata' => 'getMetadata',
-        'test' => 'getTest',
-        'template_id' => 'getTemplateId',
-        'submissions' => 'getSubmissions'
+        'id' => 'getId',
+        'url' => 'getUrl'
     ];
 
     /**
@@ -192,10 +182,8 @@ class SubmissionBatchData implements ModelInterface, ArrayAccess
      */
     public function __construct(array $data = null)
     {
-        $this->container['metadata'] = isset($data['metadata']) ? $data['metadata'] : null;
-        $this->container['test'] = isset($data['test']) ? $data['test'] : null;
-        $this->container['template_id'] = isset($data['template_id']) ? $data['template_id'] : null;
-        $this->container['submissions'] = isset($data['submissions']) ? $data['submissions'] : null;
+        $this->container['id'] = isset($data['id']) ? $data['id'] : null;
+        $this->container['url'] = isset($data['url']) ? $data['url'] : null;
     }
 
     /**
@@ -207,9 +195,6 @@ class SubmissionBatchData implements ModelInterface, ArrayAccess
     {
         $invalidProperties = [];
 
-        if ($this->container['submissions'] === null) {
-            $invalidProperties[] = "'submissions' can't be null";
-        }
         return $invalidProperties;
     }
 
@@ -226,97 +211,49 @@ class SubmissionBatchData implements ModelInterface, ArrayAccess
 
 
     /**
-     * Gets metadata
-     *
-     * @return object|null
-     */
-    public function getMetadata()
-    {
-        return $this->container['metadata'];
-    }
-
-    /**
-     * Sets metadata
-     *
-     * @param object|null $metadata metadata
-     *
-     * @return $this
-     */
-    public function setMetadata($metadata)
-    {
-        $this->container['metadata'] = $metadata;
-
-        return $this;
-    }
-
-    /**
-     * Gets test
-     *
-     * @return bool|null
-     */
-    public function getTest()
-    {
-        return $this->container['test'];
-    }
-
-    /**
-     * Sets test
-     *
-     * @param bool|null $test test
-     *
-     * @return $this
-     */
-    public function setTest($test)
-    {
-        $this->container['test'] = $test;
-
-        return $this;
-    }
-
-    /**
-     * Gets template_id
+     * Gets id
      *
      * @return string|null
      */
-    public function getTemplateId()
+    public function getId()
     {
-        return $this->container['template_id'];
+        return $this->container['id'];
     }
 
     /**
-     * Sets template_id
+     * Sets id
      *
-     * @param string|null $template_id template_id
+     * @param string|null $id id
      *
      * @return $this
      */
-    public function setTemplateId($template_id)
+    public function setId($id)
     {
-        $this->container['template_id'] = $template_id;
+        $this->container['id'] = $id;
 
         return $this;
     }
 
     /**
-     * Gets submissions
+     * Gets url
      *
-     * @return \FormAPI\Model\SubmissionDataBatchRequest[]
+     * @return string|null
      */
-    public function getSubmissions()
+    public function getUrl()
     {
-        return $this->container['submissions'];
+        return $this->container['url'];
     }
 
     /**
-     * Sets submissions
+     * Sets url
      *
-     * @param \FormAPI\Model\SubmissionDataBatchRequest[] $submissions submissions
+     * @param string|null $url url
      *
      * @return $this
      */
-    public function setSubmissions($submissions)
+    public function setUrl($url)
     {
-        $this->container['submissions'] = $submissions;
+        $this->container['url'] = $url;
 
         return $this;
     }

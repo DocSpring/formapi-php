@@ -1,6 +1,6 @@
 <?php
 /**
- * CreateSubmissionDataTest
+ * CreateCustomFileDataTest
  *
  * PHP version 5
  *
@@ -30,15 +30,15 @@
 namespace FormAPI;
 
 /**
- * CreateSubmissionDataTest Class Doc Comment
+ * CreateCustomFileDataTest Class Doc Comment
  *
  * @category    Class
- * @description CreateSubmissionData
+ * @description CreateCustomFileData
  * @package     FormAPI
  * @author      OpenAPI Generator team
  * @link        https://openapi-generator.tech
  */
-class CreateSubmissionDataTest extends \PHPUnit_Framework_TestCase
+class CreateCustomFileDataTest extends \PHPUnit_Framework_TestCase
 {
 
     /**
@@ -70,51 +70,16 @@ class CreateSubmissionDataTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Test "CreateSubmissionData"
+     * Test "CreateCustomFileData"
      */
-    public function testCreateSubmissionData()
+    public function testCreateCustomFileData()
     {
     }
 
     /**
-     * Test attribute "test"
+     * Test attribute "cache_id"
      */
-    public function testPropertyTest()
-    {
-    }
-
-    /**
-     * Test attribute "data"
-     */
-    public function testPropertyData()
-    {
-    }
-
-    /**
-     * Test attribute "html"
-     */
-    public function testPropertyHtml()
-    {
-    }
-
-    /**
-     * Test attribute "css"
-     */
-    public function testPropertyCss()
-    {
-    }
-
-    /**
-     * Test attribute "metadata"
-     */
-    public function testPropertyMetadata()
-    {
-    }
-
-    /**
-     * Test attribute "data_requests"
-     */
-    public function testPropertyDataRequests()
+    public function testPropertyCacheId()
     {
     }
 }

@@ -1,6 +1,6 @@
 <?php
 /**
- * CombinedSubmissionTest
+ * Templatesv2TemplateDocumentTest
  *
  * PHP version 5
  *
@@ -30,15 +30,15 @@
 namespace FormAPI;
 
 /**
- * CombinedSubmissionTest Class Doc Comment
+ * Templatesv2TemplateDocumentTest Class Doc Comment
  *
  * @category    Class
- * @description CombinedSubmission
+ * @description Templatesv2TemplateDocument
  * @package     FormAPI
  * @author      OpenAPI Generator team
  * @link        https://openapi-generator.tech
  */
-class CombinedSubmissionTest extends \PHPUnit_Framework_TestCase
+class Templatesv2TemplateDocumentTest extends \PHPUnit_Framework_TestCase
 {
 
     /**
@@ -70,9 +70,9 @@ class CombinedSubmissionTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Test "CombinedSubmission"
+     * Test "Templatesv2TemplateDocument"
      */
-    public function testCombinedSubmission()
+    public function testTemplatesv2TemplateDocument()
     {
     }
 
@@ -84,41 +84,6 @@ class CombinedSubmissionTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Test attribute "expired"
-     */
-    public function testPropertyExpired()
-    {
-    }
-
-    /**
-     * Test attribute "expires_at"
-     */
-    public function testPropertyExpiresAt()
-    {
-    }
-
-    /**
-     * Test attribute "source_pdfs"
-     */
-    public function testPropertySourcePdfs()
-    {
-    }
-
-    /**
-     * Test attribute "download_url"
-     */
-    public function testPropertyDownloadUrl()
-    {
-    }
-
-    /**
-     * Test attribute "submission_ids"
-     */
-    public function testPropertySubmissionIds()
-    {
-    }
-
-    /**
      * Test attribute "id"
      */
     public function testPropertyId()
@@ -126,16 +91,9 @@ class CombinedSubmissionTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Test attribute "state"
+     * Test attribute "storage"
      */
-    public function testPropertyState()
-    {
-    }
-
-    /**
-     * Test attribute "actions"
-     */
-    public function testPropertyActions()
+    public function testPropertyStorage()
     {
     }
 }

@@ -59,7 +59,7 @@ class PDFApiTest extends \PHPUnit_Framework_TestCase
       $config = \FormAPI\Configuration::getDefaultConfiguration()
                     ->setUsername('api_token123')
                     ->setPassword('testsecret123')
-                    ->setHost('http://localhost:31337/api/v1');
+                    ->setHost('http://api.formapi.local:31337/api/v1');
       $this->apiInstance = new \FormAPI\Api\PDFApi(
           // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
           // This is optional, `GuzzleHttp\Client` will be used as default.
@@ -175,7 +175,7 @@ class PDFApiTest extends \PHPUnit_Framework_TestCase
     {
       $template_id = 'tpl_000000000000000001'; // string |
 
-      $submission = new Model\CreateSubmissionData();
+      $submission = new Model\SubmissionData();
       $submission->setData([
         "title" => 'Test PDF',
         "description" => 'This PDF is great!',
@@ -199,7 +199,7 @@ class PDFApiTest extends \PHPUnit_Framework_TestCase
     {
       $template_id = 'tpl_000000000000000001'; // string |
 
-      $submission = new Model\CreateSubmissionData();
+      $submission = new Model\SubmissionData();
       $submission->setData([
         "title" => 'Test PDF',
       ]);

@@ -1,6 +1,6 @@
 <?php
 /**
- * SubmissionBatchData
+ * CreateTemplateData
  *
  * PHP version 5
  *
@@ -33,14 +33,14 @@ use \ArrayAccess;
 use \FormAPI\ObjectSerializer;
 
 /**
- * SubmissionBatchData Class Doc Comment
+ * CreateTemplateData Class Doc Comment
  *
  * @category Class
  * @package  FormAPI
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  */
-class SubmissionBatchData implements ModelInterface, ArrayAccess
+class CreateTemplateData implements ModelInterface, ArrayAccess
 {
     const DISCRIMINATOR = null;
 
@@ -49,7 +49,7 @@ class SubmissionBatchData implements ModelInterface, ArrayAccess
       *
       * @var string
       */
-    protected static $openAPIModelName = 'submission_batch_data';
+    protected static $openAPIModelName = 'create_template_data';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -57,10 +57,7 @@ class SubmissionBatchData implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $openAPITypes = [
-        'metadata' => 'object',
-        'test' => 'bool',
-        'template_id' => 'string',
-        'submissions' => '\FormAPI\Model\SubmissionDataBatchRequest[]'
+        'template' => '\FormAPI\Model\Templatesv2Template'
     ];
 
     /**
@@ -69,10 +66,7 @@ class SubmissionBatchData implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $openAPIFormats = [
-        'metadata' => null,
-        'test' => null,
-        'template_id' => null,
-        'submissions' => null
+        'template' => null
     ];
 
     /**
@@ -102,10 +96,7 @@ class SubmissionBatchData implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $attributeMap = [
-        'metadata' => 'metadata',
-        'test' => 'test',
-        'template_id' => 'template_id',
-        'submissions' => 'submissions'
+        'template' => 'template'
     ];
 
     /**
@@ -114,10 +105,7 @@ class SubmissionBatchData implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $setters = [
-        'metadata' => 'setMetadata',
-        'test' => 'setTest',
-        'template_id' => 'setTemplateId',
-        'submissions' => 'setSubmissions'
+        'template' => 'setTemplate'
     ];
 
     /**
@@ -126,10 +114,7 @@ class SubmissionBatchData implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $getters = [
-        'metadata' => 'getMetadata',
-        'test' => 'getTest',
-        'template_id' => 'getTemplateId',
-        'submissions' => 'getSubmissions'
+        'template' => 'getTemplate'
     ];
 
     /**
@@ -192,10 +177,7 @@ class SubmissionBatchData implements ModelInterface, ArrayAccess
      */
     public function __construct(array $data = null)
     {
-        $this->container['metadata'] = isset($data['metadata']) ? $data['metadata'] : null;
-        $this->container['test'] = isset($data['test']) ? $data['test'] : null;
-        $this->container['template_id'] = isset($data['template_id']) ? $data['template_id'] : null;
-        $this->container['submissions'] = isset($data['submissions']) ? $data['submissions'] : null;
+        $this->container['template'] = isset($data['template']) ? $data['template'] : null;
     }
 
     /**
@@ -207,8 +189,8 @@ class SubmissionBatchData implements ModelInterface, ArrayAccess
     {
         $invalidProperties = [];
 
-        if ($this->container['submissions'] === null) {
-            $invalidProperties[] = "'submissions' can't be null";
+        if ($this->container['template'] === null) {
+            $invalidProperties[] = "'template' can't be null";
         }
         return $invalidProperties;
     }
@@ -226,97 +208,25 @@ class SubmissionBatchData implements ModelInterface, ArrayAccess
 
 
     /**
-     * Gets metadata
+     * Gets template
      *
-     * @return object|null
+     * @return \FormAPI\Model\Templatesv2Template
      */
-    public function getMetadata()
+    public function getTemplate()
     {
-        return $this->container['metadata'];
+        return $this->container['template'];
     }
 
     /**
-     * Sets metadata
+     * Sets template
      *
-     * @param object|null $metadata metadata
+     * @param \FormAPI\Model\Templatesv2Template $template template
      *
      * @return $this
      */
-    public function setMetadata($metadata)
+    public function setTemplate($template)
     {
-        $this->container['metadata'] = $metadata;
-
-        return $this;
-    }
-
-    /**
-     * Gets test
-     *
-     * @return bool|null
-     */
-    public function getTest()
-    {
-        return $this->container['test'];
-    }
-
-    /**
-     * Sets test
-     *
-     * @param bool|null $test test
-     *
-     * @return $this
-     */
-    public function setTest($test)
-    {
-        $this->container['test'] = $test;
-
-        return $this;
-    }
-
-    /**
-     * Gets template_id
-     *
-     * @return string|null
-     */
-    public function getTemplateId()
-    {
-        return $this->container['template_id'];
-    }
-
-    /**
-     * Sets template_id
-     *
-     * @param string|null $template_id template_id
-     *
-     * @return $this
-     */
-    public function setTemplateId($template_id)
-    {
-        $this->container['template_id'] = $template_id;
-
-        return $this;
-    }
-
-    /**
-     * Gets submissions
-     *
-     * @return \FormAPI\Model\SubmissionDataBatchRequest[]
-     */
-    public function getSubmissions()
-    {
-        return $this->container['submissions'];
-    }
-
-    /**
-     * Sets submissions
-     *
-     * @param \FormAPI\Model\SubmissionDataBatchRequest[] $submissions submissions
-     *
-     * @return $this
-     */
-    public function setSubmissions($submissions)
-    {
-        $this->container['submissions'] = $submissions;
+        $this->container['template'] = $template;
 
         return $this;
     }

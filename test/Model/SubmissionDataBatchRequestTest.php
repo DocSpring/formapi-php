@@ -1,6 +1,6 @@
 <?php
 /**
- * CombinedSubmissionTest
+ * SubmissionDataBatchRequestTest
  *
  * PHP version 5
  *
@@ -30,15 +30,15 @@
 namespace FormAPI;
 
 /**
- * CombinedSubmissionTest Class Doc Comment
+ * SubmissionDataBatchRequestTest Class Doc Comment
  *
  * @category    Class
- * @description CombinedSubmission
+ * @description SubmissionDataBatchRequest
  * @package     FormAPI
  * @author      OpenAPI Generator team
  * @link        https://openapi-generator.tech
  */
-class CombinedSubmissionTest extends \PHPUnit_Framework_TestCase
+class SubmissionDataBatchRequestTest extends \PHPUnit_Framework_TestCase
 {
 
     /**
@@ -70,9 +70,16 @@ class CombinedSubmissionTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Test "CombinedSubmission"
+     * Test "SubmissionDataBatchRequest"
      */
-    public function testCombinedSubmission()
+    public function testSubmissionDataBatchRequest()
+    {
+    }
+
+    /**
+     * Test attribute "css"
+     */
+    public function testPropertyCss()
     {
     }
 
@@ -84,58 +91,30 @@ class CombinedSubmissionTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Test attribute "expired"
+     * Test attribute "test"
      */
-    public function testPropertyExpired()
+    public function testPropertyTest()
     {
     }
 
     /**
-     * Test attribute "expires_at"
+     * Test attribute "data"
      */
-    public function testPropertyExpiresAt()
+    public function testPropertyData()
     {
     }
 
     /**
-     * Test attribute "source_pdfs"
+     * Test attribute "template_id"
      */
-    public function testPropertySourcePdfs()
+    public function testPropertyTemplateId()
     {
     }
 
     /**
-     * Test attribute "download_url"
+     * Test attribute "html"
      */
-    public function testPropertyDownloadUrl()
-    {
-    }
-
-    /**
-     * Test attribute "submission_ids"
-     */
-    public function testPropertySubmissionIds()
-    {
-    }
-
-    /**
-     * Test attribute "id"
-     */
-    public function testPropertyId()
-    {
-    }
-
-    /**
-     * Test attribute "state"
-     */
-    public function testPropertyState()
-    {
-    }
-
-    /**
-     * Test attribute "actions"
-     */
-    public function testPropertyActions()
+    public function testPropertyHtml()
     {
     }
 }

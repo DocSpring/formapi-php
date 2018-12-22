@@ -6,6 +6,7 @@ Name | Type | Description | Notes
 **metadata** | **object** |  | [optional] 
 **expired** | **bool** |  | [optional] 
 **expires_at** | **string** |  | [optional] 
+**source_pdfs** | **object[]** |  | [optional] 
 **download_url** | **string** |  | [optional] 
 **submission_ids** | **string[]** |  | [optional] 
 **id** | **string** |  | [optional] 

@@ -1,6 +1,6 @@
 <?php
 /**
- * SubmissionBatchData
+ * CreateCustomFileResponse
  *
  * PHP version 5
  *
@@ -33,14 +33,14 @@ use \ArrayAccess;
 use \FormAPI\ObjectSerializer;
 
 /**
- * SubmissionBatchData Class Doc Comment
+ * CreateCustomFileResponse Class Doc Comment
  *
  * @category Class
  * @package  FormAPI
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  */
-class SubmissionBatchData implements ModelInterface, ArrayAccess
+class CreateCustomFileResponse implements ModelInterface, ArrayAccess
 {
     const DISCRIMINATOR = null;
 
@@ -49,7 +49,7 @@ class SubmissionBatchData implements ModelInterface, ArrayAccess
       *
       * @var string
       */
-    protected static $openAPIModelName = 'submission_batch_data';
+    protected static $openAPIModelName = 'create_custom_file_response';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -57,10 +57,9 @@ class SubmissionBatchData implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $openAPITypes = [
-        'metadata' => 'object',
-        'test' => 'bool',
-        'template_id' => 'string',
-        'submissions' => '\FormAPI\Model\SubmissionDataBatchRequest[]'
+        'custom_file' => '\FormAPI\Model\CustomFile',
+        'errors' => 'string[]',
+        'status' => 'string'
     ];
 
     /**
@@ -69,10 +68,9 @@ class SubmissionBatchData implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $openAPIFormats = [
-        'metadata' => null,
-        'test' => null,
-        'template_id' => null,
-        'submissions' => null
+        'custom_file' => null,
+        'errors' => null,
+        'status' => null
     ];
 
     /**
@@ -102,10 +100,9 @@ class SubmissionBatchData implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $attributeMap = [
-        'metadata' => 'metadata',
-        'test' => 'test',
-        'template_id' => 'template_id',
-        'submissions' => 'submissions'
+        'custom_file' => 'custom_file',
+        'errors' => 'errors',
+        'status' => 'status'
     ];
 
     /**
@@ -114,10 +111,9 @@ class SubmissionBatchData implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $setters = [
-        'metadata' => 'setMetadata',
-        'test' => 'setTest',
-        'template_id' => 'setTemplateId',
-        'submissions' => 'setSubmissions'
+        'custom_file' => 'setCustomFile',
+        'errors' => 'setErrors',
+        'status' => 'setStatus'
     ];
 
     /**
@@ -126,10 +122,9 @@ class SubmissionBatchData implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $getters = [
-        'metadata' => 'getMetadata',
-        'test' => 'getTest',
-        'template_id' => 'getTemplateId',
-        'submissions' => 'getSubmissions'
+        'custom_file' => 'getCustomFile',
+        'errors' => 'getErrors',
+        'status' => 'getStatus'
     ];
 
     /**
@@ -173,8 +168,23 @@ class SubmissionBatchData implements ModelInterface, ArrayAccess
         return self::$openAPIModelName;
     }
 
+    const STATUS_SUCCESS = 'success';
+    const STATUS_ERROR = 'error';
     
 
+    
+    /**
+     * Gets allowable values of the enum
+     *
+     * @return string[]
+     */
+    public function getStatusAllowableValues()
+    {
+        return [
+            self::STATUS_SUCCESS,
+            self::STATUS_ERROR,
+        ];
+    }
     
 
     /**
@@ -192,10 +202,9 @@ class SubmissionBatchData implements ModelInterface, ArrayAccess
      */
     public function __construct(array $data = null)
     {
-        $this->container['metadata'] = isset($data['metadata']) ? $data['metadata'] : null;
-        $this->container['test'] = isset($data['test']) ? $data['test'] : null;
-        $this->container['template_id'] = isset($data['template_id']) ? $data['template_id'] : null;
-        $this->container['submissions'] = isset($data['submissions']) ? $data['submissions'] : null;
+        $this->container['custom_file'] = isset($data['custom_file']) ? $data['custom_file'] : null;
+        $this->container['errors'] = isset($data['errors']) ? $data['errors'] : null;
+        $this->container['status'] = isset($data['status']) ? $data['status'] : null;
     }
 
     /**
@@ -207,9 +216,14 @@ class SubmissionBatchData implements ModelInterface, ArrayAccess
     {
         $invalidProperties = [];
 
-        if ($this->container['submissions'] === null) {
-            $invalidProperties[] = "'submissions' can't be null";
+        $allowedValues = $this->getStatusAllowableValues();
+        if (!is_null($this->container['status']) && !in_array($this->container['status'], $allowedValues, true)) {
+            $invalidProperties[] = sprintf(
+                "invalid value for 'status', must be one of '%s'",
+                implode("', '", $allowedValues)
+            );
         }
+
         return $invalidProperties;
     }
 
@@ -226,97 +240,82 @@ class SubmissionBatchData implements ModelInterface, ArrayAccess
 
 
     /**
-     * Gets metadata
+     * Gets custom_file
      *
-     * @return object|null
+     * @return \FormAPI\Model\CustomFile|null
      */
-    public function getMetadata()
+    public function getCustomFile()
     {
-        return $this->container['metadata'];
+        return $this->container['custom_file'];
     }
 
     /**
-     * Sets metadata
+     * Sets custom_file
      *
-     * @param object|null $metadata metadata
+     * @param \FormAPI\Model\CustomFile|null $custom_file custom_file
      *
      * @return $this
      */
-    public function setMetadata($metadata)
+    public function setCustomFile($custom_file)
     {
-        $this->container['metadata'] = $metadata;
+        $this->container['custom_file'] = $custom_file;
 
         return $this;
     }
 
     /**
-     * Gets test
+     * Gets errors
      *
-     * @return bool|null
+     * @return string[]|null
      */
-    public function getTest()
+    public function getErrors()
     {
-        return $this->container['test'];
+        return $this->container['errors'];
     }
 
     /**
-     * Sets test
+     * Sets errors
      *
-     * @param bool|null $test test
+     * @param string[]|null $errors errors
      *
      * @return $this
      */
-    public function setTest($test)
+    public function setErrors($errors)
     {
-        $this->container['test'] = $test;
+        $this->container['errors'] = $errors;
 
         return $this;
     }
 
     /**
-     * Gets template_id
+     * Gets status
      *
      * @return string|null
      */
-    public function getTemplateId()
+    public function getStatus()
     {
-        return $this->container['template_id'];
+        return $this->container['status'];
     }
 
     /**
-     * Sets template_id
+     * Sets status
      *
-     * @param string|null $template_id template_id
+     * @param string|null $status status
      *
      * @return $this
      */
-    public function setTemplateId($template_id)
+    public function setStatus($status)
     {
-        $this->container['template_id'] = $template_id;
-
-        return $this;
-    }
-
-    /**
-     * Gets submissions
-     *
-     * @return \FormAPI\Model\SubmissionDataBatchRequest[]
-     */
-    public function getSubmissions()
-    {
-        return $this->container['submissions'];
-    }
-
-    /**
-     * Sets submissions
-     *
-     * @param \FormAPI\Model\SubmissionDataBatchRequest[] $submissions submissions
-     *
-     * @return $this
-     */
-    public function setSubmissions($submissions)
-    {
-        $this->container['submissions'] = $submissions;
+        $allowedValues = $this->getStatusAllowableValues();
+        if (!is_null($status) && !in_array($status, $allowedValues, true)) {
+            throw new \InvalidArgumentException(
+                sprintf(
+                    "Invalid value for 'status', must be one of '%s'",
+                    implode("', '", $allowedValues)
+                )
+            );
+        }
+        $this->container['status'] = $status;
 
         return $this;
     }

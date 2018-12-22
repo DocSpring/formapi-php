@@ -1,6 +1,6 @@
 <?php
 /**
- * SubmissionBatchData
+ * SubmissionDataBatchRequest
  *
  * PHP version 5
  *
@@ -33,14 +33,14 @@ use \ArrayAccess;
 use \FormAPI\ObjectSerializer;
 
 /**
- * SubmissionBatchData Class Doc Comment
+ * SubmissionDataBatchRequest Class Doc Comment
  *
  * @category Class
  * @package  FormAPI
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  */
-class SubmissionBatchData implements ModelInterface, ArrayAccess
+class SubmissionDataBatchRequest implements ModelInterface, ArrayAccess
 {
     const DISCRIMINATOR = null;
 
@@ -49,7 +49,7 @@ class SubmissionBatchData implements ModelInterface, ArrayAccess
       *
       * @var string
       */
-    protected static $openAPIModelName = 'submission_batch_data';
+    protected static $openAPIModelName = 'submission_data_batch_request';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -57,10 +57,12 @@ class SubmissionBatchData implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $openAPITypes = [
+        'css' => 'string',
         'metadata' => 'object',
         'test' => 'bool',
+        'data' => 'object',
         'template_id' => 'string',
-        'submissions' => '\FormAPI\Model\SubmissionDataBatchRequest[]'
+        'html' => 'string'
     ];
 
     /**
@@ -69,10 +71,12 @@ class SubmissionBatchData implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $openAPIFormats = [
+        'css' => null,
         'metadata' => null,
         'test' => null,
+        'data' => null,
         'template_id' => null,
-        'submissions' => null
+        'html' => null
     ];
 
     /**
@@ -102,10 +106,12 @@ class SubmissionBatchData implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $attributeMap = [
+        'css' => 'css',
         'metadata' => 'metadata',
         'test' => 'test',
+        'data' => 'data',
         'template_id' => 'template_id',
-        'submissions' => 'submissions'
+        'html' => 'html'
     ];
 
     /**
@@ -114,10 +120,12 @@ class SubmissionBatchData implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $setters = [
+        'css' => 'setCss',
         'metadata' => 'setMetadata',
         'test' => 'setTest',
+        'data' => 'setData',
         'template_id' => 'setTemplateId',
-        'submissions' => 'setSubmissions'
+        'html' => 'setHtml'
     ];
 
     /**
@@ -126,10 +134,12 @@ class SubmissionBatchData implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $getters = [
+        'css' => 'getCss',
         'metadata' => 'getMetadata',
         'test' => 'getTest',
+        'data' => 'getData',
         'template_id' => 'getTemplateId',
-        'submissions' => 'getSubmissions'
+        'html' => 'getHtml'
     ];
 
     /**
@@ -192,10 +202,12 @@ class SubmissionBatchData implements ModelInterface, ArrayAccess
      */
     public function __construct(array $data = null)
     {
+        $this->container['css'] = isset($data['css']) ? $data['css'] : null;
         $this->container['metadata'] = isset($data['metadata']) ? $data['metadata'] : null;
         $this->container['test'] = isset($data['test']) ? $data['test'] : null;
+        $this->container['data'] = isset($data['data']) ? $data['data'] : null;
         $this->container['template_id'] = isset($data['template_id']) ? $data['template_id'] : null;
-        $this->container['submissions'] = isset($data['submissions']) ? $data['submissions'] : null;
+        $this->container['html'] = isset($data['html']) ? $data['html'] : null;
     }
 
     /**
@@ -207,9 +219,6 @@ class SubmissionBatchData implements ModelInterface, ArrayAccess
     {
         $invalidProperties = [];
 
-        if ($this->container['submissions'] === null) {
-            $invalidProperties[] = "'submissions' can't be null";
-        }
         return $invalidProperties;
     }
 
@@ -224,6 +233,30 @@ class SubmissionBatchData implements ModelInterface, ArrayAccess
         return count($this->listInvalidProperties()) === 0;
     }
 
+
+    /**
+     * Gets css
+     *
+     * @return string|null
+     */
+    public function getCss()
+    {
+        return $this->container['css'];
+    }
+
+    /**
+     * Sets css
+     *
+     * @param string|null $css css
+     *
+     * @return $this
+     */
+    public function setCss($css)
+    {
+        $this->container['css'] = $css;
+
+        return $this;
+    }
 
     /**
      * Gets metadata
@@ -274,6 +307,30 @@ class SubmissionBatchData implements ModelInterface, ArrayAccess
     }
 
     /**
+     * Gets data
+     *
+     * @return object|null
+     */
+    public function getData()
+    {
+        return $this->container['data'];
+    }
+
+    /**
+     * Sets data
+     *
+     * @param object|null $data data
+     *
+     * @return $this
+     */
+    public function setData($data)
+    {
+        $this->container['data'] = $data;
+
+        return $this;
+    }
+
+    /**
      * Gets template_id
      *
      * @return string|null
@@ -298,25 +355,25 @@ class SubmissionBatchData implements ModelInterface, ArrayAccess
     }
 
     /**
-     * Gets submissions
+     * Gets html
      *
-     * @return \FormAPI\Model\SubmissionDataBatchRequest[]
+     * @return string|null
      */
-    public function getSubmissions()
+    public function getHtml()
     {
-        return $this->container['submissions'];
+        return $this->container['html'];
     }
 
     /**
-     * Sets submissions
+     * Sets html
      *
-     * @param \FormAPI\Model\SubmissionDataBatchRequest[] $submissions submissions
+     * @param string|null $html html
      *
      * @return $this
      */
-    public function setSubmissions($submissions)
+    public function setHtml($html)
     {
-        $this->container['submissions'] = $submissions;
+        $this->container['html'] = $html;
 
         return $this;
     }

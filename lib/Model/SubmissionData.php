@@ -1,6 +1,6 @@
 <?php
 /**
- * SubmissionBatchData
+ * SubmissionData
  *
  * PHP version 5
  *
@@ -33,14 +33,14 @@ use \ArrayAccess;
 use \FormAPI\ObjectSerializer;
 
 /**
- * SubmissionBatchData Class Doc Comment
+ * SubmissionData Class Doc Comment
  *
  * @category Class
  * @package  FormAPI
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  */
-class SubmissionBatchData implements ModelInterface, ArrayAccess
+class SubmissionData implements ModelInterface, ArrayAccess
 {
     const DISCRIMINATOR = null;
 
@@ -49,7 +49,7 @@ class SubmissionBatchData implements ModelInterface, ArrayAccess
       *
       * @var string
       */
-    protected static $openAPIModelName = 'submission_batch_data';
+    protected static $openAPIModelName = 'submission_data';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -57,10 +57,12 @@ class SubmissionBatchData implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $openAPITypes = [
-        'metadata' => 'object',
         'test' => 'bool',
-        'template_id' => 'string',
-        'submissions' => '\FormAPI\Model\SubmissionDataBatchRequest[]'
+        'data' => 'object',
+        'html' => 'string',
+        'css' => 'string',
+        'metadata' => 'object',
+        'data_requests' => '\FormAPI\Model\CreateSubmissionDataRequestData[]'
     ];
 
     /**
@@ -69,10 +71,12 @@ class SubmissionBatchData implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $openAPIFormats = [
-        'metadata' => null,
         'test' => null,
-        'template_id' => null,
-        'submissions' => null
+        'data' => null,
+        'html' => null,
+        'css' => null,
+        'metadata' => null,
+        'data_requests' => null
     ];
 
     /**
@@ -102,10 +106,12 @@ class SubmissionBatchData implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $attributeMap = [
-        'metadata' => 'metadata',
         'test' => 'test',
-        'template_id' => 'template_id',
-        'submissions' => 'submissions'
+        'data' => 'data',
+        'html' => 'html',
+        'css' => 'css',
+        'metadata' => 'metadata',
+        'data_requests' => 'data_requests'
     ];
 
     /**
@@ -114,10 +120,12 @@ class SubmissionBatchData implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $setters = [
-        'metadata' => 'setMetadata',
         'test' => 'setTest',
-        'template_id' => 'setTemplateId',
-        'submissions' => 'setSubmissions'
+        'data' => 'setData',
+        'html' => 'setHtml',
+        'css' => 'setCss',
+        'metadata' => 'setMetadata',
+        'data_requests' => 'setDataRequests'
     ];
 
     /**
@@ -126,10 +134,12 @@ class SubmissionBatchData implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $getters = [
-        'metadata' => 'getMetadata',
         'test' => 'getTest',
-        'template_id' => 'getTemplateId',
-        'submissions' => 'getSubmissions'
+        'data' => 'getData',
+        'html' => 'getHtml',
+        'css' => 'getCss',
+        'metadata' => 'getMetadata',
+        'data_requests' => 'getDataRequests'
     ];
 
     /**
@@ -192,10 +202,12 @@ class SubmissionBatchData implements ModelInterface, ArrayAccess
      */
     public function __construct(array $data = null)
     {
-        $this->container['metadata'] = isset($data['metadata']) ? $data['metadata'] : null;
         $this->container['test'] = isset($data['test']) ? $data['test'] : null;
-        $this->container['template_id'] = isset($data['template_id']) ? $data['template_id'] : null;
-        $this->container['submissions'] = isset($data['submissions']) ? $data['submissions'] : null;
+        $this->container['data'] = isset($data['data']) ? $data['data'] : null;
+        $this->container['html'] = isset($data['html']) ? $data['html'] : null;
+        $this->container['css'] = isset($data['css']) ? $data['css'] : null;
+        $this->container['metadata'] = isset($data['metadata']) ? $data['metadata'] : null;
+        $this->container['data_requests'] = isset($data['data_requests']) ? $data['data_requests'] : null;
     }
 
     /**
@@ -207,8 +219,8 @@ class SubmissionBatchData implements ModelInterface, ArrayAccess
     {
         $invalidProperties = [];
 
-        if ($this->container['submissions'] === null) {
-            $invalidProperties[] = "'submissions' can't be null";
+        if ($this->container['data'] === null) {
+            $invalidProperties[] = "'data' can't be null";
         }
         return $invalidProperties;
     }
@@ -224,30 +236,6 @@ class SubmissionBatchData implements ModelInterface, ArrayAccess
         return count($this->listInvalidProperties()) === 0;
     }
 
-
-    /**
-     * Gets metadata
-     *
-     * @return object|null
-     */
-    public function getMetadata()
-    {
-        return $this->container['metadata'];
-    }
-
-    /**
-     * Sets metadata
-     *
-     * @param object|null $metadata metadata
-     *
-     * @return $this
-     */
-    public function setMetadata($metadata)
-    {
-        $this->container['metadata'] = $metadata;
-
-        return $this;
-    }
 
     /**
      * Gets test
@@ -274,49 +262,121 @@ class SubmissionBatchData implements ModelInterface, ArrayAccess
     }
 
     /**
-     * Gets template_id
+     * Gets data
      *
-     * @return string|null
+     * @return object
      */
-    public function getTemplateId()
+    public function getData()
     {
-        return $this->container['template_id'];
+        return $this->container['data'];
     }
 
     /**
-     * Sets template_id
+     * Sets data
      *
-     * @param string|null $template_id template_id
+     * @param object $data data
      *
      * @return $this
      */
-    public function setTemplateId($template_id)
+    public function setData($data)
     {
-        $this->container['template_id'] = $template_id;
+        $this->container['data'] = $data;
 
         return $this;
     }
 
     /**
-     * Gets submissions
+     * Gets html
      *
-     * @return \FormAPI\Model\SubmissionDataBatchRequest[]
+     * @return string|null
      */
-    public function getSubmissions()
+    public function getHtml()
     {
-        return $this->container['submissions'];
+        return $this->container['html'];
     }
 
     /**
-     * Sets submissions
+     * Sets html
      *
-     * @param \FormAPI\Model\SubmissionDataBatchRequest[] $submissions submissions
+     * @param string|null $html html
      *
      * @return $this
      */
-    public function setSubmissions($submissions)
+    public function setHtml($html)
     {
-        $this->container['submissions'] = $submissions;
+        $this->container['html'] = $html;
+
+        return $this;
+    }
+
+    /**
+     * Gets css
+     *
+     * @return string|null
+     */
+    public function getCss()
+    {
+        return $this->container['css'];
+    }
+
+    /**
+     * Sets css
+     *
+     * @param string|null $css css
+     *
+     * @return $this
+     */
+    public function setCss($css)
+    {
+        $this->container['css'] = $css;
+
+        return $this;
+    }
+
+    /**
+     * Gets metadata
+     *
+     * @return object|null
+     */
+    public function getMetadata()
+    {
+        return $this->container['metadata'];
+    }
+
+    /**
+     * Sets metadata
+     *
+     * @param object|null $metadata metadata
+     *
+     * @return $this
+     */
+    public function setMetadata($metadata)
+    {
+        $this->container['metadata'] = $metadata;
+
+        return $this;
+    }
+
+    /**
+     * Gets data_requests
+     *
+     * @return \FormAPI\Model\CreateSubmissionDataRequestData[]|null
+     */
+    public function getDataRequests()
+    {
+        return $this->container['data_requests'];
+    }
+
+    /**
+     * Sets data_requests
+     *
+     * @param \FormAPI\Model\CreateSubmissionDataRequestData[]|null $data_requests data_requests
+     *
+     * @return $this
+     */
+    public function setDataRequests($data_requests)
+    {
+        $this->container['data_requests'] = $data_requests;
 
         return $this;
     }

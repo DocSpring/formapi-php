@@ -1,12 +1,11 @@
-# SubmissionBatchData
+# CreateCustomFileResponse
 
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**metadata** | **object** |  | [optional] 
-**test** | **bool** |  | [optional] 
-**template_id** | **string** |  | [optional] 
-**submissions** | [**\FormAPI\Model\SubmissionDataBatchRequest[]**](SubmissionDataBatchRequest.md) |  | 
+**custom_file** | [**\FormAPI\Model\CustomFile**](CustomFile.md) |  | [optional] 
+**errors** | **string[]** |  | [optional] 
+**status** | **string** |  | [optional] 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

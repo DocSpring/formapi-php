@@ -1,6 +1,6 @@
 <?php
 /**
- * CreateSubmissionData
+ * CombinePdfsData
  *
  * PHP version 5
  *
@@ -33,14 +33,14 @@ use \ArrayAccess;
 use \FormAPI\ObjectSerializer;
 
 /**
- * CreateSubmissionData Class Doc Comment
+ * CombinePdfsData Class Doc Comment
  *
  * @category Class
  * @package  FormAPI
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  */
-class CreateSubmissionData implements ModelInterface, ArrayAccess
+class CombinePdfsData implements ModelInterface, ArrayAccess
 {
     const DISCRIMINATOR = null;
 
@@ -49,7 +49,7 @@ class CreateSubmissionData implements ModelInterface, ArrayAccess
       *
       * @var string
       */
-    protected static $openAPIModelName = 'create_submission_data';
+    protected static $openAPIModelName = 'combine_pdfs_data';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -58,11 +58,10 @@ class CreateSubmissionData implements ModelInterface, ArrayAccess
       */
     protected static $openAPITypes = [
         'test' => 'bool',
-        'data' => 'object',
-        'html' => 'string',
-        'css' => 'string',
+        'source_pdfs' => 'object[]',
         'metadata' => 'object',
-        'data_requests' => '\FormAPI\Model\CreateSubmissionDataRequestData[]'
+        'expires_in' => 'int',
+        'delete_custom_files' => 'bool'
     ];
 
     /**
@@ -72,11 +71,10 @@ class CreateSubmissionData implements ModelInterface, ArrayAccess
       */
     protected static $openAPIFormats = [
         'test' => null,
-        'data' => null,
-        'html' => null,
-        'css' => null,
+        'source_pdfs' => null,
         'metadata' => null,
-        'data_requests' => null
+        'expires_in' => null,
+        'delete_custom_files' => null
     ];
 
     /**
@@ -107,11 +105,10 @@ class CreateSubmissionData implements ModelInterface, ArrayAccess
      */
     protected static $attributeMap = [
         'test' => 'test',
-        'data' => 'data',
-        'html' => 'html',
-        'css' => 'css',
+        'source_pdfs' => 'source_pdfs',
         'metadata' => 'metadata',
-        'data_requests' => 'data_requests'
+        'expires_in' => 'expires_in',
+        'delete_custom_files' => 'delete_custom_files'
     ];
 
     /**
@@ -121,11 +118,10 @@ class CreateSubmissionData implements ModelInterface, ArrayAccess
      */
     protected static $setters = [
         'test' => 'setTest',
-        'data' => 'setData',
-        'html' => 'setHtml',
-        'css' => 'setCss',
+        'source_pdfs' => 'setSourcePdfs',
         'metadata' => 'setMetadata',
-        'data_requests' => 'setDataRequests'
+        'expires_in' => 'setExpiresIn',
+        'delete_custom_files' => 'setDeleteCustomFiles'
     ];
 
     /**
@@ -135,11 +131,10 @@ class CreateSubmissionData implements ModelInterface, ArrayAccess
      */
     protected static $getters = [
         'test' => 'getTest',
-        'data' => 'getData',
-        'html' => 'getHtml',
-        'css' => 'getCss',
+        'source_pdfs' => 'getSourcePdfs',
         'metadata' => 'getMetadata',
-        'data_requests' => 'getDataRequests'
+        'expires_in' => 'getExpiresIn',
+        'delete_custom_files' => 'getDeleteCustomFiles'
     ];
 
     /**
@@ -203,11 +198,10 @@ class CreateSubmissionData implements ModelInterface, ArrayAccess
     public function __construct(array $data = null)
     {
         $this->container['test'] = isset($data['test']) ? $data['test'] : null;
-        $this->container['data'] = isset($data['data']) ? $data['data'] : null;
-        $this->container['html'] = isset($data['html']) ? $data['html'] : null;
-        $this->container['css'] = isset($data['css']) ? $data['css'] : null;
+        $this->container['source_pdfs'] = isset($data['source_pdfs']) ? $data['source_pdfs'] : null;
         $this->container['metadata'] = isset($data['metadata']) ? $data['metadata'] : null;
-        $this->container['data_requests'] = isset($data['data_requests']) ? $data['data_requests'] : null;
+        $this->container['expires_in'] = isset($data['expires_in']) ? $data['expires_in'] : null;
+        $this->container['delete_custom_files'] = isset($data['delete_custom_files']) ? $data['delete_custom_files'] : null;
     }
 
     /**
@@ -219,8 +213,8 @@ class CreateSubmissionData implements ModelInterface, ArrayAccess
     {
         $invalidProperties = [];
 
-        if ($this->container['data'] === null) {
-            $invalidProperties[] = "'data' can't be null";
+        if ($this->container['source_pdfs'] === null) {
+            $invalidProperties[] = "'source_pdfs' can't be null";
         }
         return $invalidProperties;
     }
@@ -262,73 +256,25 @@ class CreateSubmissionData implements ModelInterface, ArrayAccess
     }
 
     /**
-     * Gets data
+     * Gets source_pdfs
      *
-     * @return object
+     * @return object[]
      */
-    public function getData()
+    public function getSourcePdfs()
     {
-        return $this->container['data'];
+        return $this->container['source_pdfs'];
     }
 
     /**
-     * Sets data
+     * Sets source_pdfs
      *
-     * @param object $data data
+     * @param object[] $source_pdfs source_pdfs
      *
      * @return $this
      */
-    public function setData($data)
+    public function setSourcePdfs($source_pdfs)
     {
-        $this->container['data'] = $data;
-
-        return $this;
-    }
-
-    /**
-     * Gets html
-     *
-     * @return string|null
-     */
-    public function getHtml()
-    {
-        return $this->container['html'];
-    }
-
-    /**
-     * Sets html
-     *
-     * @param string|null $html html
-     *
-     * @return $this
-     */
-    public function setHtml($html)
-    {
-        $this->container['html'] = $html;
-
-        return $this;
-    }
-
-    /**
-     * Gets css
-     *
-     * @return string|null
-     */
-    public function getCss()
-    {
-        return $this->container['css'];
-    }
-
-    /**
-     * Sets css
-     *
-     * @param string|null $css css
-     *
-     * @return $this
-     */
-    public function setCss($css)
-    {
-        $this->container['css'] = $css;
+        $this->container['source_pdfs'] = $source_pdfs;
 
         return $this;
     }
@@ -358,25 +304,49 @@ class CreateSubmissionData implements ModelInterface, ArrayAccess
     }
 
     /**
-     * Gets data_requests
+     * Gets expires_in
      *
-     * @return \FormAPI\Model\CreateSubmissionDataRequestData[]|null
+     * @return int|null
      */
-    public function getDataRequests()
+    public function getExpiresIn()
     {
-        return $this->container['data_requests'];
+        return $this->container['expires_in'];
     }
 
     /**
-     * Sets data_requests
+     * Sets expires_in
      *
-     * @param \FormAPI\Model\CreateSubmissionDataRequestData[]|null $data_requests data_requests
+     * @param int|null $expires_in expires_in
      *
      * @return $this
      */
-    public function setDataRequests($data_requests)
+    public function setExpiresIn($expires_in)
     {
-        $this->container['data_requests'] = $data_requests;
+        $this->container['expires_in'] = $expires_in;
+
+        return $this;
+    }
+
+    /**
+     * Gets delete_custom_files
+     *
+     * @return bool|null
+     */
+    public function getDeleteCustomFiles()
+    {
+        return $this->container['delete_custom_files'];
+    }
+
+    /**
+     * Sets delete_custom_files
+     *
+     * @param bool|null $delete_custom_files delete_custom_files
+     *
+     * @return $this
+     */
+    public function setDeleteCustomFiles($delete_custom_files)
+    {
+        $this->container['delete_custom_files'] = $delete_custom_files;
 
         return $this;
     }

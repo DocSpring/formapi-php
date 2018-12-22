@@ -1,6 +1,6 @@
 <?php
 /**
- * CombinedSubmissionTest
+ * Templatesv2TemplateDocumentMetadataTest
  *
  * PHP version 5
  *
@@ -30,15 +30,15 @@
 namespace FormAPI;
 
 /**
- * CombinedSubmissionTest Class Doc Comment
+ * Templatesv2TemplateDocumentMetadataTest Class Doc Comment
  *
  * @category    Class
- * @description CombinedSubmission
+ * @description Templatesv2TemplateDocumentMetadata
  * @package     FormAPI
  * @author      OpenAPI Generator team
  * @link        https://openapi-generator.tech
  */
-class CombinedSubmissionTest extends \PHPUnit_Framework_TestCase
+class Templatesv2TemplateDocumentMetadataTest extends \PHPUnit_Framework_TestCase
 {
 
     /**
@@ -70,72 +70,30 @@ class CombinedSubmissionTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Test "CombinedSubmission"
+     * Test "Templatesv2TemplateDocumentMetadata"
      */
-    public function testCombinedSubmission()
+    public function testTemplatesv2TemplateDocumentMetadata()
     {
     }
 
     /**
-     * Test attribute "metadata"
+     * Test attribute "filename"
      */
-    public function testPropertyMetadata()
+    public function testPropertyFilename()
     {
     }
 
     /**
-     * Test attribute "expired"
+     * Test attribute "size"
      */
-    public function testPropertyExpired()
+    public function testPropertySize()
     {
     }
 
     /**
-     * Test attribute "expires_at"
+     * Test attribute "mime_type"
      */
-    public function testPropertyExpiresAt()
-    {
-    }
-
-    /**
-     * Test attribute "source_pdfs"
-     */
-    public function testPropertySourcePdfs()
-    {
-    }
-
-    /**
-     * Test attribute "download_url"
-     */
-    public function testPropertyDownloadUrl()
-    {
-    }
-
-    /**
-     * Test attribute "submission_ids"
-     */
-    public function testPropertySubmissionIds()
-    {
-    }
-
-    /**
-     * Test attribute "id"
-     */
-    public function testPropertyId()
-    {
-    }
-
-    /**
-     * Test attribute "state"
-     */
-    public function testPropertyState()
-    {
-    }
-
-    /**
-     * Test attribute "actions"
-     */
-    public function testPropertyActions()
+    public function testPropertyMimeType()
     {
     }
 }

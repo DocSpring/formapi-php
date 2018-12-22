@@ -1,6 +1,6 @@
 <?php
 /**
- * CreateSubmissionDataBatchV1
+ * CreateCustomFileData
  *
  * PHP version 5
  *
@@ -33,14 +33,14 @@ use \ArrayAccess;
 use \FormAPI\ObjectSerializer;
 
 /**
- * CreateSubmissionDataBatchV1 Class Doc Comment
+ * CreateCustomFileData Class Doc Comment
  *
  * @category Class
  * @package  FormAPI
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  */
-class CreateSubmissionDataBatchV1 implements ModelInterface, ArrayAccess
+class CreateCustomFileData implements ModelInterface, ArrayAccess
 {
     const DISCRIMINATOR = null;
 
@@ -49,7 +49,7 @@ class CreateSubmissionDataBatchV1 implements ModelInterface, ArrayAccess
       *
       * @var string
       */
-    protected static $openAPIModelName = 'create_submission_data_batch_v1';
+    protected static $openAPIModelName = 'create_custom_file_data';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -57,11 +57,7 @@ class CreateSubmissionDataBatchV1 implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $openAPITypes = [
-        'test' => 'bool',
-        'data' => 'object',
-        'html' => 'string',
-        'css' => 'string',
-        'metadata' => 'object'
+        'cache_id' => 'string'
     ];
 
     /**
@@ -70,11 +66,7 @@ class CreateSubmissionDataBatchV1 implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $openAPIFormats = [
-        'test' => null,
-        'data' => null,
-        'html' => null,
-        'css' => null,
-        'metadata' => null
+        'cache_id' => null
     ];
 
     /**
@@ -104,11 +96,7 @@ class CreateSubmissionDataBatchV1 implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $attributeMap = [
-        'test' => 'test',
-        'data' => 'data',
-        'html' => 'html',
-        'css' => 'css',
-        'metadata' => 'metadata'
+        'cache_id' => 'cache_id'
     ];
 
     /**
@@ -117,11 +105,7 @@ class CreateSubmissionDataBatchV1 implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $setters = [
-        'test' => 'setTest',
-        'data' => 'setData',
-        'html' => 'setHtml',
-        'css' => 'setCss',
-        'metadata' => 'setMetadata'
+        'cache_id' => 'setCacheId'
     ];
 
     /**
@@ -130,11 +114,7 @@ class CreateSubmissionDataBatchV1 implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $getters = [
-        'test' => 'getTest',
-        'data' => 'getData',
-        'html' => 'getHtml',
-        'css' => 'getCss',
-        'metadata' => 'getMetadata'
+        'cache_id' => 'getCacheId'
     ];
 
     /**
@@ -197,11 +177,7 @@ class CreateSubmissionDataBatchV1 implements ModelInterface, ArrayAccess
      */
     public function __construct(array $data = null)
     {
-        $this->container['test'] = isset($data['test']) ? $data['test'] : null;
-        $this->container['data'] = isset($data['data']) ? $data['data'] : null;
-        $this->container['html'] = isset($data['html']) ? $data['html'] : null;
-        $this->container['css'] = isset($data['css']) ? $data['css'] : null;
-        $this->container['metadata'] = isset($data['metadata']) ? $data['metadata'] : null;
+        $this->container['cache_id'] = isset($data['cache_id']) ? $data['cache_id'] : null;
     }
 
     /**
@@ -213,8 +189,8 @@ class CreateSubmissionDataBatchV1 implements ModelInterface, ArrayAccess
     {
         $invalidProperties = [];
 
-        if ($this->container['data'] === null) {
-            $invalidProperties[] = "'data' can't be null";
+        if ($this->container['cache_id'] === null) {
+            $invalidProperties[] = "'cache_id' can't be null";
         }
         return $invalidProperties;
     }
@@ -232,121 +208,25 @@ class CreateSubmissionDataBatchV1 implements ModelInterface, ArrayAccess
 
 
     /**
-     * Gets test
+     * Gets cache_id
      *
-     * @return bool|null
+     * @return string
      */
-    public function getTest()
+    public function getCacheId()
     {
-        return $this->container['test'];
+        return $this->container['cache_id'];
     }
 
     /**
-     * Sets test
+     * Sets cache_id
      *
-     * @param bool|null $test test
+     * @param string $cache_id cache_id
      *
      * @return $this
      */
-    public function setTest($test)
+    public function setCacheId($cache_id)
     {
-        $this->container['test'] = $test;
-
-        return $this;
-    }
-
-    /**
-     * Gets data
-     *
-     * @return object
-     */
-    public function getData()
-    {
-        return $this->container['data'];
-    }
-
-    /**
-     * Sets data
-     *
-     * @param object $data data
-     *
-     * @return $this
-     */
-    public function setData($data)
-    {
-        $this->container['data'] = $data;
-
-        return $this;
-    }
-
-    /**
-     * Gets html
-     *
-     * @return string|null
-     */
-    public function getHtml()
-    {
-        return $this->container['html'];
-    }
-
-    /**
-     * Sets html
-     *
-     * @param string|null $html html
-     *
-     * @return $this
-     */
-    public function setHtml($html)
-    {
-        $this->container['html'] = $html;
-
-        return $this;
-    }
-
-    /**
-     * Gets css
-     *
-     * @return string|null
-     */
-    public function getCss()
-    {
-        return $this->container['css'];
-    }
-
-    /**
-     * Sets css
-     *
-     * @param string|null $css css
-     *
-     * @return $this
-     */
-    public function setCss($css)
-    {
-        $this->container['css'] = $css;
-
-        return $this;
-    }
-
-    /**
-     * Gets metadata
-     *
-     * @return object|null
-     */
-    public function getMetadata()
-    {
-        return $this->container['metadata'];
-    }
-
-    /**
-     * Sets metadata
-     *
-     * @param object|null $metadata metadata
-     *
-     * @return $this
-     */
-    public function setMetadata($metadata)
-    {
-        $this->container['metadata'] = $metadata;
+        $this->container['cache_id'] = $cache_id;
 
         return $this;
     }

@@ -1,6 +1,6 @@
 <?php
 /**
- * CreateSubmissionDataBatchRequestTest
+ * CombinePdfsDataTest
  *
  * PHP version 5
  *
@@ -30,15 +30,15 @@
 namespace FormAPI;
 
 /**
- * CreateSubmissionDataBatchRequestTest Class Doc Comment
+ * CombinePdfsDataTest Class Doc Comment
  *
  * @category    Class
- * @description CreateSubmissionDataBatchRequest
+ * @description CombinePdfsData
  * @package     FormAPI
  * @author      OpenAPI Generator team
  * @link        https://openapi-generator.tech
  */
-class CreateSubmissionDataBatchRequestTest extends \PHPUnit_Framework_TestCase
+class CombinePdfsDataTest extends \PHPUnit_Framework_TestCase
 {
 
     /**
@@ -70,16 +70,9 @@ class CreateSubmissionDataBatchRequestTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Test "CreateSubmissionDataBatchRequest"
+     * Test "CombinePdfsData"
      */
-    public function testCreateSubmissionDataBatchRequest()
-    {
-    }
-
-    /**
-     * Test attribute "template_id"
-     */
-    public function testPropertyTemplateId()
+    public function testCombinePdfsData()
     {
     }
 
@@ -91,23 +84,9 @@ class CreateSubmissionDataBatchRequestTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Test attribute "data"
+     * Test attribute "source_pdfs"
      */
-    public function testPropertyData()
-    {
-    }
-
-    /**
-     * Test attribute "html"
-     */
-    public function testPropertyHtml()
-    {
-    }
-
-    /**
-     * Test attribute "css"
-     */
-    public function testPropertyCss()
+    public function testPropertySourcePdfs()
     {
     }
 
@@ -115,6 +94,20 @@ class CreateSubmissionDataBatchRequestTest extends \PHPUnit_Framework_TestCase
      * Test attribute "metadata"
      */
     public function testPropertyMetadata()
+    {
+    }
+
+    /**
+     * Test attribute "expires_in"
+     */
+    public function testPropertyExpiresIn()
+    {
+    }
+
+    /**
+     * Test attribute "delete_custom_files"
+     */
+    public function testPropertyDeleteCustomFiles()
     {
     }
 }

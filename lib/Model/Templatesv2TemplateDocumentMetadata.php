@@ -1,6 +1,6 @@
 <?php
 /**
- * CreateSubmissionDataBatchRequest
+ * Templatesv2TemplateDocumentMetadata
  *
  * PHP version 5
  *
@@ -33,14 +33,14 @@ use \ArrayAccess;
 use \FormAPI\ObjectSerializer;
 
 /**
- * CreateSubmissionDataBatchRequest Class Doc Comment
+ * Templatesv2TemplateDocumentMetadata Class Doc Comment
  *
  * @category Class
  * @package  FormAPI
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  */
-class CreateSubmissionDataBatchRequest implements ModelInterface, ArrayAccess
+class Templatesv2TemplateDocumentMetadata implements ModelInterface, ArrayAccess
 {
     const DISCRIMINATOR = null;
 
@@ -49,7 +49,7 @@ class CreateSubmissionDataBatchRequest implements ModelInterface, ArrayAccess
       *
       * @var string
       */
-    protected static $openAPIModelName = 'create_submission_data_batch_request';
+    protected static $openAPIModelName = 'templatesv2_template_document_metadata';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -57,12 +57,9 @@ class CreateSubmissionDataBatchRequest implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $openAPITypes = [
-        'template_id' => 'string',
-        'test' => 'bool',
-        'data' => 'object',
-        'html' => 'string',
-        'css' => 'string',
-        'metadata' => 'object'
+        'filename' => 'string',
+        'size' => 'int',
+        'mime_type' => 'string'
     ];
 
     /**
@@ -71,12 +68,9 @@ class CreateSubmissionDataBatchRequest implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $openAPIFormats = [
-        'template_id' => null,
-        'test' => null,
-        'data' => null,
-        'html' => null,
-        'css' => null,
-        'metadata' => null
+        'filename' => null,
+        'size' => null,
+        'mime_type' => null
     ];
 
     /**
@@ -106,12 +100,9 @@ class CreateSubmissionDataBatchRequest implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $attributeMap = [
-        'template_id' => 'template_id',
-        'test' => 'test',
-        'data' => 'data',
-        'html' => 'html',
-        'css' => 'css',
-        'metadata' => 'metadata'
+        'filename' => 'filename',
+        'size' => 'size',
+        'mime_type' => 'mime_type'
     ];
 
     /**
@@ -120,12 +111,9 @@ class CreateSubmissionDataBatchRequest implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $setters = [
-        'template_id' => 'setTemplateId',
-        'test' => 'setTest',
-        'data' => 'setData',
-        'html' => 'setHtml',
-        'css' => 'setCss',
-        'metadata' => 'setMetadata'
+        'filename' => 'setFilename',
+        'size' => 'setSize',
+        'mime_type' => 'setMimeType'
     ];
 
     /**
@@ -134,12 +122,9 @@ class CreateSubmissionDataBatchRequest implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $getters = [
-        'template_id' => 'getTemplateId',
-        'test' => 'getTest',
-        'data' => 'getData',
-        'html' => 'getHtml',
-        'css' => 'getCss',
-        'metadata' => 'getMetadata'
+        'filename' => 'getFilename',
+        'size' => 'getSize',
+        'mime_type' => 'getMimeType'
     ];
 
     /**
@@ -183,8 +168,21 @@ class CreateSubmissionDataBatchRequest implements ModelInterface, ArrayAccess
         return self::$openAPIModelName;
     }
 
+    const MIME_TYPE_APPLICATIONPDF = 'application/pdf';
     
 
+    
+    /**
+     * Gets allowable values of the enum
+     *
+     * @return string[]
+     */
+    public function getMimeTypeAllowableValues()
+    {
+        return [
+            self::MIME_TYPE_APPLICATIONPDF,
+        ];
+    }
     
 
     /**
@@ -202,12 +200,9 @@ class CreateSubmissionDataBatchRequest implements ModelInterface, ArrayAccess
      */
     public function __construct(array $data = null)
     {
-        $this->container['template_id'] = isset($data['template_id']) ? $data['template_id'] : null;
-        $this->container['test'] = isset($data['test']) ? $data['test'] : null;
-        $this->container['data'] = isset($data['data']) ? $data['data'] : null;
-        $this->container['html'] = isset($data['html']) ? $data['html'] : null;
-        $this->container['css'] = isset($data['css']) ? $data['css'] : null;
-        $this->container['metadata'] = isset($data['metadata']) ? $data['metadata'] : null;
+        $this->container['filename'] = isset($data['filename']) ? $data['filename'] : null;
+        $this->container['size'] = isset($data['size']) ? $data['size'] : null;
+        $this->container['mime_type'] = isset($data['mime_type']) ? $data['mime_type'] : null;
     }
 
     /**
@@ -219,12 +214,14 @@ class CreateSubmissionDataBatchRequest implements ModelInterface, ArrayAccess
     {
         $invalidProperties = [];
 
-        if ($this->container['template_id'] === null) {
-            $invalidProperties[] = "'template_id' can't be null";
+        $allowedValues = $this->getMimeTypeAllowableValues();
+        if (!is_null($this->container['mime_type']) && !in_array($this->container['mime_type'], $allowedValues, true)) {
+            $invalidProperties[] = sprintf(
+                "invalid value for 'mime_type', must be one of '%s'",
+                implode("', '", $allowedValues)
+            );
         }
-        if ($this->container['data'] === null) {
-            $invalidProperties[] = "'data' can't be null";
-        }
+
         return $invalidProperties;
     }
 
@@ -241,145 +238,82 @@ class CreateSubmissionDataBatchRequest implements ModelInterface, ArrayAccess
 
 
     /**
-     * Gets template_id
-     *
-     * @return string
-     */
-    public function getTemplateId()
-    {
-        return $this->container['template_id'];
-    }
-
-    /**
-     * Sets template_id
-     *
-     * @param string $template_id template_id
-     *
-     * @return $this
-     */
-    public function setTemplateId($template_id)
-    {
-        $this->container['template_id'] = $template_id;
-
-        return $this;
-    }
-
-    /**
-     * Gets test
-     *
-     * @return bool|null
-     */
-    public function getTest()
-    {
-        return $this->container['test'];
-    }
-
-    /**
-     * Sets test
-     *
-     * @param bool|null $test test
-     *
-     * @return $this
-     */
-    public function setTest($test)
-    {
-        $this->container['test'] = $test;
-
-        return $this;
-    }
-
-    /**
-     * Gets data
-     *
-     * @return object
-     */
-    public function getData()
-    {
-        return $this->container['data'];
-    }
-
-    /**
-     * Sets data
-     *
-     * @param object $data data
-     *
-     * @return $this
-     */
-    public function setData($data)
-    {
-        $this->container['data'] = $data;
-
-        return $this;
-    }
-
-    /**
-     * Gets html
+     * Gets filename
      *
      * @return string|null
      */
-    public function getHtml()
+    public function getFilename()
     {
-        return $this->container['html'];
+        return $this->container['filename'];
     }
 
     /**
-     * Sets html
+     * Sets filename
      *
-     * @param string|null $html html
+     * @param string|null $filename filename
      *
      * @return $this
      */
-    public function setHtml($html)
+    public function setFilename($filename)
     {
-        $this->container['html'] = $html;
+        $this->container['filename'] = $filename;
 
         return $this;
     }
 
     /**
-     * Gets css
+     * Gets size
+     *
+     * @return int|null
+     */
+    public function getSize()
+    {
+        return $this->container['size'];
+    }
+
+    /**
+     * Sets size
+     *
+     * @param int|null $size size
+     *
+     * @return $this
+     */
+    public function setSize($size)
+    {
+        $this->container['size'] = $size;
+
+        return $this;
+    }
+
+    /**
+     * Gets mime_type
      *
      * @return string|null
      */
-    public function getCss()
+    public function getMimeType()
     {
-        return $this->container['css'];
+        return $this->container['mime_type'];
     }
 
     /**
-     * Sets css
+     * Sets mime_type
      *
-     * @param string|null $css css
+     * @param string|null $mime_type mime_type
      *
      * @return $this
      */
-    public function setCss($css)
+    public function setMimeType($mime_type)
     {
-        $this->container['css'] = $css;
-
-        return $this;
-    }
-
-    /**
-     * Gets metadata
-     *
-     * @return object|null
-     */
-    public function getMetadata()
-    {
-        return $this->container['metadata'];
-    }
-
-    /**
-     * Sets metadata
-     *
-     * @param object|null $metadata metadata
-     *
-     * @return $this
-     */
-    public function setMetadata($metadata)
-    {
-        $this->container['metadata'] = $metadata;
+        $allowedValues = $this->getMimeTypeAllowableValues();
+        if (!is_null($mime_type) && !in_array($mime_type, $allowedValues, true)) {
+            throw new \InvalidArgumentException(
+                sprintf(
+                    "Invalid value for 'mime_type', must be one of '%s'",
+                    implode("', '", $allowedValues)
+                )
+            );
+        }
+        $this->container['mime_type'] = $mime_type;
 
         return $this;
     }

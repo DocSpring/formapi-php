@@ -93,15 +93,15 @@ class PDFApi
      * Generates multiple PDFs
      *
      * @param  string $template_id template_id (required)
-     * @param  \FormAPI\Model\CreateSubmissionDataBatchV1[] $create_submission_data_batch_v1 create_submission_data_batch_v1 (required)
+     * @param  object[] $request_body request_body (required)
      *
      * @throws \FormAPI\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return \FormAPI\Model\CreateSubmissionResponse[]|\FormAPI\Model\Error|\FormAPI\Model\AuthenticationError|\FormAPI\Model\InvalidRequest[]
      */
-    public function batchGeneratePdfV1($template_id, $create_submission_data_batch_v1)
+    public function batchGeneratePdfV1($template_id, $request_body)
     {
-        list($response) = $this->batchGeneratePdfV1WithHttpInfo($template_id, $create_submission_data_batch_v1);
+        list($response) = $this->batchGeneratePdfV1WithHttpInfo($template_id, $request_body);
         return $response;
     }
 
@@ -111,15 +111,15 @@ class PDFApi
      * Generates multiple PDFs
      *
      * @param  string $template_id (required)
-     * @param  \FormAPI\Model\CreateSubmissionDataBatchV1[] $create_submission_data_batch_v1 (required)
+     * @param  object[] $request_body (required)
      *
      * @throws \FormAPI\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return array of \FormAPI\Model\CreateSubmissionResponse[]|\FormAPI\Model\Error|\FormAPI\Model\AuthenticationError|\FormAPI\Model\InvalidRequest[], HTTP status code, HTTP response headers (array of strings)
      */
-    public function batchGeneratePdfV1WithHttpInfo($template_id, $create_submission_data_batch_v1)
+    public function batchGeneratePdfV1WithHttpInfo($template_id, $request_body)
     {
-        $request = $this->batchGeneratePdfV1Request($template_id, $create_submission_data_batch_v1);
+        $request = $this->batchGeneratePdfV1Request($template_id, $request_body);
 
         try {
             $options = $this->createHttpClientOption();
@@ -275,14 +275,14 @@ class PDFApi
      * Generates multiple PDFs
      *
      * @param  string $template_id (required)
-     * @param  \FormAPI\Model\CreateSubmissionDataBatchV1[] $create_submission_data_batch_v1 (required)
+     * @param  object[] $request_body (required)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function batchGeneratePdfV1Async($template_id, $create_submission_data_batch_v1)
+    public function batchGeneratePdfV1Async($template_id, $request_body)
     {
-        return $this->batchGeneratePdfV1AsyncWithHttpInfo($template_id, $create_submission_data_batch_v1)
+        return $this->batchGeneratePdfV1AsyncWithHttpInfo($template_id, $request_body)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -296,15 +296,15 @@ class PDFApi
      * Generates multiple PDFs
      *
      * @param  string $template_id (required)
-     * @param  \FormAPI\Model\CreateSubmissionDataBatchV1[] $create_submission_data_batch_v1 (required)
+     * @param  object[] $request_body (required)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function batchGeneratePdfV1AsyncWithHttpInfo($template_id, $create_submission_data_batch_v1)
+    public function batchGeneratePdfV1AsyncWithHttpInfo($template_id, $request_body)
     {
         $returnType = '\FormAPI\Model\CreateSubmissionResponse[]';
-        $request = $this->batchGeneratePdfV1Request($template_id, $create_submission_data_batch_v1);
+        $request = $this->batchGeneratePdfV1Request($template_id, $request_body);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -347,12 +347,12 @@ class PDFApi
      * Create request for operation 'batchGeneratePdfV1'
      *
      * @param  string $template_id (required)
-     * @param  \FormAPI\Model\CreateSubmissionDataBatchV1[] $create_submission_data_batch_v1 (required)
+     * @param  object[] $request_body (required)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    protected function batchGeneratePdfV1Request($template_id, $create_submission_data_batch_v1)
+    protected function batchGeneratePdfV1Request($template_id, $request_body)
     {
         // verify the required parameter 'template_id' is set
         if ($template_id === null || (is_array($template_id) && count($template_id) === 0)) {
@@ -360,10 +360,10 @@ class PDFApi
                 'Missing the required parameter $template_id when calling batchGeneratePdfV1'
             );
         }
-        // verify the required parameter 'create_submission_data_batch_v1' is set
-        if ($create_submission_data_batch_v1 === null || (is_array($create_submission_data_batch_v1) && count($create_submission_data_batch_v1) === 0)) {
+        // verify the required parameter 'request_body' is set
+        if ($request_body === null || (is_array($request_body) && count($request_body) === 0)) {
             throw new \InvalidArgumentException(
-                'Missing the required parameter $create_submission_data_batch_v1 when calling batchGeneratePdfV1'
+                'Missing the required parameter $request_body when calling batchGeneratePdfV1'
             );
         }
 
@@ -386,8 +386,8 @@ class PDFApi
 
         // body params
         $_tempBody = null;
-        if (isset($create_submission_data_batch_v1)) {
-            $_tempBody = $create_submission_data_batch_v1;
+        if (isset($request_body)) {
+            $_tempBody = $request_body;
         }
 
         if ($multipart) {
@@ -805,6 +805,355 @@ class PDFApi
     }
 
     /**
+     * Operation combinePdfs
+     *
+     * Merge submission PDFs, template PDFs, or custom files
+     *
+     * @param  \FormAPI\Model\CombinePdfsData $combine_pdfs_data combine_pdfs_data (required)
+     *
+     * @throws \FormAPI\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return \FormAPI\Model\CreateCombinedSubmissionResponse|\FormAPI\Model\Error|\FormAPI\Model\AuthenticationError|\FormAPI\Model\InvalidRequest
+     */
+    public function combinePdfs($combine_pdfs_data)
+    {
+        list($response) = $this->combinePdfsWithHttpInfo($combine_pdfs_data);
+        return $response;
+    }
+
+    /**
+     * Operation combinePdfsWithHttpInfo
+     *
+     * Merge submission PDFs, template PDFs, or custom files
+     *
+     * @param  \FormAPI\Model\CombinePdfsData $combine_pdfs_data (required)
+     *
+     * @throws \FormAPI\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return array of \FormAPI\Model\CreateCombinedSubmissionResponse|\FormAPI\Model\Error|\FormAPI\Model\AuthenticationError|\FormAPI\Model\InvalidRequest, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function combinePdfsWithHttpInfo($combine_pdfs_data)
+    {
+        $request = $this->combinePdfsRequest($combine_pdfs_data);
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? $e->getResponse()->getBody()->getContents() : null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    $response->getBody()
+                );
+            }
+
+            $responseBody = $response->getBody();
+            switch($statusCode) {
+                case 201:
+                    if ('\FormAPI\Model\CreateCombinedSubmissionResponse' === '\SplFileObject') {
+                        $content = $responseBody; //stream goes to serializer
+                    } else {
+                        $content = $responseBody->getContents();
+                        if ('\FormAPI\Model\CreateCombinedSubmissionResponse' !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\FormAPI\Model\CreateCombinedSubmissionResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 400:
+                    if ('\FormAPI\Model\Error' === '\SplFileObject') {
+                        $content = $responseBody; //stream goes to serializer
+                    } else {
+                        $content = $responseBody->getContents();
+                        if ('\FormAPI\Model\Error' !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\FormAPI\Model\Error', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 401:
+                    if ('\FormAPI\Model\AuthenticationError' === '\SplFileObject') {
+                        $content = $responseBody; //stream goes to serializer
+                    } else {
+                        $content = $responseBody->getContents();
+                        if ('\FormAPI\Model\AuthenticationError' !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\FormAPI\Model\AuthenticationError', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 422:
+                    if ('\FormAPI\Model\InvalidRequest' === '\SplFileObject') {
+                        $content = $responseBody; //stream goes to serializer
+                    } else {
+                        $content = $responseBody->getContents();
+                        if ('\FormAPI\Model\InvalidRequest' !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\FormAPI\Model\InvalidRequest', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+            }
+
+            $returnType = '\FormAPI\Model\CreateCombinedSubmissionResponse';
+            $responseBody = $response->getBody();
+            if ($returnType === '\SplFileObject') {
+                $content = $responseBody; //stream goes to serializer
+            } else {
+                $content = $responseBody->getContents();
+                if ($returnType !== 'string') {
+                    $content = json_decode($content);
+                }
+            }
+
+            return [
+                ObjectSerializer::deserialize($content, $returnType, []),
+                $response->getStatusCode(),
+                $response->getHeaders()
+            ];
+
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 201:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\FormAPI\Model\CreateCombinedSubmissionResponse',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+                case 400:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\FormAPI\Model\Error',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+                case 401:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\FormAPI\Model\AuthenticationError',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+                case 422:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\FormAPI\Model\InvalidRequest',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+            }
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation combinePdfsAsync
+     *
+     * Merge submission PDFs, template PDFs, or custom files
+     *
+     * @param  \FormAPI\Model\CombinePdfsData $combine_pdfs_data (required)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function combinePdfsAsync($combine_pdfs_data)
+    {
+        return $this->combinePdfsAsyncWithHttpInfo($combine_pdfs_data)
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /**
+     * Operation combinePdfsAsyncWithHttpInfo
+     *
+     * Merge submission PDFs, template PDFs, or custom files
+     *
+     * @param  \FormAPI\Model\CombinePdfsData $combine_pdfs_data (required)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function combinePdfsAsyncWithHttpInfo($combine_pdfs_data)
+    {
+        $returnType = '\FormAPI\Model\CreateCombinedSubmissionResponse';
+        $request = $this->combinePdfsRequest($combine_pdfs_data);
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    $responseBody = $response->getBody();
+                    if ($returnType === '\SplFileObject') {
+                        $content = $responseBody; //stream goes to serializer
+                    } else {
+                        $content = $responseBody->getContents();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    throw new ApiException(
+                        sprintf(
+                            '[%d] Error connecting to the API (%s)',
+                            $statusCode,
+                            $exception->getRequest()->getUri()
+                        ),
+                        $statusCode,
+                        $response->getHeaders(),
+                        $response->getBody()
+                    );
+                }
+            );
+    }
+
+    /**
+     * Create request for operation 'combinePdfs'
+     *
+     * @param  \FormAPI\Model\CombinePdfsData $combine_pdfs_data (required)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    protected function combinePdfsRequest($combine_pdfs_data)
+    {
+        // verify the required parameter 'combine_pdfs_data' is set
+        if ($combine_pdfs_data === null || (is_array($combine_pdfs_data) && count($combine_pdfs_data) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $combine_pdfs_data when calling combinePdfs'
+            );
+        }
+
+        $resourcePath = '/combined_submissions?v=2';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+
+
+        // body params
+        $_tempBody = null;
+        if (isset($combine_pdfs_data)) {
+            $_tempBody = $combine_pdfs_data;
+        }
+
+        if ($multipart) {
+            $headers = $this->headerSelector->selectHeadersForMultipart(
+                ['application/json']
+            );
+        } else {
+            $headers = $this->headerSelector->selectHeaders(
+                ['application/json'],
+                ['application/json']
+            );
+        }
+
+        // for model (json/xml)
+        if (isset($_tempBody)) {
+            // $_tempBody is the method argument, if present
+            $httpBody = $_tempBody;
+            // \stdClass has no __toString(), so we should encode it manually
+            if ($httpBody instanceof \stdClass && $headers['Content-Type'] === 'application/json') {
+                $httpBody = \GuzzleHttp\json_encode($httpBody);
+            }
+        } elseif (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $multipartContents[] = [
+                        'name' => $formParamName,
+                        'contents' => $formParamValue
+                    ];
+                }
+                // for HTTP post (form)
+                $httpBody = new MultipartStream($multipartContents);
+
+            } elseif ($headers['Content-Type'] === 'application/json') {
+                $httpBody = \GuzzleHttp\json_encode($formParams);
+
+            } else {
+                // for HTTP post (form)
+                $httpBody = \GuzzleHttp\Psr7\build_query($formParams);
+            }
+        }
+
+        // this endpoint requires HTTP basic authentication
+        if ($this->config->getUsername() !== null || $this->config->getPassword() !== null) {
+            $headers['Authorization'] = 'Basic ' . base64_encode($this->config->getUsername() . ":" . $this->config->getPassword());
+        }
+
+        $defaultHeaders = [];
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $query = \GuzzleHttp\Psr7\build_query($queryParams);
+        return new Request(
+            'POST',
+            $this->config->getHost() . $resourcePath . ($query ? "?{$query}" : ''),
+            $headers,
+            $httpBody
+        );
+    }
+
+    /**
      * Operation combineSubmissions
      *
      * Merge generated PDFs together
@@ -1086,6 +1435,309 @@ class PDFApi
         $_tempBody = null;
         if (isset($combined_submission_data)) {
             $_tempBody = $combined_submission_data;
+        }
+
+        if ($multipart) {
+            $headers = $this->headerSelector->selectHeadersForMultipart(
+                ['application/json']
+            );
+        } else {
+            $headers = $this->headerSelector->selectHeaders(
+                ['application/json'],
+                ['application/json']
+            );
+        }
+
+        // for model (json/xml)
+        if (isset($_tempBody)) {
+            // $_tempBody is the method argument, if present
+            $httpBody = $_tempBody;
+            // \stdClass has no __toString(), so we should encode it manually
+            if ($httpBody instanceof \stdClass && $headers['Content-Type'] === 'application/json') {
+                $httpBody = \GuzzleHttp\json_encode($httpBody);
+            }
+        } elseif (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $multipartContents[] = [
+                        'name' => $formParamName,
+                        'contents' => $formParamValue
+                    ];
+                }
+                // for HTTP post (form)
+                $httpBody = new MultipartStream($multipartContents);
+
+            } elseif ($headers['Content-Type'] === 'application/json') {
+                $httpBody = \GuzzleHttp\json_encode($formParams);
+
+            } else {
+                // for HTTP post (form)
+                $httpBody = \GuzzleHttp\Psr7\build_query($formParams);
+            }
+        }
+
+        // this endpoint requires HTTP basic authentication
+        if ($this->config->getUsername() !== null || $this->config->getPassword() !== null) {
+            $headers['Authorization'] = 'Basic ' . base64_encode($this->config->getUsername() . ":" . $this->config->getPassword());
+        }
+
+        $defaultHeaders = [];
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $query = \GuzzleHttp\Psr7\build_query($queryParams);
+        return new Request(
+            'POST',
+            $this->config->getHost() . $resourcePath . ($query ? "?{$query}" : ''),
+            $headers,
+            $httpBody
+        );
+    }
+
+    /**
+     * Operation createCustomFileFromUpload
+     *
+     * Create a new custom file from a cached presign upload
+     *
+     * @param  \FormAPI\Model\CreateCustomFileData $create_custom_file_data create_custom_file_data (required)
+     *
+     * @throws \FormAPI\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return \FormAPI\Model\CreateCustomFileResponse|\FormAPI\Model\AuthenticationError
+     */
+    public function createCustomFileFromUpload($create_custom_file_data)
+    {
+        list($response) = $this->createCustomFileFromUploadWithHttpInfo($create_custom_file_data);
+        return $response;
+    }
+
+    /**
+     * Operation createCustomFileFromUploadWithHttpInfo
+     *
+     * Create a new custom file from a cached presign upload
+     *
+     * @param  \FormAPI\Model\CreateCustomFileData $create_custom_file_data (required)
+     *
+     * @throws \FormAPI\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return array of \FormAPI\Model\CreateCustomFileResponse|\FormAPI\Model\AuthenticationError, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function createCustomFileFromUploadWithHttpInfo($create_custom_file_data)
+    {
+        $request = $this->createCustomFileFromUploadRequest($create_custom_file_data);
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? $e->getResponse()->getBody()->getContents() : null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    $response->getBody()
+                );
+            }
+
+            $responseBody = $response->getBody();
+            switch($statusCode) {
+                case 201:
+                    if ('\FormAPI\Model\CreateCustomFileResponse' === '\SplFileObject') {
+                        $content = $responseBody; //stream goes to serializer
+                    } else {
+                        $content = $responseBody->getContents();
+                        if ('\FormAPI\Model\CreateCustomFileResponse' !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\FormAPI\Model\CreateCustomFileResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 401:
+                    if ('\FormAPI\Model\AuthenticationError' === '\SplFileObject') {
+                        $content = $responseBody; //stream goes to serializer
+                    } else {
+                        $content = $responseBody->getContents();
+                        if ('\FormAPI\Model\AuthenticationError' !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\FormAPI\Model\AuthenticationError', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+            }
+
+            $returnType = '\FormAPI\Model\CreateCustomFileResponse';
+            $responseBody = $response->getBody();
+            if ($returnType === '\SplFileObject') {
+                $content = $responseBody; //stream goes to serializer
+            } else {
+                $content = $responseBody->getContents();
+                if ($returnType !== 'string') {
+                    $content = json_decode($content);
+                }
+            }
+
+            return [
+                ObjectSerializer::deserialize($content, $returnType, []),
+                $response->getStatusCode(),
+                $response->getHeaders()
+            ];
+
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 201:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\FormAPI\Model\CreateCustomFileResponse',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+                case 401:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\FormAPI\Model\AuthenticationError',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+            }
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation createCustomFileFromUploadAsync
+     *
+     * Create a new custom file from a cached presign upload
+     *
+     * @param  \FormAPI\Model\CreateCustomFileData $create_custom_file_data (required)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function createCustomFileFromUploadAsync($create_custom_file_data)
+    {
+        return $this->createCustomFileFromUploadAsyncWithHttpInfo($create_custom_file_data)
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /**
+     * Operation createCustomFileFromUploadAsyncWithHttpInfo
+     *
+     * Create a new custom file from a cached presign upload
+     *
+     * @param  \FormAPI\Model\CreateCustomFileData $create_custom_file_data (required)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function createCustomFileFromUploadAsyncWithHttpInfo($create_custom_file_data)
+    {
+        $returnType = '\FormAPI\Model\CreateCustomFileResponse';
+        $request = $this->createCustomFileFromUploadRequest($create_custom_file_data);
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    $responseBody = $response->getBody();
+                    if ($returnType === '\SplFileObject') {
+                        $content = $responseBody; //stream goes to serializer
+                    } else {
+                        $content = $responseBody->getContents();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    throw new ApiException(
+                        sprintf(
+                            '[%d] Error connecting to the API (%s)',
+                            $statusCode,
+                            $exception->getRequest()->getUri()
+                        ),
+                        $statusCode,
+                        $response->getHeaders(),
+                        $response->getBody()
+                    );
+                }
+            );
+    }
+
+    /**
+     * Create request for operation 'createCustomFileFromUpload'
+     *
+     * @param  \FormAPI\Model\CreateCustomFileData $create_custom_file_data (required)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    protected function createCustomFileFromUploadRequest($create_custom_file_data)
+    {
+        // verify the required parameter 'create_custom_file_data' is set
+        if ($create_custom_file_data === null || (is_array($create_custom_file_data) && count($create_custom_file_data) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $create_custom_file_data when calling createCustomFileFromUpload'
+            );
+        }
+
+        $resourcePath = '/custom_files';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+
+
+        // body params
+        $_tempBody = null;
+        if (isset($create_custom_file_data)) {
+            $_tempBody = $create_custom_file_data;
         }
 
         if ($multipart) {
@@ -1464,14 +2116,14 @@ class PDFApi
     /**
      * Operation createTemplate
      *
-     * Upload a new PDF template
+     * Upload a new PDF template with a file upload
      *
      * @param  \SplFileObject $template_document template_document (required)
      * @param  string $template_name template_name (required)
      *
      * @throws \FormAPI\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return \FormAPI\Model\PendingTemplate
+     * @return \FormAPI\Model\PendingTemplate|\FormAPI\Model\AuthenticationError
      */
     public function createTemplate($template_document, $template_name)
     {
@@ -1482,14 +2134,14 @@ class PDFApi
     /**
      * Operation createTemplateWithHttpInfo
      *
-     * Upload a new PDF template
+     * Upload a new PDF template with a file upload
      *
      * @param  \SplFileObject $template_document (required)
      * @param  string $template_name (required)
      *
      * @throws \FormAPI\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return array of \FormAPI\Model\PendingTemplate, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \FormAPI\Model\PendingTemplate|\FormAPI\Model\AuthenticationError, HTTP status code, HTTP response headers (array of strings)
      */
     public function createTemplateWithHttpInfo($template_document, $template_name)
     {
@@ -1540,6 +2192,21 @@ class PDFApi
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
+                case 401:
+                    if ('\FormAPI\Model\AuthenticationError' === '\SplFileObject') {
+                        $content = $responseBody; //stream goes to serializer
+                    } else {
+                        $content = $responseBody->getContents();
+                        if ('\FormAPI\Model\AuthenticationError' !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\FormAPI\Model\AuthenticationError', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
             }
 
             $returnType = '\FormAPI\Model\PendingTemplate';
@@ -1569,6 +2236,14 @@ class PDFApi
                     );
                     $e->setResponseObject($data);
                     break;
+                case 401:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\FormAPI\Model\AuthenticationError',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
             }
             throw $e;
         }
@@ -1577,7 +2252,7 @@ class PDFApi
     /**
      * Operation createTemplateAsync
      *
-     * Upload a new PDF template
+     * Upload a new PDF template with a file upload
      *
      * @param  \SplFileObject $template_document (required)
      * @param  string $template_name (required)
@@ -1598,7 +2273,7 @@ class PDFApi
     /**
      * Operation createTemplateAsyncWithHttpInfo
      *
-     * Upload a new PDF template
+     * Upload a new PDF template with a file upload
      *
      * @param  \SplFileObject $template_document (required)
      * @param  string $template_name (required)
@@ -1701,6 +2376,309 @@ class PDFApi
             $headers = $this->headerSelector->selectHeaders(
                 ['application/json'],
                 ['multipart/form-data']
+            );
+        }
+
+        // for model (json/xml)
+        if (isset($_tempBody)) {
+            // $_tempBody is the method argument, if present
+            $httpBody = $_tempBody;
+            // \stdClass has no __toString(), so we should encode it manually
+            if ($httpBody instanceof \stdClass && $headers['Content-Type'] === 'application/json') {
+                $httpBody = \GuzzleHttp\json_encode($httpBody);
+            }
+        } elseif (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $multipartContents[] = [
+                        'name' => $formParamName,
+                        'contents' => $formParamValue
+                    ];
+                }
+                // for HTTP post (form)
+                $httpBody = new MultipartStream($multipartContents);
+
+            } elseif ($headers['Content-Type'] === 'application/json') {
+                $httpBody = \GuzzleHttp\json_encode($formParams);
+
+            } else {
+                // for HTTP post (form)
+                $httpBody = \GuzzleHttp\Psr7\build_query($formParams);
+            }
+        }
+
+        // this endpoint requires HTTP basic authentication
+        if ($this->config->getUsername() !== null || $this->config->getPassword() !== null) {
+            $headers['Authorization'] = 'Basic ' . base64_encode($this->config->getUsername() . ":" . $this->config->getPassword());
+        }
+
+        $defaultHeaders = [];
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $query = \GuzzleHttp\Psr7\build_query($queryParams);
+        return new Request(
+            'POST',
+            $this->config->getHost() . $resourcePath . ($query ? "?{$query}" : ''),
+            $headers,
+            $httpBody
+        );
+    }
+
+    /**
+     * Operation createTemplateFromUpload
+     *
+     * Create a new PDF template from a cached presign upload
+     *
+     * @param  \FormAPI\Model\CreateTemplateData $create_template_data create_template_data (required)
+     *
+     * @throws \FormAPI\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return \FormAPI\Model\PendingTemplate|\FormAPI\Model\AuthenticationError
+     */
+    public function createTemplateFromUpload($create_template_data)
+    {
+        list($response) = $this->createTemplateFromUploadWithHttpInfo($create_template_data);
+        return $response;
+    }
+
+    /**
+     * Operation createTemplateFromUploadWithHttpInfo
+     *
+     * Create a new PDF template from a cached presign upload
+     *
+     * @param  \FormAPI\Model\CreateTemplateData $create_template_data (required)
+     *
+     * @throws \FormAPI\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return array of \FormAPI\Model\PendingTemplate|\FormAPI\Model\AuthenticationError, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function createTemplateFromUploadWithHttpInfo($create_template_data)
+    {
+        $request = $this->createTemplateFromUploadRequest($create_template_data);
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? $e->getResponse()->getBody()->getContents() : null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    $response->getBody()
+                );
+            }
+
+            $responseBody = $response->getBody();
+            switch($statusCode) {
+                case 201:
+                    if ('\FormAPI\Model\PendingTemplate' === '\SplFileObject') {
+                        $content = $responseBody; //stream goes to serializer
+                    } else {
+                        $content = $responseBody->getContents();
+                        if ('\FormAPI\Model\PendingTemplate' !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\FormAPI\Model\PendingTemplate', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 401:
+                    if ('\FormAPI\Model\AuthenticationError' === '\SplFileObject') {
+                        $content = $responseBody; //stream goes to serializer
+                    } else {
+                        $content = $responseBody->getContents();
+                        if ('\FormAPI\Model\AuthenticationError' !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\FormAPI\Model\AuthenticationError', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+            }
+
+            $returnType = '\FormAPI\Model\PendingTemplate';
+            $responseBody = $response->getBody();
+            if ($returnType === '\SplFileObject') {
+                $content = $responseBody; //stream goes to serializer
+            } else {
+                $content = $responseBody->getContents();
+                if ($returnType !== 'string') {
+                    $content = json_decode($content);
+                }
+            }
+
+            return [
+                ObjectSerializer::deserialize($content, $returnType, []),
+                $response->getStatusCode(),
+                $response->getHeaders()
+            ];
+
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 201:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\FormAPI\Model\PendingTemplate',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+                case 401:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\FormAPI\Model\AuthenticationError',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+            }
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation createTemplateFromUploadAsync
+     *
+     * Create a new PDF template from a cached presign upload
+     *
+     * @param  \FormAPI\Model\CreateTemplateData $create_template_data (required)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function createTemplateFromUploadAsync($create_template_data)
+    {
+        return $this->createTemplateFromUploadAsyncWithHttpInfo($create_template_data)
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /**
+     * Operation createTemplateFromUploadAsyncWithHttpInfo
+     *
+     * Create a new PDF template from a cached presign upload
+     *
+     * @param  \FormAPI\Model\CreateTemplateData $create_template_data (required)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function createTemplateFromUploadAsyncWithHttpInfo($create_template_data)
+    {
+        $returnType = '\FormAPI\Model\PendingTemplate';
+        $request = $this->createTemplateFromUploadRequest($create_template_data);
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    $responseBody = $response->getBody();
+                    if ($returnType === '\SplFileObject') {
+                        $content = $responseBody; //stream goes to serializer
+                    } else {
+                        $content = $responseBody->getContents();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    throw new ApiException(
+                        sprintf(
+                            '[%d] Error connecting to the API (%s)',
+                            $statusCode,
+                            $exception->getRequest()->getUri()
+                        ),
+                        $statusCode,
+                        $response->getHeaders(),
+                        $response->getBody()
+                    );
+                }
+            );
+    }
+
+    /**
+     * Create request for operation 'createTemplateFromUpload'
+     *
+     * @param  \FormAPI\Model\CreateTemplateData $create_template_data (required)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    protected function createTemplateFromUploadRequest($create_template_data)
+    {
+        // verify the required parameter 'create_template_data' is set
+        if ($create_template_data === null || (is_array($create_template_data) && count($create_template_data) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $create_template_data when calling createTemplateFromUpload'
+            );
+        }
+
+        $resourcePath = '/templates?v=2';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+
+
+        // body params
+        $_tempBody = null;
+        if (isset($create_template_data)) {
+            $_tempBody = $create_template_data;
+        }
+
+        if ($multipart) {
+            $headers = $this->headerSelector->selectHeadersForMultipart(
+                ['application/json']
+            );
+        } else {
+            $headers = $this->headerSelector->selectHeaders(
+                ['application/json'],
+                ['application/json']
             );
         }
 
@@ -2472,15 +3450,15 @@ class PDFApi
      * Generates a new PDF
      *
      * @param  string $template_id template_id (required)
-     * @param  \FormAPI\Model\CreateSubmissionData $create_submission_data create_submission_data (required)
+     * @param  \FormAPI\Model\SubmissionData $submission_data submission_data (required)
      *
      * @throws \FormAPI\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return \FormAPI\Model\CreateSubmissionResponse|\FormAPI\Model\Error|\FormAPI\Model\AuthenticationError|\FormAPI\Model\InvalidRequest
      */
-    public function generatePDF($template_id, $create_submission_data)
+    public function generatePDF($template_id, $submission_data)
     {
-        list($response) = $this->generatePDFWithHttpInfo($template_id, $create_submission_data);
+        list($response) = $this->generatePDFWithHttpInfo($template_id, $submission_data);
         return $response;
     }
 
@@ -2490,15 +3468,15 @@ class PDFApi
      * Generates a new PDF
      *
      * @param  string $template_id (required)
-     * @param  \FormAPI\Model\CreateSubmissionData $create_submission_data (required)
+     * @param  \FormAPI\Model\SubmissionData $submission_data (required)
      *
      * @throws \FormAPI\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return array of \FormAPI\Model\CreateSubmissionResponse|\FormAPI\Model\Error|\FormAPI\Model\AuthenticationError|\FormAPI\Model\InvalidRequest, HTTP status code, HTTP response headers (array of strings)
      */
-    public function generatePDFWithHttpInfo($template_id, $create_submission_data)
+    public function generatePDFWithHttpInfo($template_id, $submission_data)
     {
-        $request = $this->generatePDFRequest($template_id, $create_submission_data);
+        $request = $this->generatePDFRequest($template_id, $submission_data);
 
         try {
             $options = $this->createHttpClientOption();
@@ -2654,14 +3632,14 @@ class PDFApi
      * Generates a new PDF
      *
      * @param  string $template_id (required)
-     * @param  \FormAPI\Model\CreateSubmissionData $create_submission_data (required)
+     * @param  \FormAPI\Model\SubmissionData $submission_data (required)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function generatePDFAsync($template_id, $create_submission_data)
+    public function generatePDFAsync($template_id, $submission_data)
     {
-        return $this->generatePDFAsyncWithHttpInfo($template_id, $create_submission_data)
+        return $this->generatePDFAsyncWithHttpInfo($template_id, $submission_data)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -2675,15 +3653,15 @@ class PDFApi
      * Generates a new PDF
      *
      * @param  string $template_id (required)
-     * @param  \FormAPI\Model\CreateSubmissionData $create_submission_data (required)
+     * @param  \FormAPI\Model\SubmissionData $submission_data (required)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function generatePDFAsyncWithHttpInfo($template_id, $create_submission_data)
+    public function generatePDFAsyncWithHttpInfo($template_id, $submission_data)
     {
         $returnType = '\FormAPI\Model\CreateSubmissionResponse';
-        $request = $this->generatePDFRequest($template_id, $create_submission_data);
+        $request = $this->generatePDFRequest($template_id, $submission_data);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -2726,12 +3704,12 @@ class PDFApi
      * Create request for operation 'generatePDF'
      *
      * @param  string $template_id (required)
-     * @param  \FormAPI\Model\CreateSubmissionData $create_submission_data (required)
+     * @param  \FormAPI\Model\SubmissionData $submission_data (required)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    protected function generatePDFRequest($template_id, $create_submission_data)
+    protected function generatePDFRequest($template_id, $submission_data)
     {
         // verify the required parameter 'template_id' is set
         if ($template_id === null || (is_array($template_id) && count($template_id) === 0)) {
@@ -2739,10 +3717,10 @@ class PDFApi
                 'Missing the required parameter $template_id when calling generatePDF'
             );
         }
-        // verify the required parameter 'create_submission_data' is set
-        if ($create_submission_data === null || (is_array($create_submission_data) && count($create_submission_data) === 0)) {
+        // verify the required parameter 'submission_data' is set
+        if ($submission_data === null || (is_array($submission_data) && count($submission_data) === 0)) {
             throw new \InvalidArgumentException(
-                'Missing the required parameter $create_submission_data when calling generatePDF'
+                'Missing the required parameter $submission_data when calling generatePDF'
             );
         }
 
@@ -2765,8 +3743,8 @@ class PDFApi
 
         // body params
         $_tempBody = null;
-        if (isset($create_submission_data)) {
-            $_tempBody = $create_submission_data;
+        if (isset($submission_data)) {
+            $_tempBody = $submission_data;
         }
 
         if ($multipart) {
@@ -3427,6 +4405,295 @@ class PDFApi
                 $resourcePath
             );
         }
+
+        // body params
+        $_tempBody = null;
+
+        if ($multipart) {
+            $headers = $this->headerSelector->selectHeadersForMultipart(
+                ['application/json']
+            );
+        } else {
+            $headers = $this->headerSelector->selectHeaders(
+                ['application/json'],
+                []
+            );
+        }
+
+        // for model (json/xml)
+        if (isset($_tempBody)) {
+            // $_tempBody is the method argument, if present
+            $httpBody = $_tempBody;
+            // \stdClass has no __toString(), so we should encode it manually
+            if ($httpBody instanceof \stdClass && $headers['Content-Type'] === 'application/json') {
+                $httpBody = \GuzzleHttp\json_encode($httpBody);
+            }
+        } elseif (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $multipartContents[] = [
+                        'name' => $formParamName,
+                        'contents' => $formParamValue
+                    ];
+                }
+                // for HTTP post (form)
+                $httpBody = new MultipartStream($multipartContents);
+
+            } elseif ($headers['Content-Type'] === 'application/json') {
+                $httpBody = \GuzzleHttp\json_encode($formParams);
+
+            } else {
+                // for HTTP post (form)
+                $httpBody = \GuzzleHttp\Psr7\build_query($formParams);
+            }
+        }
+
+        // this endpoint requires HTTP basic authentication
+        if ($this->config->getUsername() !== null || $this->config->getPassword() !== null) {
+            $headers['Authorization'] = 'Basic ' . base64_encode($this->config->getUsername() . ":" . $this->config->getPassword());
+        }
+
+        $defaultHeaders = [];
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $query = \GuzzleHttp\Psr7\build_query($queryParams);
+        return new Request(
+            'GET',
+            $this->config->getHost() . $resourcePath . ($query ? "?{$query}" : ''),
+            $headers,
+            $httpBody
+        );
+    }
+
+    /**
+     * Operation getPresignUrl
+     *
+     * Get a presigned URL so that you can upload a file to our AWS S3 bucket
+     *
+     *
+     * @throws \FormAPI\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return map[string,object]|\FormAPI\Model\AuthenticationError
+     */
+    public function getPresignUrl()
+    {
+        list($response) = $this->getPresignUrlWithHttpInfo();
+        return $response;
+    }
+
+    /**
+     * Operation getPresignUrlWithHttpInfo
+     *
+     * Get a presigned URL so that you can upload a file to our AWS S3 bucket
+     *
+     *
+     * @throws \FormAPI\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return array of map[string,object]|\FormAPI\Model\AuthenticationError, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function getPresignUrlWithHttpInfo()
+    {
+        $request = $this->getPresignUrlRequest();
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? $e->getResponse()->getBody()->getContents() : null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    $response->getBody()
+                );
+            }
+
+            $responseBody = $response->getBody();
+            switch($statusCode) {
+                case 200:
+                    if ('map[string,object]' === '\SplFileObject') {
+                        $content = $responseBody; //stream goes to serializer
+                    } else {
+                        $content = $responseBody->getContents();
+                        if ('map[string,object]' !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, 'map[string,object]', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 401:
+                    if ('\FormAPI\Model\AuthenticationError' === '\SplFileObject') {
+                        $content = $responseBody; //stream goes to serializer
+                    } else {
+                        $content = $responseBody->getContents();
+                        if ('\FormAPI\Model\AuthenticationError' !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\FormAPI\Model\AuthenticationError', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+            }
+
+            $returnType = 'map[string,object]';
+            $responseBody = $response->getBody();
+            if ($returnType === '\SplFileObject') {
+                $content = $responseBody; //stream goes to serializer
+            } else {
+                $content = $responseBody->getContents();
+                if ($returnType !== 'string') {
+                    $content = json_decode($content);
+                }
+            }
+
+            return [
+                ObjectSerializer::deserialize($content, $returnType, []),
+                $response->getStatusCode(),
+                $response->getHeaders()
+            ];
+
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        'map[string,object]',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+                case 401:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\FormAPI\Model\AuthenticationError',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+            }
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation getPresignUrlAsync
+     *
+     * Get a presigned URL so that you can upload a file to our AWS S3 bucket
+     *
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function getPresignUrlAsync()
+    {
+        return $this->getPresignUrlAsyncWithHttpInfo()
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /**
+     * Operation getPresignUrlAsyncWithHttpInfo
+     *
+     * Get a presigned URL so that you can upload a file to our AWS S3 bucket
+     *
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function getPresignUrlAsyncWithHttpInfo()
+    {
+        $returnType = 'map[string,object]';
+        $request = $this->getPresignUrlRequest();
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    $responseBody = $response->getBody();
+                    if ($returnType === '\SplFileObject') {
+                        $content = $responseBody; //stream goes to serializer
+                    } else {
+                        $content = $responseBody->getContents();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    throw new ApiException(
+                        sprintf(
+                            '[%d] Error connecting to the API (%s)',
+                            $statusCode,
+                            $exception->getRequest()->getUri()
+                        ),
+                        $statusCode,
+                        $response->getHeaders(),
+                        $response->getBody()
+                    );
+                }
+            );
+    }
+
+    /**
+     * Create request for operation 'getPresignUrl'
+     *
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    protected function getPresignUrlRequest()
+    {
+
+        $resourcePath = '/uploads/presign';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+
 
         // body params
         $_tempBody = null;
@@ -4176,7 +5443,7 @@ class PDFApi
      *
      * @throws \FormAPI\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return \FormAPI\Model\Template|\FormAPI\Model\Error
+     * @return \FormAPI\Model\Template|\FormAPI\Model\AuthenticationError|\FormAPI\Model\Error
      */
     public function getTemplate($template_id)
     {
@@ -4193,7 +5460,7 @@ class PDFApi
      *
      * @throws \FormAPI\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return array of \FormAPI\Model\Template|\FormAPI\Model\Error, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \FormAPI\Model\Template|\FormAPI\Model\AuthenticationError|\FormAPI\Model\Error, HTTP status code, HTTP response headers (array of strings)
      */
     public function getTemplateWithHttpInfo($template_id)
     {
@@ -4244,6 +5511,21 @@ class PDFApi
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
+                case 401:
+                    if ('\FormAPI\Model\AuthenticationError' === '\SplFileObject') {
+                        $content = $responseBody; //stream goes to serializer
+                    } else {
+                        $content = $responseBody->getContents();
+                        if ('\FormAPI\Model\AuthenticationError' !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\FormAPI\Model\AuthenticationError', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
                 case 404:
                     if ('\FormAPI\Model\Error' === '\SplFileObject') {
                         $content = $responseBody; //stream goes to serializer
@@ -4284,6 +5566,14 @@ class PDFApi
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
                         '\FormAPI\Model\Template',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+                case 401:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\FormAPI\Model\AuthenticationError',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -4484,7 +5774,7 @@ class PDFApi
      *
      * @throws \FormAPI\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return map[string,object]|\FormAPI\Model\Error
+     * @return map[string,object]|\FormAPI\Model\AuthenticationError|\FormAPI\Model\Error
      */
     public function getTemplateSchema($template_id)
     {
@@ -4501,7 +5791,7 @@ class PDFApi
      *
      * @throws \FormAPI\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return array of map[string,object]|\FormAPI\Model\Error, HTTP status code, HTTP response headers (array of strings)
+     * @return array of map[string,object]|\FormAPI\Model\AuthenticationError|\FormAPI\Model\Error, HTTP status code, HTTP response headers (array of strings)
      */
     public function getTemplateSchemaWithHttpInfo($template_id)
     {
@@ -4552,6 +5842,21 @@ class PDFApi
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
+                case 401:
+                    if ('\FormAPI\Model\AuthenticationError' === '\SplFileObject') {
+                        $content = $responseBody; //stream goes to serializer
+                    } else {
+                        $content = $responseBody->getContents();
+                        if ('\FormAPI\Model\AuthenticationError' !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\FormAPI\Model\AuthenticationError', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
                 case 404:
                     if ('\FormAPI\Model\Error' === '\SplFileObject') {
                         $content = $responseBody; //stream goes to serializer
@@ -4592,6 +5897,14 @@ class PDFApi
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
                         'map[string,object]',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+                case 401:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\FormAPI\Model\AuthenticationError',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
