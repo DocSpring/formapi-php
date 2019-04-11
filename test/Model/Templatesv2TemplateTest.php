@@ -84,23 +84,9 @@ class Templatesv2TemplateTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Test attribute "public_web_form"
-     */
-    public function testPropertyPublicWebForm()
-    {
-    }
-
-    /**
      * Test attribute "webhook_url"
      */
     public function testPropertyWebhookUrl()
-    {
-    }
-
-    /**
-     * Test attribute "expire_submissions"
-     */
-    public function testPropertyExpireSubmissions()
     {
     }
 
@@ -126,13 +112,6 @@ class Templatesv2TemplateTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Test attribute "name"
-     */
-    public function testPropertyName()
-    {
-    }
-
-    /**
      * Test attribute "public_submissions"
      */
     public function testPropertyPublicSubmissions()
@@ -147,16 +126,44 @@ class Templatesv2TemplateTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Test attribute "redirect_url"
+     * Test attribute "blockchain_timestamp_verification"
      */
-    public function testPropertyRedirectUrl()
+    public function testPropertyBlockchainTimestampVerification()
     {
     }
 
     /**
-     * Test attribute "blockchain_timestamp_verification"
+     * Test attribute "public_web_form"
      */
-    public function testPropertyBlockchainTimestampVerification()
+    public function testPropertyPublicWebForm()
+    {
+    }
+
+    /**
+     * Test attribute "editable_submissions"
+     */
+    public function testPropertyEditableSubmissions()
+    {
+    }
+
+    /**
+     * Test attribute "expire_submissions"
+     */
+    public function testPropertyExpireSubmissions()
+    {
+    }
+
+    /**
+     * Test attribute "name"
+     */
+    public function testPropertyName()
+    {
+    }
+
+    /**
+     * Test attribute "redirect_url"
+     */
+    public function testPropertyRedirectUrl()
     {
     }
 }

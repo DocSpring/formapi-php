@@ -59,6 +59,7 @@ class Submission implements ModelInterface, ArrayAccess
     protected static $openAPITypes = [
         'id' => 'string',
         'test' => 'bool',
+        'editable' => 'bool',
         'expired' => 'bool',
         'expires_at' => 'string',
         'processed_at' => 'string',
@@ -78,6 +79,7 @@ class Submission implements ModelInterface, ArrayAccess
     protected static $openAPIFormats = [
         'id' => null,
         'test' => null,
+        'editable' => null,
         'expired' => null,
         'expires_at' => null,
         'processed_at' => null,
@@ -118,6 +120,7 @@ class Submission implements ModelInterface, ArrayAccess
     protected static $attributeMap = [
         'id' => 'id',
         'test' => 'test',
+        'editable' => 'editable',
         'expired' => 'expired',
         'expires_at' => 'expires_at',
         'processed_at' => 'processed_at',
@@ -137,6 +140,7 @@ class Submission implements ModelInterface, ArrayAccess
     protected static $setters = [
         'id' => 'setId',
         'test' => 'setTest',
+        'editable' => 'setEditable',
         'expired' => 'setExpired',
         'expires_at' => 'setExpiresAt',
         'processed_at' => 'setProcessedAt',
@@ -156,6 +160,7 @@ class Submission implements ModelInterface, ArrayAccess
     protected static $getters = [
         'id' => 'getId',
         'test' => 'getTest',
+        'editable' => 'getEditable',
         'expired' => 'getExpired',
         'expires_at' => 'getExpiresAt',
         'processed_at' => 'getProcessedAt',
@@ -215,6 +220,7 @@ class Submission implements ModelInterface, ArrayAccess
     const STATE_IMAGE_DOWNLOAD_FAILED = 'image_download_failed';
     const STATE_IMAGE_PROCESSING_FAILED = 'image_processing_failed';
     const STATE_WAITING_FOR_DATA_REQUESTS = 'waiting_for_data_requests';
+    const STATE_LIQUID_SYNTAX_ERROR = 'liquid_syntax_error';
     
 
     
@@ -233,6 +239,7 @@ class Submission implements ModelInterface, ArrayAccess
             self::STATE_IMAGE_DOWNLOAD_FAILED,
             self::STATE_IMAGE_PROCESSING_FAILED,
             self::STATE_WAITING_FOR_DATA_REQUESTS,
+            self::STATE_LIQUID_SYNTAX_ERROR,
         ];
     }
     
@@ -254,6 +261,7 @@ class Submission implements ModelInterface, ArrayAccess
     {
         $this->container['id'] = isset($data['id']) ? $data['id'] : null;
         $this->container['test'] = isset($data['test']) ? $data['test'] : null;
+        $this->container['editable'] = isset($data['editable']) ? $data['editable'] : null;
         $this->container['expired'] = isset($data['expired']) ? $data['expired'] : null;
         $this->container['expires_at'] = isset($data['expires_at']) ? $data['expires_at'] : null;
         $this->container['processed_at'] = isset($data['processed_at']) ? $data['processed_at'] : null;
@@ -353,6 +361,30 @@ class Submission implements ModelInterface, ArrayAccess
     public function setTest($test)
     {
         $this->container['test'] = $test;
+
+        return $this;
+    }
+
+    /**
+     * Gets editable
+     *
+     * @return bool|null
+     */
+    public function getEditable()
+    {
+        return $this->container['editable'];
+    }
+
+    /**
+     * Sets editable
+     *
+     * @param bool|null $editable editable
+     *
+     * @return $this
+     */
+    public function setEditable($editable)
+    {
+        $this->container['editable'] = $editable;
 
         return $this;
     }

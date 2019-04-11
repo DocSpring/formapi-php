@@ -133,6 +133,13 @@ class TemplateTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test attribute "editable_submissions"
+     */
+    public function testPropertyEditableSubmissions()
+    {
+    }
+
+    /**
      * Test attribute "expire_submissions"
      */
     public function testPropertyExpireSubmissions()

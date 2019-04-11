@@ -91,6 +91,13 @@ class SubmissionTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test attribute "editable"
+     */
+    public function testPropertyEditable()
+    {
+    }
+
+    /**
      * Test attribute "expired"
      */
     public function testPropertyExpired()

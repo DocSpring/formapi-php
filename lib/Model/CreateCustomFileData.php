@@ -192,6 +192,10 @@ class CreateCustomFileData implements ModelInterface, ArrayAccess
         if ($this->container['cache_id'] === null) {
             $invalidProperties[] = "'cache_id' can't be null";
         }
+        if ((mb_strlen($this->container['cache_id']) < 1)) {
+            $invalidProperties[] = "invalid value for 'cache_id', the character length must be bigger than or equal to 1.";
+        }
+
         return $invalidProperties;
     }
 
@@ -226,6 +230,11 @@ class CreateCustomFileData implements ModelInterface, ArrayAccess
      */
     public function setCacheId($cache_id)
     {
+
+        if ((mb_strlen($cache_id) < 1)) {
+            throw new \InvalidArgumentException('invalid length for $cache_id when calling CreateCustomFileData., must be bigger than or equal to 1.');
+        }
+
         $this->container['cache_id'] = $cache_id;
 
         return $this;

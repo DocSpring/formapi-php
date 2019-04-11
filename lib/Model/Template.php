@@ -65,6 +65,7 @@ class Template implements ModelInterface, ArrayAccess
         'slack_webhook_url' => 'string',
         'blockchain_timestamp_verification' => 'bool',
         'public_web_form' => 'bool',
+        'editable_submissions' => 'bool',
         'expire_submissions' => 'bool',
         'name' => 'string',
         'template_type' => 'string',
@@ -87,6 +88,7 @@ class Template implements ModelInterface, ArrayAccess
         'slack_webhook_url' => null,
         'blockchain_timestamp_verification' => null,
         'public_web_form' => null,
+        'editable_submissions' => null,
         'expire_submissions' => null,
         'name' => null,
         'template_type' => null,
@@ -130,6 +132,7 @@ class Template implements ModelInterface, ArrayAccess
         'slack_webhook_url' => 'slack_webhook_url',
         'blockchain_timestamp_verification' => 'blockchain_timestamp_verification',
         'public_web_form' => 'public_web_form',
+        'editable_submissions' => 'editable_submissions',
         'expire_submissions' => 'expire_submissions',
         'name' => 'name',
         'template_type' => 'template_type',
@@ -152,6 +155,7 @@ class Template implements ModelInterface, ArrayAccess
         'slack_webhook_url' => 'setSlackWebhookUrl',
         'blockchain_timestamp_verification' => 'setBlockchainTimestampVerification',
         'public_web_form' => 'setPublicWebForm',
+        'editable_submissions' => 'setEditableSubmissions',
         'expire_submissions' => 'setExpireSubmissions',
         'name' => 'setName',
         'template_type' => 'setTemplateType',
@@ -174,6 +178,7 @@ class Template implements ModelInterface, ArrayAccess
         'slack_webhook_url' => 'getSlackWebhookUrl',
         'blockchain_timestamp_verification' => 'getBlockchainTimestampVerification',
         'public_web_form' => 'getPublicWebForm',
+        'editable_submissions' => 'getEditableSubmissions',
         'expire_submissions' => 'getExpireSubmissions',
         'name' => 'getName',
         'template_type' => 'getTemplateType',
@@ -267,6 +272,7 @@ class Template implements ModelInterface, ArrayAccess
         $this->container['slack_webhook_url'] = isset($data['slack_webhook_url']) ? $data['slack_webhook_url'] : null;
         $this->container['blockchain_timestamp_verification'] = isset($data['blockchain_timestamp_verification']) ? $data['blockchain_timestamp_verification'] : null;
         $this->container['public_web_form'] = isset($data['public_web_form']) ? $data['public_web_form'] : null;
+        $this->container['editable_submissions'] = isset($data['editable_submissions']) ? $data['editable_submissions'] : null;
         $this->container['expire_submissions'] = isset($data['expire_submissions']) ? $data['expire_submissions'] : null;
         $this->container['name'] = isset($data['name']) ? $data['name'] : null;
         $this->container['template_type'] = isset($data['template_type']) ? $data['template_type'] : null;
@@ -504,6 +510,30 @@ class Template implements ModelInterface, ArrayAccess
     public function setPublicWebForm($public_web_form)
     {
         $this->container['public_web_form'] = $public_web_form;
+
+        return $this;
+    }
+
+    /**
+     * Gets editable_submissions
+     *
+     * @return bool|null
+     */
+    public function getEditableSubmissions()
+    {
+        return $this->container['editable_submissions'];
+    }
+
+    /**
+     * Sets editable_submissions
+     *
+     * @param bool|null $editable_submissions editable_submissions
+     *
+     * @return $this
+     */
+    public function setEditableSubmissions($editable_submissions)
+    {
+        $this->container['editable_submissions'] = $editable_submissions;
 
         return $this;
     }

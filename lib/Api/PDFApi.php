@@ -4769,14 +4769,15 @@ class PDFApi
      * Check the status of a PDF
      *
      * @param  string $submission_id submission_id (required)
+     * @param  bool $include_data include_data (optional)
      *
      * @throws \FormAPI\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return \FormAPI\Model\Submission|\FormAPI\Model\AuthenticationError|\FormAPI\Model\Error
      */
-    public function getSubmission($submission_id)
+    public function getSubmission($submission_id, $include_data = null)
     {
-        list($response) = $this->getSubmissionWithHttpInfo($submission_id);
+        list($response) = $this->getSubmissionWithHttpInfo($submission_id, $include_data);
         return $response;
     }
 
@@ -4786,14 +4787,15 @@ class PDFApi
      * Check the status of a PDF
      *
      * @param  string $submission_id (required)
+     * @param  bool $include_data (optional)
      *
      * @throws \FormAPI\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return array of \FormAPI\Model\Submission|\FormAPI\Model\AuthenticationError|\FormAPI\Model\Error, HTTP status code, HTTP response headers (array of strings)
      */
-    public function getSubmissionWithHttpInfo($submission_id)
+    public function getSubmissionWithHttpInfo($submission_id, $include_data = null)
     {
-        $request = $this->getSubmissionRequest($submission_id);
+        $request = $this->getSubmissionRequest($submission_id, $include_data);
 
         try {
             $options = $this->createHttpClientOption();
@@ -4926,13 +4928,14 @@ class PDFApi
      * Check the status of a PDF
      *
      * @param  string $submission_id (required)
+     * @param  bool $include_data (optional)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function getSubmissionAsync($submission_id)
+    public function getSubmissionAsync($submission_id, $include_data = null)
     {
-        return $this->getSubmissionAsyncWithHttpInfo($submission_id)
+        return $this->getSubmissionAsyncWithHttpInfo($submission_id, $include_data)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -4946,14 +4949,15 @@ class PDFApi
      * Check the status of a PDF
      *
      * @param  string $submission_id (required)
+     * @param  bool $include_data (optional)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function getSubmissionAsyncWithHttpInfo($submission_id)
+    public function getSubmissionAsyncWithHttpInfo($submission_id, $include_data = null)
     {
         $returnType = '\FormAPI\Model\Submission';
-        $request = $this->getSubmissionRequest($submission_id);
+        $request = $this->getSubmissionRequest($submission_id, $include_data);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -4996,11 +5000,12 @@ class PDFApi
      * Create request for operation 'getSubmission'
      *
      * @param  string $submission_id (required)
+     * @param  bool $include_data (optional)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    protected function getSubmissionRequest($submission_id)
+    protected function getSubmissionRequest($submission_id, $include_data = null)
     {
         // verify the required parameter 'submission_id' is set
         if ($submission_id === null || (is_array($submission_id) && count($submission_id) === 0)) {
@@ -5016,6 +5021,10 @@ class PDFApi
         $httpBody = '';
         $multipart = false;
 
+        // query params
+        if ($include_data !== null) {
+            $queryParams['include_data'] = ObjectSerializer::toQueryValue($include_data);
+        }
 
         // path params
         if ($submission_id !== null) {

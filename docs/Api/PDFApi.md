@@ -786,7 +786,7 @@ This endpoint does not need any parameter.
 [[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
 
 # **getSubmission**
-> \FormAPI\Model\Submission getSubmission($submission_id)
+> \FormAPI\Model\Submission getSubmission($submission_id, $include_data)
 
 Check the status of a PDF
 
@@ -808,9 +808,10 @@ $apiInstance = new FormAPI\Api\PDFApi(
     $config
 );
 $submission_id = sub_000000000000000001; // string | 
+$include_data = false; // bool | 
 
 try {
-    $result = $apiInstance->getSubmission($submission_id);
+    $result = $apiInstance->getSubmission($submission_id, $include_data);
     print_r($result);
 } catch (Exception $e) {
     echo 'Exception when calling PDFApi->getSubmission: ', $e->getMessage(), PHP_EOL;
@@ -823,6 +824,7 @@ try {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **submission_id** | **string**|  |
+ **include_data** | **bool**|  | [optional]
 
 ### Return type
 
