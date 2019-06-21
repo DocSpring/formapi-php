@@ -58,6 +58,7 @@ class Submission implements ModelInterface, ArrayAccess
       */
     protected static $openAPITypes = [
         'id' => 'string',
+        'template_id' => 'string',
         'test' => 'bool',
         'editable' => 'bool',
         'expired' => 'bool',
@@ -78,6 +79,7 @@ class Submission implements ModelInterface, ArrayAccess
       */
     protected static $openAPIFormats = [
         'id' => null,
+        'template_id' => null,
         'test' => null,
         'editable' => null,
         'expired' => null,
@@ -119,6 +121,7 @@ class Submission implements ModelInterface, ArrayAccess
      */
     protected static $attributeMap = [
         'id' => 'id',
+        'template_id' => 'template_id',
         'test' => 'test',
         'editable' => 'editable',
         'expired' => 'expired',
@@ -139,6 +142,7 @@ class Submission implements ModelInterface, ArrayAccess
      */
     protected static $setters = [
         'id' => 'setId',
+        'template_id' => 'setTemplateId',
         'test' => 'setTest',
         'editable' => 'setEditable',
         'expired' => 'setExpired',
@@ -159,6 +163,7 @@ class Submission implements ModelInterface, ArrayAccess
      */
     protected static $getters = [
         'id' => 'getId',
+        'template_id' => 'getTemplateId',
         'test' => 'getTest',
         'editable' => 'getEditable',
         'expired' => 'getExpired',
@@ -221,6 +226,8 @@ class Submission implements ModelInterface, ArrayAccess
     const STATE_IMAGE_PROCESSING_FAILED = 'image_processing_failed';
     const STATE_WAITING_FOR_DATA_REQUESTS = 'waiting_for_data_requests';
     const STATE_LIQUID_SYNTAX_ERROR = 'liquid_syntax_error';
+    const STATE_ACCOUNT_SUSPENDED = 'account_suspended';
+    const STATE_LICENSE_REVOKED = 'license_revoked';
     
 
     
@@ -240,6 +247,8 @@ class Submission implements ModelInterface, ArrayAccess
             self::STATE_IMAGE_PROCESSING_FAILED,
             self::STATE_WAITING_FOR_DATA_REQUESTS,
             self::STATE_LIQUID_SYNTAX_ERROR,
+            self::STATE_ACCOUNT_SUSPENDED,
+            self::STATE_LICENSE_REVOKED,
         ];
     }
     
@@ -260,6 +269,7 @@ class Submission implements ModelInterface, ArrayAccess
     public function __construct(array $data = null)
     {
         $this->container['id'] = isset($data['id']) ? $data['id'] : null;
+        $this->container['template_id'] = isset($data['template_id']) ? $data['template_id'] : null;
         $this->container['test'] = isset($data['test']) ? $data['test'] : null;
         $this->container['editable'] = isset($data['editable']) ? $data['editable'] : null;
         $this->container['expired'] = isset($data['expired']) ? $data['expired'] : null;
@@ -337,6 +347,30 @@ class Submission implements ModelInterface, ArrayAccess
     public function setId($id)
     {
         $this->container['id'] = $id;
+
+        return $this;
+    }
+
+    /**
+     * Gets template_id
+     *
+     * @return string|null
+     */
+    public function getTemplateId()
+    {
+        return $this->container['template_id'];
+    }
+
+    /**
+     * Sets template_id
+     *
+     * @param string|null $template_id template_id
+     *
+     * @return $this
+     */
+    public function setTemplateId($template_id)
+    {
+        $this->container['template_id'] = $template_id;
 
         return $this;
     }

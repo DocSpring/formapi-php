@@ -58,17 +58,16 @@ class Templatesv2Template implements ModelInterface, ArrayAccess
       */
     protected static $openAPITypes = [
         'expiration_interval' => 'string',
+        'public_web_form' => 'bool',
         'webhook_url' => 'string',
+        'editable_submissions' => 'bool',
+        'expire_submissions' => 'bool',
         'expire_after' => 'float',
         'allow_additional_properties' => 'bool',
         'document' => '\FormAPI\Model\Templatesv2TemplateDocument',
+        'name' => 'string',
         'public_submissions' => 'bool',
         'slack_webhook_url' => 'string',
-        'blockchain_timestamp_verification' => 'bool',
-        'public_web_form' => 'bool',
-        'editable_submissions' => 'bool',
-        'expire_submissions' => 'bool',
-        'name' => 'string',
         'redirect_url' => 'string'
     ];
 
@@ -79,17 +78,16 @@ class Templatesv2Template implements ModelInterface, ArrayAccess
       */
     protected static $openAPIFormats = [
         'expiration_interval' => null,
+        'public_web_form' => null,
         'webhook_url' => null,
+        'editable_submissions' => null,
+        'expire_submissions' => null,
         'expire_after' => null,
         'allow_additional_properties' => null,
         'document' => null,
+        'name' => null,
         'public_submissions' => null,
         'slack_webhook_url' => null,
-        'blockchain_timestamp_verification' => null,
-        'public_web_form' => null,
-        'editable_submissions' => null,
-        'expire_submissions' => null,
-        'name' => null,
         'redirect_url' => null
     ];
 
@@ -121,17 +119,16 @@ class Templatesv2Template implements ModelInterface, ArrayAccess
      */
     protected static $attributeMap = [
         'expiration_interval' => 'expiration_interval',
+        'public_web_form' => 'public_web_form',
         'webhook_url' => 'webhook_url',
+        'editable_submissions' => 'editable_submissions',
+        'expire_submissions' => 'expire_submissions',
         'expire_after' => 'expire_after',
         'allow_additional_properties' => 'allow_additional_properties',
         'document' => 'document',
+        'name' => 'name',
         'public_submissions' => 'public_submissions',
         'slack_webhook_url' => 'slack_webhook_url',
-        'blockchain_timestamp_verification' => 'blockchain_timestamp_verification',
-        'public_web_form' => 'public_web_form',
-        'editable_submissions' => 'editable_submissions',
-        'expire_submissions' => 'expire_submissions',
-        'name' => 'name',
         'redirect_url' => 'redirect_url'
     ];
 
@@ -142,17 +139,16 @@ class Templatesv2Template implements ModelInterface, ArrayAccess
      */
     protected static $setters = [
         'expiration_interval' => 'setExpirationInterval',
+        'public_web_form' => 'setPublicWebForm',
         'webhook_url' => 'setWebhookUrl',
+        'editable_submissions' => 'setEditableSubmissions',
+        'expire_submissions' => 'setExpireSubmissions',
         'expire_after' => 'setExpireAfter',
         'allow_additional_properties' => 'setAllowAdditionalProperties',
         'document' => 'setDocument',
+        'name' => 'setName',
         'public_submissions' => 'setPublicSubmissions',
         'slack_webhook_url' => 'setSlackWebhookUrl',
-        'blockchain_timestamp_verification' => 'setBlockchainTimestampVerification',
-        'public_web_form' => 'setPublicWebForm',
-        'editable_submissions' => 'setEditableSubmissions',
-        'expire_submissions' => 'setExpireSubmissions',
-        'name' => 'setName',
         'redirect_url' => 'setRedirectUrl'
     ];
 
@@ -163,17 +159,16 @@ class Templatesv2Template implements ModelInterface, ArrayAccess
      */
     protected static $getters = [
         'expiration_interval' => 'getExpirationInterval',
+        'public_web_form' => 'getPublicWebForm',
         'webhook_url' => 'getWebhookUrl',
+        'editable_submissions' => 'getEditableSubmissions',
+        'expire_submissions' => 'getExpireSubmissions',
         'expire_after' => 'getExpireAfter',
         'allow_additional_properties' => 'getAllowAdditionalProperties',
         'document' => 'getDocument',
+        'name' => 'getName',
         'public_submissions' => 'getPublicSubmissions',
         'slack_webhook_url' => 'getSlackWebhookUrl',
-        'blockchain_timestamp_verification' => 'getBlockchainTimestampVerification',
-        'public_web_form' => 'getPublicWebForm',
-        'editable_submissions' => 'getEditableSubmissions',
-        'expire_submissions' => 'getExpireSubmissions',
-        'name' => 'getName',
         'redirect_url' => 'getRedirectUrl'
     ];
 
@@ -255,17 +250,16 @@ class Templatesv2Template implements ModelInterface, ArrayAccess
     public function __construct(array $data = null)
     {
         $this->container['expiration_interval'] = isset($data['expiration_interval']) ? $data['expiration_interval'] : null;
+        $this->container['public_web_form'] = isset($data['public_web_form']) ? $data['public_web_form'] : null;
         $this->container['webhook_url'] = isset($data['webhook_url']) ? $data['webhook_url'] : null;
+        $this->container['editable_submissions'] = isset($data['editable_submissions']) ? $data['editable_submissions'] : null;
+        $this->container['expire_submissions'] = isset($data['expire_submissions']) ? $data['expire_submissions'] : null;
         $this->container['expire_after'] = isset($data['expire_after']) ? $data['expire_after'] : null;
         $this->container['allow_additional_properties'] = isset($data['allow_additional_properties']) ? $data['allow_additional_properties'] : null;
         $this->container['document'] = isset($data['document']) ? $data['document'] : null;
+        $this->container['name'] = isset($data['name']) ? $data['name'] : null;
         $this->container['public_submissions'] = isset($data['public_submissions']) ? $data['public_submissions'] : null;
         $this->container['slack_webhook_url'] = isset($data['slack_webhook_url']) ? $data['slack_webhook_url'] : null;
-        $this->container['blockchain_timestamp_verification'] = isset($data['blockchain_timestamp_verification']) ? $data['blockchain_timestamp_verification'] : null;
-        $this->container['public_web_form'] = isset($data['public_web_form']) ? $data['public_web_form'] : null;
-        $this->container['editable_submissions'] = isset($data['editable_submissions']) ? $data['editable_submissions'] : null;
-        $this->container['expire_submissions'] = isset($data['expire_submissions']) ? $data['expire_submissions'] : null;
-        $this->container['name'] = isset($data['name']) ? $data['name'] : null;
         $this->container['redirect_url'] = isset($data['redirect_url']) ? $data['redirect_url'] : null;
     }
 
@@ -335,6 +329,30 @@ class Templatesv2Template implements ModelInterface, ArrayAccess
     }
 
     /**
+     * Gets public_web_form
+     *
+     * @return bool|null
+     */
+    public function getPublicWebForm()
+    {
+        return $this->container['public_web_form'];
+    }
+
+    /**
+     * Sets public_web_form
+     *
+     * @param bool|null $public_web_form public_web_form
+     *
+     * @return $this
+     */
+    public function setPublicWebForm($public_web_form)
+    {
+        $this->container['public_web_form'] = $public_web_form;
+
+        return $this;
+    }
+
+    /**
      * Gets webhook_url
      *
      * @return string|null
@@ -354,6 +372,54 @@ class Templatesv2Template implements ModelInterface, ArrayAccess
     public function setWebhookUrl($webhook_url)
     {
         $this->container['webhook_url'] = $webhook_url;
+
+        return $this;
+    }
+
+    /**
+     * Gets editable_submissions
+     *
+     * @return bool|null
+     */
+    public function getEditableSubmissions()
+    {
+        return $this->container['editable_submissions'];
+    }
+
+    /**
+     * Sets editable_submissions
+     *
+     * @param bool|null $editable_submissions editable_submissions
+     *
+     * @return $this
+     */
+    public function setEditableSubmissions($editable_submissions)
+    {
+        $this->container['editable_submissions'] = $editable_submissions;
+
+        return $this;
+    }
+
+    /**
+     * Gets expire_submissions
+     *
+     * @return bool|null
+     */
+    public function getExpireSubmissions()
+    {
+        return $this->container['expire_submissions'];
+    }
+
+    /**
+     * Sets expire_submissions
+     *
+     * @param bool|null $expire_submissions expire_submissions
+     *
+     * @return $this
+     */
+    public function setExpireSubmissions($expire_submissions)
+    {
+        $this->container['expire_submissions'] = $expire_submissions;
 
         return $this;
     }
@@ -431,6 +497,30 @@ class Templatesv2Template implements ModelInterface, ArrayAccess
     }
 
     /**
+     * Gets name
+     *
+     * @return string|null
+     */
+    public function getName()
+    {
+        return $this->container['name'];
+    }
+
+    /**
+     * Sets name
+     *
+     * @param string|null $name name
+     *
+     * @return $this
+     */
+    public function setName($name)
+    {
+        $this->container['name'] = $name;
+
+        return $this;
+    }
+
+    /**
      * Gets public_submissions
      *
      * @return bool|null
@@ -474,126 +564,6 @@ class Templatesv2Template implements ModelInterface, ArrayAccess
     public function setSlackWebhookUrl($slack_webhook_url)
     {
         $this->container['slack_webhook_url'] = $slack_webhook_url;
-
-        return $this;
-    }
-
-    /**
-     * Gets blockchain_timestamp_verification
-     *
-     * @return bool|null
-     */
-    public function getBlockchainTimestampVerification()
-    {
-        return $this->container['blockchain_timestamp_verification'];
-    }
-
-    /**
-     * Sets blockchain_timestamp_verification
-     *
-     * @param bool|null $blockchain_timestamp_verification blockchain_timestamp_verification
-     *
-     * @return $this
-     */
-    public function setBlockchainTimestampVerification($blockchain_timestamp_verification)
-    {
-        $this->container['blockchain_timestamp_verification'] = $blockchain_timestamp_verification;
-
-        return $this;
-    }
-
-    /**
-     * Gets public_web_form
-     *
-     * @return bool|null
-     */
-    public function getPublicWebForm()
-    {
-        return $this->container['public_web_form'];
-    }
-
-    /**
-     * Sets public_web_form
-     *
-     * @param bool|null $public_web_form public_web_form
-     *
-     * @return $this
-     */
-    public function setPublicWebForm($public_web_form)
-    {
-        $this->container['public_web_form'] = $public_web_form;
-
-        return $this;
-    }
-
-    /**
-     * Gets editable_submissions
-     *
-     * @return bool|null
-     */
-    public function getEditableSubmissions()
-    {
-        return $this->container['editable_submissions'];
-    }
-
-    /**
-     * Sets editable_submissions
-     *
-     * @param bool|null $editable_submissions editable_submissions
-     *
-     * @return $this
-     */
-    public function setEditableSubmissions($editable_submissions)
-    {
-        $this->container['editable_submissions'] = $editable_submissions;
-
-        return $this;
-    }
-
-    /**
-     * Gets expire_submissions
-     *
-     * @return bool|null
-     */
-    public function getExpireSubmissions()
-    {
-        return $this->container['expire_submissions'];
-    }
-
-    /**
-     * Sets expire_submissions
-     *
-     * @param bool|null $expire_submissions expire_submissions
-     *
-     * @return $this
-     */
-    public function setExpireSubmissions($expire_submissions)
-    {
-        $this->container['expire_submissions'] = $expire_submissions;
-
-        return $this;
-    }
-
-    /**
-     * Gets name
-     *
-     * @return string|null
-     */
-    public function getName()
-    {
-        return $this->container['name'];
-    }
-
-    /**
-     * Sets name
-     *
-     * @param string|null $name name
-     *
-     * @return $this
-     */
-    public function setName($name)
-    {
-        $this->container['name'] = $name;
 
         return $this;
     }

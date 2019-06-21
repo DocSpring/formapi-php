@@ -84,9 +84,30 @@ class Templatesv2TemplateTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test attribute "public_web_form"
+     */
+    public function testPropertyPublicWebForm()
+    {
+    }
+
+    /**
      * Test attribute "webhook_url"
      */
     public function testPropertyWebhookUrl()
+    {
+    }
+
+    /**
+     * Test attribute "editable_submissions"
+     */
+    public function testPropertyEditableSubmissions()
+    {
+    }
+
+    /**
+     * Test attribute "expire_submissions"
+     */
+    public function testPropertyExpireSubmissions()
     {
     }
 
@@ -112,6 +133,13 @@ class Templatesv2TemplateTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test attribute "name"
+     */
+    public function testPropertyName()
+    {
+    }
+
+    /**
      * Test attribute "public_submissions"
      */
     public function testPropertyPublicSubmissions()
@@ -122,41 +150,6 @@ class Templatesv2TemplateTest extends \PHPUnit_Framework_TestCase
      * Test attribute "slack_webhook_url"
      */
     public function testPropertySlackWebhookUrl()
-    {
-    }
-
-    /**
-     * Test attribute "blockchain_timestamp_verification"
-     */
-    public function testPropertyBlockchainTimestampVerification()
-    {
-    }
-
-    /**
-     * Test attribute "public_web_form"
-     */
-    public function testPropertyPublicWebForm()
-    {
-    }
-
-    /**
-     * Test attribute "editable_submissions"
-     */
-    public function testPropertyEditableSubmissions()
-    {
-    }
-
-    /**
-     * Test attribute "expire_submissions"
-     */
-    public function testPropertyExpireSubmissions()
-    {
-    }
-
-    /**
-     * Test attribute "name"
-     */
-    public function testPropertyName()
     {
     }
 

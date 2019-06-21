@@ -22,7 +22,7 @@ Method | HTTP request | Description
 [**getSubmissionBatch**](PDFApi.md#getSubmissionBatch) | **GET** /submissions/batches/{submission_batch_id} | Check the status of a submission batch job
 [**getTemplate**](PDFApi.md#getTemplate) | **GET** /templates/{template_id} | Check the status of an uploaded template
 [**getTemplateSchema**](PDFApi.md#getTemplateSchema) | **GET** /templates/{template_id}/schema | Fetch the JSON schema for a template
-[**getTemplates**](PDFApi.md#getTemplates) | **GET** /templates | Get a list of all templates
+[**listTemplates**](PDFApi.md#listTemplates) | **GET** /templates | Get a list of all templates
 [**testAuthentication**](PDFApi.md#testAuthentication) | **GET** /authentication | Test Authentication
 [**updateDataRequest**](PDFApi.md#updateDataRequest) | **PUT** /data_requests/{data_request_id} | Update a submission data request
 
@@ -1005,8 +1005,8 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
 
-# **getTemplates**
-> \FormAPI\Model\Template[] getTemplates($page, $per_page)
+# **listTemplates**
+> \FormAPI\Model\Template[] listTemplates($query, $page, $per_page)
 
 Get a list of all templates
 
@@ -1027,14 +1027,15 @@ $apiInstance = new FormAPI\Api\PDFApi(
     new GuzzleHttp\Client(),
     $config
 );
+$query = 2; // string | Search By Name
 $page = 2; // int | Default: 1
 $per_page = 1; // int | Default: 50
 
 try {
-    $result = $apiInstance->getTemplates($page, $per_page);
+    $result = $apiInstance->listTemplates($query, $page, $per_page);
     print_r($result);
 } catch (Exception $e) {
-    echo 'Exception when calling PDFApi->getTemplates: ', $e->getMessage(), PHP_EOL;
+    echo 'Exception when calling PDFApi->listTemplates: ', $e->getMessage(), PHP_EOL;
 }
 ?>
 ```
@@ -1043,6 +1044,7 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
+ **query** | **string**| Search By Name | [optional]
  **page** | **int**| Default: 1 | [optional]
  **per_page** | **int**| Default: 50 | [optional]
 

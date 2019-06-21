@@ -63,7 +63,6 @@ class PendingTemplate implements ModelInterface, ArrayAccess
         'allow_additional_properties' => 'bool',
         'public_submissions' => 'bool',
         'slack_webhook_url' => 'string',
-        'blockchain_timestamp_verification' => 'bool',
         'public_web_form' => 'bool',
         'editable_submissions' => 'bool',
         'expire_submissions' => 'bool',
@@ -85,7 +84,6 @@ class PendingTemplate implements ModelInterface, ArrayAccess
         'allow_additional_properties' => null,
         'public_submissions' => null,
         'slack_webhook_url' => null,
-        'blockchain_timestamp_verification' => null,
         'public_web_form' => null,
         'editable_submissions' => null,
         'expire_submissions' => null,
@@ -128,7 +126,6 @@ class PendingTemplate implements ModelInterface, ArrayAccess
         'allow_additional_properties' => 'allow_additional_properties',
         'public_submissions' => 'public_submissions',
         'slack_webhook_url' => 'slack_webhook_url',
-        'blockchain_timestamp_verification' => 'blockchain_timestamp_verification',
         'public_web_form' => 'public_web_form',
         'editable_submissions' => 'editable_submissions',
         'expire_submissions' => 'expire_submissions',
@@ -150,7 +147,6 @@ class PendingTemplate implements ModelInterface, ArrayAccess
         'allow_additional_properties' => 'setAllowAdditionalProperties',
         'public_submissions' => 'setPublicSubmissions',
         'slack_webhook_url' => 'setSlackWebhookUrl',
-        'blockchain_timestamp_verification' => 'setBlockchainTimestampVerification',
         'public_web_form' => 'setPublicWebForm',
         'editable_submissions' => 'setEditableSubmissions',
         'expire_submissions' => 'setExpireSubmissions',
@@ -172,7 +168,6 @@ class PendingTemplate implements ModelInterface, ArrayAccess
         'allow_additional_properties' => 'getAllowAdditionalProperties',
         'public_submissions' => 'getPublicSubmissions',
         'slack_webhook_url' => 'getSlackWebhookUrl',
-        'blockchain_timestamp_verification' => 'getBlockchainTimestampVerification',
         'public_web_form' => 'getPublicWebForm',
         'editable_submissions' => 'getEditableSubmissions',
         'expire_submissions' => 'getExpireSubmissions',
@@ -265,7 +260,6 @@ class PendingTemplate implements ModelInterface, ArrayAccess
         $this->container['allow_additional_properties'] = isset($data['allow_additional_properties']) ? $data['allow_additional_properties'] : null;
         $this->container['public_submissions'] = isset($data['public_submissions']) ? $data['public_submissions'] : null;
         $this->container['slack_webhook_url'] = isset($data['slack_webhook_url']) ? $data['slack_webhook_url'] : null;
-        $this->container['blockchain_timestamp_verification'] = isset($data['blockchain_timestamp_verification']) ? $data['blockchain_timestamp_verification'] : null;
         $this->container['public_web_form'] = isset($data['public_web_form']) ? $data['public_web_form'] : null;
         $this->container['editable_submissions'] = isset($data['editable_submissions']) ? $data['editable_submissions'] : null;
         $this->container['expire_submissions'] = isset($data['expire_submissions']) ? $data['expire_submissions'] : null;
@@ -456,30 +450,6 @@ class PendingTemplate implements ModelInterface, ArrayAccess
     public function setSlackWebhookUrl($slack_webhook_url)
     {
         $this->container['slack_webhook_url'] = $slack_webhook_url;
-
-        return $this;
-    }
-
-    /**
-     * Gets blockchain_timestamp_verification
-     *
-     * @return bool|null
-     */
-    public function getBlockchainTimestampVerification()
-    {
-        return $this->container['blockchain_timestamp_verification'];
-    }
-
-    /**
-     * Sets blockchain_timestamp_verification
-     *
-     * @param bool|null $blockchain_timestamp_verification blockchain_timestamp_verification
-     *
-     * @return $this
-     */
-    public function setBlockchainTimestampVerification($blockchain_timestamp_verification)
-    {
-        $this->container['blockchain_timestamp_verification'] = $blockchain_timestamp_verification;
 
         return $this;
     }

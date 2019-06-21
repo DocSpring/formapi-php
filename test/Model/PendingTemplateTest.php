@@ -119,13 +119,6 @@ class PendingTemplateTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Test attribute "blockchain_timestamp_verification"
-     */
-    public function testPropertyBlockchainTimestampVerification()
-    {
-    }
-
-    /**
      * Test attribute "public_web_form"
      */
     public function testPropertyPublicWebForm()
