@@ -67,6 +67,7 @@ class Submission implements ModelInterface, ArrayAccess
         'state' => 'string',
         'metadata' => 'object',
         'download_url' => 'string',
+        'permanent_download_url' => 'string',
         'batch_id' => 'string',
         'data_requests' => '\FormAPI\Model\SubmissionDataRequest[]',
         'actions' => '\FormAPI\Model\SubmissionAction[]'
@@ -88,6 +89,7 @@ class Submission implements ModelInterface, ArrayAccess
         'state' => null,
         'metadata' => null,
         'download_url' => null,
+        'permanent_download_url' => null,
         'batch_id' => null,
         'data_requests' => null,
         'actions' => null
@@ -130,6 +132,7 @@ class Submission implements ModelInterface, ArrayAccess
         'state' => 'state',
         'metadata' => 'metadata',
         'download_url' => 'download_url',
+        'permanent_download_url' => 'permanent_download_url',
         'batch_id' => 'batch_id',
         'data_requests' => 'data_requests',
         'actions' => 'actions'
@@ -151,6 +154,7 @@ class Submission implements ModelInterface, ArrayAccess
         'state' => 'setState',
         'metadata' => 'setMetadata',
         'download_url' => 'setDownloadUrl',
+        'permanent_download_url' => 'setPermanentDownloadUrl',
         'batch_id' => 'setBatchId',
         'data_requests' => 'setDataRequests',
         'actions' => 'setActions'
@@ -172,6 +176,7 @@ class Submission implements ModelInterface, ArrayAccess
         'state' => 'getState',
         'metadata' => 'getMetadata',
         'download_url' => 'getDownloadUrl',
+        'permanent_download_url' => 'getPermanentDownloadUrl',
         'batch_id' => 'getBatchId',
         'data_requests' => 'getDataRequests',
         'actions' => 'getActions'
@@ -278,6 +283,7 @@ class Submission implements ModelInterface, ArrayAccess
         $this->container['state'] = isset($data['state']) ? $data['state'] : null;
         $this->container['metadata'] = isset($data['metadata']) ? $data['metadata'] : null;
         $this->container['download_url'] = isset($data['download_url']) ? $data['download_url'] : null;
+        $this->container['permanent_download_url'] = isset($data['permanent_download_url']) ? $data['permanent_download_url'] : null;
         $this->container['batch_id'] = isset($data['batch_id']) ? $data['batch_id'] : null;
         $this->container['data_requests'] = isset($data['data_requests']) ? $data['data_requests'] : null;
         $this->container['actions'] = isset($data['actions']) ? $data['actions'] : null;
@@ -572,6 +578,30 @@ class Submission implements ModelInterface, ArrayAccess
     public function setDownloadUrl($download_url)
     {
         $this->container['download_url'] = $download_url;
+
+        return $this;
+    }
+
+    /**
+     * Gets permanent_download_url
+     *
+     * @return string|null
+     */
+    public function getPermanentDownloadUrl()
+    {
+        return $this->container['permanent_download_url'];
+    }
+
+    /**
+     * Sets permanent_download_url
+     *
+     * @param string|null $permanent_download_url permanent_download_url
+     *
+     * @return $this
+     */
+    public function setPermanentDownloadUrl($permanent_download_url)
+    {
+        $this->container['permanent_download_url'] = $permanent_download_url;
 
         return $this;
     }

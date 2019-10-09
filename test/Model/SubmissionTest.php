@@ -147,6 +147,13 @@ class SubmissionTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test attribute "permanent_download_url"
+     */
+    public function testPropertyPermanentDownloadUrl()
+    {
+    }
+
+    /**
      * Test attribute "batch_id"
      */
     public function testPropertyBatchId()
