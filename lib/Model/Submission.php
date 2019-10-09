@@ -225,7 +225,7 @@ class Submission implements ModelInterface, ArrayAccess
     const STATE_IMAGE_DOWNLOAD_FAILED = 'image_download_failed';
     const STATE_IMAGE_PROCESSING_FAILED = 'image_processing_failed';
     const STATE_WAITING_FOR_DATA_REQUESTS = 'waiting_for_data_requests';
-    const STATE_LIQUID_SYNTAX_ERROR = 'liquid_syntax_error';
+    const STATE_SYNTAX_ERROR = 'syntax_error';
     const STATE_ACCOUNT_SUSPENDED = 'account_suspended';
     const STATE_LICENSE_REVOKED = 'license_revoked';
     
@@ -246,7 +246,7 @@ class Submission implements ModelInterface, ArrayAccess
             self::STATE_IMAGE_DOWNLOAD_FAILED,
             self::STATE_IMAGE_PROCESSING_FAILED,
             self::STATE_WAITING_FOR_DATA_REQUESTS,
-            self::STATE_LIQUID_SYNTAX_ERROR,
+            self::STATE_SYNTAX_ERROR,
             self::STATE_ACCOUNT_SUSPENDED,
             self::STATE_LICENSE_REVOKED,
         ];

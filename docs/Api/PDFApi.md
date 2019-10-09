@@ -10,8 +10,10 @@ Method | HTTP request | Description
 [**combineSubmissions**](PDFApi.md#combineSubmissions) | **POST** /combined_submissions | Merge generated PDFs together
 [**createCustomFileFromUpload**](PDFApi.md#createCustomFileFromUpload) | **POST** /custom_files | Create a new custom file from a cached presign upload
 [**createDataRequestToken**](PDFApi.md#createDataRequestToken) | **POST** /data_requests/{data_request_id}/tokens | Creates a new data request token for form authentication
+[**createFolder**](PDFApi.md#createFolder) | **POST** /folders/ | Create a folder
 [**createTemplate**](PDFApi.md#createTemplate) | **POST** /templates | Upload a new PDF template with a file upload
 [**createTemplateFromUpload**](PDFApi.md#createTemplateFromUpload) | **POST** /templates?v&#x3D;2 | Create a new PDF template from a cached presign upload
+[**deleteFolder**](PDFApi.md#deleteFolder) | **DELETE** /folders/{folder_id} | Delete a folder
 [**expireCombinedSubmission**](PDFApi.md#expireCombinedSubmission) | **DELETE** /combined_submissions/{combined_submission_id} | Expire a combined submission
 [**expireSubmission**](PDFApi.md#expireSubmission) | **DELETE** /submissions/{submission_id} | Expire a PDF submission
 [**generatePDF**](PDFApi.md#generatePDF) | **POST** /templates/{template_id}/submissions | Generates a new PDF
@@ -20,9 +22,13 @@ Method | HTTP request | Description
 [**getPresignUrl**](PDFApi.md#getPresignUrl) | **GET** /uploads/presign | Get a presigned URL so that you can upload a file to our AWS S3 bucket
 [**getSubmission**](PDFApi.md#getSubmission) | **GET** /submissions/{submission_id} | Check the status of a PDF
 [**getSubmissionBatch**](PDFApi.md#getSubmissionBatch) | **GET** /submissions/batches/{submission_batch_id} | Check the status of a submission batch job
-[**getTemplate**](PDFApi.md#getTemplate) | **GET** /templates/{template_id} | Check the status of an uploaded template
+[**getTemplate**](PDFApi.md#getTemplate) | **GET** /templates/{template_id} | Get a single template
 [**getTemplateSchema**](PDFApi.md#getTemplateSchema) | **GET** /templates/{template_id}/schema | Fetch the JSON schema for a template
+[**listFolders**](PDFApi.md#listFolders) | **GET** /folders/ | Get a list of all folders
 [**listTemplates**](PDFApi.md#listTemplates) | **GET** /templates | Get a list of all templates
+[**moveFolderToFolder**](PDFApi.md#moveFolderToFolder) | **POST** /folders/{folder_id}/move | Move a folder
+[**moveTemplateToFolder**](PDFApi.md#moveTemplateToFolder) | **POST** /templates/{template_id}/move | Move Template to folder
+[**renameFolder**](PDFApi.md#renameFolder) | **POST** /folders/{folder_id}/rename | Rename a folder
 [**testAuthentication**](PDFApi.md#testAuthentication) | **GET** /authentication | Test Authentication
 [**updateDataRequest**](PDFApi.md#updateDataRequest) | **PUT** /data_requests/{data_request_id} | Update a submission data request
 
@@ -353,8 +359,62 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
 
+# **createFolder**
+> \FormAPI\Model\Folder createFolder($create_folder_data)
+
+Create a folder
+
+### Example
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+// Configure HTTP basic authorization: api_token_basic
+$config = FormAPI\Configuration::getDefaultConfiguration()
+              ->setUsername('YOUR_USERNAME')
+              ->setPassword('YOUR_PASSWORD');
+
+
+$apiInstance = new FormAPI\Api\PDFApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client(),
+    $config
+);
+$create_folder_data = new \FormAPI\Model\CreateFolderData(); // \FormAPI\Model\CreateFolderData | 
+
+try {
+    $result = $apiInstance->createFolder($create_folder_data);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling PDFApi->createFolder: ', $e->getMessage(), PHP_EOL;
+}
+?>
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **create_folder_data** | [**\FormAPI\Model\CreateFolderData**](../Model/CreateFolderData.md)|  |
+
+### Return type
+
+[**\FormAPI\Model\Folder**](../Model/Folder.md)
+
+### Authorization
+
+[api_token_basic](../../README.md#api_token_basic)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
+
 # **createTemplate**
-> \FormAPI\Model\PendingTemplate createTemplate($template_document, $template_name)
+> \FormAPI\Model\PendingTemplate createTemplate($template_document, $template_name, $template_parent_folder_id)
 
 Upload a new PDF template with a file upload
 
@@ -377,9 +437,10 @@ $apiInstance = new FormAPI\Api\PDFApi(
 );
 $template_document = "/path/to/file.txt"; // \SplFileObject | 
 $template_name = 'template_name_example'; // string | 
+$template_parent_folder_id = 'template_parent_folder_id_example'; // string | 
 
 try {
-    $result = $apiInstance->createTemplate($template_document, $template_name);
+    $result = $apiInstance->createTemplate($template_document, $template_name, $template_parent_folder_id);
     print_r($result);
 } catch (Exception $e) {
     echo 'Exception when calling PDFApi->createTemplate: ', $e->getMessage(), PHP_EOL;
@@ -393,6 +454,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **template_document** | **\SplFileObject****\SplFileObject**|  |
  **template_name** | **string**|  |
+ **template_parent_folder_id** | **string**|  | [optional]
 
 ### Return type
 
@@ -459,6 +521,60 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
  - **Content-Type**: application/json
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
+
+# **deleteFolder**
+> \FormAPI\Model\Folder deleteFolder($folder_id)
+
+Delete a folder
+
+### Example
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+// Configure HTTP basic authorization: api_token_basic
+$config = FormAPI\Configuration::getDefaultConfiguration()
+              ->setUsername('YOUR_USERNAME')
+              ->setPassword('YOUR_PASSWORD');
+
+
+$apiInstance = new FormAPI\Api\PDFApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client(),
+    $config
+);
+$folder_id = fld_000000000000000001; // string | 
+
+try {
+    $result = $apiInstance->deleteFolder($folder_id);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling PDFApi->deleteFolder: ', $e->getMessage(), PHP_EOL;
+}
+?>
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **folder_id** | **string**|  |
+
+### Return type
+
+[**\FormAPI\Model\Folder**](../Model/Folder.md)
+
+### Authorization
+
+[api_token_basic](../../README.md#api_token_basic)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
  - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
@@ -900,7 +1016,7 @@ Name | Type | Description  | Notes
 # **getTemplate**
 > \FormAPI\Model\Template getTemplate($template_id)
 
-Check the status of an uploaded template
+Get a single template
 
 ### Example
 ```php
@@ -919,7 +1035,7 @@ $apiInstance = new FormAPI\Api\PDFApi(
     new GuzzleHttp\Client(),
     $config
 );
-$template_id = tpl_000000000000000001; // string | 
+$template_id = tpl_000000000000000011; // string | 
 
 try {
     $result = $apiInstance->getTemplate($template_id);
@@ -1005,8 +1121,62 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
 
+# **listFolders**
+> \FormAPI\Model\Folder[] listFolders($parent_folder_id)
+
+Get a list of all folders
+
+### Example
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+// Configure HTTP basic authorization: api_token_basic
+$config = FormAPI\Configuration::getDefaultConfiguration()
+              ->setUsername('YOUR_USERNAME')
+              ->setPassword('YOUR_PASSWORD');
+
+
+$apiInstance = new FormAPI\Api\PDFApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client(),
+    $config
+);
+$parent_folder_id = fld_000000000000000002; // string | Filter By Folder Id
+
+try {
+    $result = $apiInstance->listFolders($parent_folder_id);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling PDFApi->listFolders: ', $e->getMessage(), PHP_EOL;
+}
+?>
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **parent_folder_id** | **string**| Filter By Folder Id | [optional]
+
+### Return type
+
+[**\FormAPI\Model\Folder[]**](../Model/Folder.md)
+
+### Authorization
+
+[api_token_basic](../../README.md#api_token_basic)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
+
 # **listTemplates**
-> \FormAPI\Model\Template[] listTemplates($query, $page, $per_page)
+> \FormAPI\Model\Template[] listTemplates($query, $parent_folder_id, $page, $per_page)
 
 Get a list of all templates
 
@@ -1028,11 +1198,12 @@ $apiInstance = new FormAPI\Api\PDFApi(
     $config
 );
 $query = 2; // string | Search By Name
+$parent_folder_id = fld_000000000000000001; // string | Filter By Folder Id
 $page = 2; // int | Default: 1
 $per_page = 1; // int | Default: 50
 
 try {
-    $result = $apiInstance->listTemplates($query, $page, $per_page);
+    $result = $apiInstance->listTemplates($query, $parent_folder_id, $page, $per_page);
     print_r($result);
 } catch (Exception $e) {
     echo 'Exception when calling PDFApi->listTemplates: ', $e->getMessage(), PHP_EOL;
@@ -1045,6 +1216,7 @@ try {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **query** | **string**| Search By Name | [optional]
+ **parent_folder_id** | **string**| Filter By Folder Id | [optional]
  **page** | **int**| Default: 1 | [optional]
  **per_page** | **int**| Default: 50 | [optional]
 
@@ -1059,6 +1231,173 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
  - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
+
+# **moveFolderToFolder**
+> \FormAPI\Model\Folder moveFolderToFolder($folder_id, $move_folder_data)
+
+Move a folder
+
+### Example
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+// Configure HTTP basic authorization: api_token_basic
+$config = FormAPI\Configuration::getDefaultConfiguration()
+              ->setUsername('YOUR_USERNAME')
+              ->setPassword('YOUR_PASSWORD');
+
+
+$apiInstance = new FormAPI\Api\PDFApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client(),
+    $config
+);
+$folder_id = fld_000000000000000001; // string | 
+$move_folder_data = new \FormAPI\Model\MoveFolderData(); // \FormAPI\Model\MoveFolderData | 
+
+try {
+    $result = $apiInstance->moveFolderToFolder($folder_id, $move_folder_data);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling PDFApi->moveFolderToFolder: ', $e->getMessage(), PHP_EOL;
+}
+?>
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **folder_id** | **string**|  |
+ **move_folder_data** | [**\FormAPI\Model\MoveFolderData**](../Model/MoveFolderData.md)|  |
+
+### Return type
+
+[**\FormAPI\Model\Folder**](../Model/Folder.md)
+
+### Authorization
+
+[api_token_basic](../../README.md#api_token_basic)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
+
+# **moveTemplateToFolder**
+> \FormAPI\Model\Template moveTemplateToFolder($template_id, $move_template_data)
+
+Move Template to folder
+
+### Example
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+// Configure HTTP basic authorization: api_token_basic
+$config = FormAPI\Configuration::getDefaultConfiguration()
+              ->setUsername('YOUR_USERNAME')
+              ->setPassword('YOUR_PASSWORD');
+
+
+$apiInstance = new FormAPI\Api\PDFApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client(),
+    $config
+);
+$template_id = tpl_000000000000000001; // string | 
+$move_template_data = new \FormAPI\Model\MoveTemplateData(); // \FormAPI\Model\MoveTemplateData | 
+
+try {
+    $result = $apiInstance->moveTemplateToFolder($template_id, $move_template_data);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling PDFApi->moveTemplateToFolder: ', $e->getMessage(), PHP_EOL;
+}
+?>
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **template_id** | **string**|  |
+ **move_template_data** | [**\FormAPI\Model\MoveTemplateData**](../Model/MoveTemplateData.md)|  |
+
+### Return type
+
+[**\FormAPI\Model\Template**](../Model/Template.md)
+
+### Authorization
+
+[api_token_basic](../../README.md#api_token_basic)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
+
+# **renameFolder**
+> renameFolder($folder_id, $rename_folder_data)
+
+Rename a folder
+
+### Example
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+// Configure HTTP basic authorization: api_token_basic
+$config = FormAPI\Configuration::getDefaultConfiguration()
+              ->setUsername('YOUR_USERNAME')
+              ->setPassword('YOUR_PASSWORD');
+
+
+$apiInstance = new FormAPI\Api\PDFApi(
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client(),
+    $config
+);
+$folder_id = fld_000000000000000001; // string | 
+$rename_folder_data = new \FormAPI\Model\RenameFolderData(); // \FormAPI\Model\RenameFolderData | 
+
+try {
+    $apiInstance->renameFolder($folder_id, $rename_folder_data);
+} catch (Exception $e) {
+    echo 'Exception when calling PDFApi->renameFolder: ', $e->getMessage(), PHP_EOL;
+}
+?>
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **folder_id** | **string**|  |
+ **rename_folder_data** | [**\FormAPI\Model\RenameFolderData**](../Model/RenameFolderData.md)|  |
+
+### Return type
+
+void (empty response body)
+
+### Authorization
+
+[api_token_basic](../../README.md#api_token_basic)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
  - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)

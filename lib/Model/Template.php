@@ -59,18 +59,22 @@ class Template implements ModelInterface, ArrayAccess
     protected static $openAPITypes = [
         'expiration_interval' => 'string',
         'webhook_url' => 'string',
+        'parent_folder_id' => 'string',
         'expire_after' => 'float',
         'allow_additional_properties' => 'bool',
         'public_submissions' => 'bool',
         'slack_webhook_url' => 'string',
+        'path' => 'string',
         'public_web_form' => 'bool',
         'editable_submissions' => 'bool',
         'expire_submissions' => 'bool',
         'name' => 'string',
+        'permanent_document_url' => 'string',
         'template_type' => 'string',
         'id' => 'string',
         'page_dimensions' => 'float[][]',
-        'redirect_url' => 'string'
+        'redirect_url' => 'string',
+        'document_url' => 'string'
     ];
 
     /**
@@ -81,18 +85,22 @@ class Template implements ModelInterface, ArrayAccess
     protected static $openAPIFormats = [
         'expiration_interval' => null,
         'webhook_url' => null,
+        'parent_folder_id' => null,
         'expire_after' => null,
         'allow_additional_properties' => null,
         'public_submissions' => null,
         'slack_webhook_url' => null,
+        'path' => null,
         'public_web_form' => null,
         'editable_submissions' => null,
         'expire_submissions' => null,
         'name' => null,
+        'permanent_document_url' => null,
         'template_type' => null,
         'id' => null,
         'page_dimensions' => null,
-        'redirect_url' => null
+        'redirect_url' => null,
+        'document_url' => null
     ];
 
     /**
@@ -124,18 +132,22 @@ class Template implements ModelInterface, ArrayAccess
     protected static $attributeMap = [
         'expiration_interval' => 'expiration_interval',
         'webhook_url' => 'webhook_url',
+        'parent_folder_id' => 'parent_folder_id',
         'expire_after' => 'expire_after',
         'allow_additional_properties' => 'allow_additional_properties',
         'public_submissions' => 'public_submissions',
         'slack_webhook_url' => 'slack_webhook_url',
+        'path' => 'path',
         'public_web_form' => 'public_web_form',
         'editable_submissions' => 'editable_submissions',
         'expire_submissions' => 'expire_submissions',
         'name' => 'name',
+        'permanent_document_url' => 'permanent_document_url',
         'template_type' => 'template_type',
         'id' => 'id',
         'page_dimensions' => 'page_dimensions',
-        'redirect_url' => 'redirect_url'
+        'redirect_url' => 'redirect_url',
+        'document_url' => 'document_url'
     ];
 
     /**
@@ -146,18 +158,22 @@ class Template implements ModelInterface, ArrayAccess
     protected static $setters = [
         'expiration_interval' => 'setExpirationInterval',
         'webhook_url' => 'setWebhookUrl',
+        'parent_folder_id' => 'setParentFolderId',
         'expire_after' => 'setExpireAfter',
         'allow_additional_properties' => 'setAllowAdditionalProperties',
         'public_submissions' => 'setPublicSubmissions',
         'slack_webhook_url' => 'setSlackWebhookUrl',
+        'path' => 'setPath',
         'public_web_form' => 'setPublicWebForm',
         'editable_submissions' => 'setEditableSubmissions',
         'expire_submissions' => 'setExpireSubmissions',
         'name' => 'setName',
+        'permanent_document_url' => 'setPermanentDocumentUrl',
         'template_type' => 'setTemplateType',
         'id' => 'setId',
         'page_dimensions' => 'setPageDimensions',
-        'redirect_url' => 'setRedirectUrl'
+        'redirect_url' => 'setRedirectUrl',
+        'document_url' => 'setDocumentUrl'
     ];
 
     /**
@@ -168,18 +184,22 @@ class Template implements ModelInterface, ArrayAccess
     protected static $getters = [
         'expiration_interval' => 'getExpirationInterval',
         'webhook_url' => 'getWebhookUrl',
+        'parent_folder_id' => 'getParentFolderId',
         'expire_after' => 'getExpireAfter',
         'allow_additional_properties' => 'getAllowAdditionalProperties',
         'public_submissions' => 'getPublicSubmissions',
         'slack_webhook_url' => 'getSlackWebhookUrl',
+        'path' => 'getPath',
         'public_web_form' => 'getPublicWebForm',
         'editable_submissions' => 'getEditableSubmissions',
         'expire_submissions' => 'getExpireSubmissions',
         'name' => 'getName',
+        'permanent_document_url' => 'getPermanentDocumentUrl',
         'template_type' => 'getTemplateType',
         'id' => 'getId',
         'page_dimensions' => 'getPageDimensions',
-        'redirect_url' => 'getRedirectUrl'
+        'redirect_url' => 'getRedirectUrl',
+        'document_url' => 'getDocumentUrl'
     ];
 
     /**
@@ -261,18 +281,22 @@ class Template implements ModelInterface, ArrayAccess
     {
         $this->container['expiration_interval'] = isset($data['expiration_interval']) ? $data['expiration_interval'] : null;
         $this->container['webhook_url'] = isset($data['webhook_url']) ? $data['webhook_url'] : null;
+        $this->container['parent_folder_id'] = isset($data['parent_folder_id']) ? $data['parent_folder_id'] : null;
         $this->container['expire_after'] = isset($data['expire_after']) ? $data['expire_after'] : null;
         $this->container['allow_additional_properties'] = isset($data['allow_additional_properties']) ? $data['allow_additional_properties'] : null;
         $this->container['public_submissions'] = isset($data['public_submissions']) ? $data['public_submissions'] : null;
         $this->container['slack_webhook_url'] = isset($data['slack_webhook_url']) ? $data['slack_webhook_url'] : null;
+        $this->container['path'] = isset($data['path']) ? $data['path'] : null;
         $this->container['public_web_form'] = isset($data['public_web_form']) ? $data['public_web_form'] : null;
         $this->container['editable_submissions'] = isset($data['editable_submissions']) ? $data['editable_submissions'] : null;
         $this->container['expire_submissions'] = isset($data['expire_submissions']) ? $data['expire_submissions'] : null;
         $this->container['name'] = isset($data['name']) ? $data['name'] : null;
+        $this->container['permanent_document_url'] = isset($data['permanent_document_url']) ? $data['permanent_document_url'] : null;
         $this->container['template_type'] = isset($data['template_type']) ? $data['template_type'] : null;
         $this->container['id'] = isset($data['id']) ? $data['id'] : null;
         $this->container['page_dimensions'] = isset($data['page_dimensions']) ? $data['page_dimensions'] : null;
         $this->container['redirect_url'] = isset($data['redirect_url']) ? $data['redirect_url'] : null;
+        $this->container['document_url'] = isset($data['document_url']) ? $data['document_url'] : null;
     }
 
     /**
@@ -360,6 +384,30 @@ class Template implements ModelInterface, ArrayAccess
     public function setWebhookUrl($webhook_url)
     {
         $this->container['webhook_url'] = $webhook_url;
+
+        return $this;
+    }
+
+    /**
+     * Gets parent_folder_id
+     *
+     * @return string|null
+     */
+    public function getParentFolderId()
+    {
+        return $this->container['parent_folder_id'];
+    }
+
+    /**
+     * Sets parent_folder_id
+     *
+     * @param string|null $parent_folder_id parent_folder_id
+     *
+     * @return $this
+     */
+    public function setParentFolderId($parent_folder_id)
+    {
+        $this->container['parent_folder_id'] = $parent_folder_id;
 
         return $this;
     }
@@ -461,6 +509,30 @@ class Template implements ModelInterface, ArrayAccess
     }
 
     /**
+     * Gets path
+     *
+     * @return string|null
+     */
+    public function getPath()
+    {
+        return $this->container['path'];
+    }
+
+    /**
+     * Sets path
+     *
+     * @param string|null $path path
+     *
+     * @return $this
+     */
+    public function setPath($path)
+    {
+        $this->container['path'] = $path;
+
+        return $this;
+    }
+
+    /**
      * Gets public_web_form
      *
      * @return bool|null
@@ -557,6 +629,30 @@ class Template implements ModelInterface, ArrayAccess
     }
 
     /**
+     * Gets permanent_document_url
+     *
+     * @return string|null
+     */
+    public function getPermanentDocumentUrl()
+    {
+        return $this->container['permanent_document_url'];
+    }
+
+    /**
+     * Sets permanent_document_url
+     *
+     * @param string|null $permanent_document_url permanent_document_url
+     *
+     * @return $this
+     */
+    public function setPermanentDocumentUrl($permanent_document_url)
+    {
+        $this->container['permanent_document_url'] = $permanent_document_url;
+
+        return $this;
+    }
+
+    /**
      * Gets template_type
      *
      * @return string|null
@@ -648,6 +744,30 @@ class Template implements ModelInterface, ArrayAccess
     public function setRedirectUrl($redirect_url)
     {
         $this->container['redirect_url'] = $redirect_url;
+
+        return $this;
+    }
+
+    /**
+     * Gets document_url
+     *
+     * @return string|null
+     */
+    public function getDocumentUrl()
+    {
+        return $this->container['document_url'];
+    }
+
+    /**
+     * Sets document_url
+     *
+     * @param string|null $document_url document_url
+     *
+     * @return $this
+     */
+    public function setDocumentUrl($document_url)
+    {
+        $this->container['document_url'] = $document_url;
 
         return $this;
     }

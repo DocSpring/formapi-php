@@ -91,6 +91,13 @@ class TemplateTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test attribute "parent_folder_id"
+     */
+    public function testPropertyParentFolderId()
+    {
+    }
+
+    /**
      * Test attribute "expire_after"
      */
     public function testPropertyExpireAfter()
@@ -115,6 +122,13 @@ class TemplateTest extends \PHPUnit_Framework_TestCase
      * Test attribute "slack_webhook_url"
      */
     public function testPropertySlackWebhookUrl()
+    {
+    }
+
+    /**
+     * Test attribute "path"
+     */
+    public function testPropertyPath()
     {
     }
 
@@ -147,6 +161,13 @@ class TemplateTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test attribute "permanent_document_url"
+     */
+    public function testPropertyPermanentDocumentUrl()
+    {
+    }
+
+    /**
      * Test attribute "template_type"
      */
     public function testPropertyTemplateType()
@@ -171,6 +192,13 @@ class TemplateTest extends \PHPUnit_Framework_TestCase
      * Test attribute "redirect_url"
      */
     public function testPropertyRedirectUrl()
+    {
+    }
+
+    /**
+     * Test attribute "document_url"
+     */
+    public function testPropertyDocumentUrl()
     {
     }
 }

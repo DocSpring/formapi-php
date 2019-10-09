@@ -91,6 +91,13 @@ class PendingTemplateTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test attribute "parent_folder_id"
+     */
+    public function testPropertyParentFolderId()
+    {
+    }
+
+    /**
      * Test attribute "expire_after"
      */
     public function testPropertyExpireAfter()
@@ -115,6 +122,13 @@ class PendingTemplateTest extends \PHPUnit_Framework_TestCase
      * Test attribute "slack_webhook_url"
      */
     public function testPropertySlackWebhookUrl()
+    {
+    }
+
+    /**
+     * Test attribute "path"
+     */
+    public function testPropertyPath()
     {
     }
 

@@ -2114,20 +2114,370 @@ class PDFApi
     }
 
     /**
+     * Operation createFolder
+     *
+     * Create a folder
+     *
+     * @param  \FormAPI\Model\CreateFolderData $create_folder_data create_folder_data (required)
+     *
+     * @throws \FormAPI\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return \FormAPI\Model\Folder|\FormAPI\Model\AuthenticationError|\FormAPI\Model\Error|\FormAPI\Model\Folder
+     */
+    public function createFolder($create_folder_data)
+    {
+        list($response) = $this->createFolderWithHttpInfo($create_folder_data);
+        return $response;
+    }
+
+    /**
+     * Operation createFolderWithHttpInfo
+     *
+     * Create a folder
+     *
+     * @param  \FormAPI\Model\CreateFolderData $create_folder_data (required)
+     *
+     * @throws \FormAPI\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return array of \FormAPI\Model\Folder|\FormAPI\Model\AuthenticationError|\FormAPI\Model\Error|\FormAPI\Model\Folder, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function createFolderWithHttpInfo($create_folder_data)
+    {
+        $request = $this->createFolderRequest($create_folder_data);
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? $e->getResponse()->getBody()->getContents() : null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    $response->getBody()
+                );
+            }
+
+            $responseBody = $response->getBody();
+            switch($statusCode) {
+                case 200:
+                    if ('\FormAPI\Model\Folder' === '\SplFileObject') {
+                        $content = $responseBody; //stream goes to serializer
+                    } else {
+                        $content = $responseBody->getContents();
+                        if ('\FormAPI\Model\Folder' !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\FormAPI\Model\Folder', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 401:
+                    if ('\FormAPI\Model\AuthenticationError' === '\SplFileObject') {
+                        $content = $responseBody; //stream goes to serializer
+                    } else {
+                        $content = $responseBody->getContents();
+                        if ('\FormAPI\Model\AuthenticationError' !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\FormAPI\Model\AuthenticationError', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 404:
+                    if ('\FormAPI\Model\Error' === '\SplFileObject') {
+                        $content = $responseBody; //stream goes to serializer
+                    } else {
+                        $content = $responseBody->getContents();
+                        if ('\FormAPI\Model\Error' !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\FormAPI\Model\Error', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 422:
+                    if ('\FormAPI\Model\Folder' === '\SplFileObject') {
+                        $content = $responseBody; //stream goes to serializer
+                    } else {
+                        $content = $responseBody->getContents();
+                        if ('\FormAPI\Model\Folder' !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\FormAPI\Model\Folder', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+            }
+
+            $returnType = '\FormAPI\Model\Folder';
+            $responseBody = $response->getBody();
+            if ($returnType === '\SplFileObject') {
+                $content = $responseBody; //stream goes to serializer
+            } else {
+                $content = $responseBody->getContents();
+                if ($returnType !== 'string') {
+                    $content = json_decode($content);
+                }
+            }
+
+            return [
+                ObjectSerializer::deserialize($content, $returnType, []),
+                $response->getStatusCode(),
+                $response->getHeaders()
+            ];
+
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\FormAPI\Model\Folder',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+                case 401:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\FormAPI\Model\AuthenticationError',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+                case 404:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\FormAPI\Model\Error',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+                case 422:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\FormAPI\Model\Folder',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+            }
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation createFolderAsync
+     *
+     * Create a folder
+     *
+     * @param  \FormAPI\Model\CreateFolderData $create_folder_data (required)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function createFolderAsync($create_folder_data)
+    {
+        return $this->createFolderAsyncWithHttpInfo($create_folder_data)
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /**
+     * Operation createFolderAsyncWithHttpInfo
+     *
+     * Create a folder
+     *
+     * @param  \FormAPI\Model\CreateFolderData $create_folder_data (required)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function createFolderAsyncWithHttpInfo($create_folder_data)
+    {
+        $returnType = '\FormAPI\Model\Folder';
+        $request = $this->createFolderRequest($create_folder_data);
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    $responseBody = $response->getBody();
+                    if ($returnType === '\SplFileObject') {
+                        $content = $responseBody; //stream goes to serializer
+                    } else {
+                        $content = $responseBody->getContents();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    throw new ApiException(
+                        sprintf(
+                            '[%d] Error connecting to the API (%s)',
+                            $statusCode,
+                            $exception->getRequest()->getUri()
+                        ),
+                        $statusCode,
+                        $response->getHeaders(),
+                        $response->getBody()
+                    );
+                }
+            );
+    }
+
+    /**
+     * Create request for operation 'createFolder'
+     *
+     * @param  \FormAPI\Model\CreateFolderData $create_folder_data (required)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    protected function createFolderRequest($create_folder_data)
+    {
+        // verify the required parameter 'create_folder_data' is set
+        if ($create_folder_data === null || (is_array($create_folder_data) && count($create_folder_data) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $create_folder_data when calling createFolder'
+            );
+        }
+
+        $resourcePath = '/folders/';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+
+
+        // body params
+        $_tempBody = null;
+        if (isset($create_folder_data)) {
+            $_tempBody = $create_folder_data;
+        }
+
+        if ($multipart) {
+            $headers = $this->headerSelector->selectHeadersForMultipart(
+                ['application/json']
+            );
+        } else {
+            $headers = $this->headerSelector->selectHeaders(
+                ['application/json'],
+                ['application/json']
+            );
+        }
+
+        // for model (json/xml)
+        if (isset($_tempBody)) {
+            // $_tempBody is the method argument, if present
+            $httpBody = $_tempBody;
+            // \stdClass has no __toString(), so we should encode it manually
+            if ($httpBody instanceof \stdClass && $headers['Content-Type'] === 'application/json') {
+                $httpBody = \GuzzleHttp\json_encode($httpBody);
+            }
+        } elseif (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $multipartContents[] = [
+                        'name' => $formParamName,
+                        'contents' => $formParamValue
+                    ];
+                }
+                // for HTTP post (form)
+                $httpBody = new MultipartStream($multipartContents);
+
+            } elseif ($headers['Content-Type'] === 'application/json') {
+                $httpBody = \GuzzleHttp\json_encode($formParams);
+
+            } else {
+                // for HTTP post (form)
+                $httpBody = \GuzzleHttp\Psr7\build_query($formParams);
+            }
+        }
+
+        // this endpoint requires HTTP basic authentication
+        if ($this->config->getUsername() !== null || $this->config->getPassword() !== null) {
+            $headers['Authorization'] = 'Basic ' . base64_encode($this->config->getUsername() . ":" . $this->config->getPassword());
+        }
+
+        $defaultHeaders = [];
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $query = \GuzzleHttp\Psr7\build_query($queryParams);
+        return new Request(
+            'POST',
+            $this->config->getHost() . $resourcePath . ($query ? "?{$query}" : ''),
+            $headers,
+            $httpBody
+        );
+    }
+
+    /**
      * Operation createTemplate
      *
      * Upload a new PDF template with a file upload
      *
      * @param  \SplFileObject $template_document template_document (required)
      * @param  string $template_name template_name (required)
+     * @param  string $template_parent_folder_id template_parent_folder_id (optional)
      *
      * @throws \FormAPI\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return \FormAPI\Model\PendingTemplate|\FormAPI\Model\AuthenticationError
      */
-    public function createTemplate($template_document, $template_name)
+    public function createTemplate($template_document, $template_name, $template_parent_folder_id = null)
     {
-        list($response) = $this->createTemplateWithHttpInfo($template_document, $template_name);
+        list($response) = $this->createTemplateWithHttpInfo($template_document, $template_name, $template_parent_folder_id);
         return $response;
     }
 
@@ -2138,14 +2488,15 @@ class PDFApi
      *
      * @param  \SplFileObject $template_document (required)
      * @param  string $template_name (required)
+     * @param  string $template_parent_folder_id (optional)
      *
      * @throws \FormAPI\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return array of \FormAPI\Model\PendingTemplate|\FormAPI\Model\AuthenticationError, HTTP status code, HTTP response headers (array of strings)
      */
-    public function createTemplateWithHttpInfo($template_document, $template_name)
+    public function createTemplateWithHttpInfo($template_document, $template_name, $template_parent_folder_id = null)
     {
-        $request = $this->createTemplateRequest($template_document, $template_name);
+        $request = $this->createTemplateRequest($template_document, $template_name, $template_parent_folder_id);
 
         try {
             $options = $this->createHttpClientOption();
@@ -2256,13 +2607,14 @@ class PDFApi
      *
      * @param  \SplFileObject $template_document (required)
      * @param  string $template_name (required)
+     * @param  string $template_parent_folder_id (optional)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function createTemplateAsync($template_document, $template_name)
+    public function createTemplateAsync($template_document, $template_name, $template_parent_folder_id = null)
     {
-        return $this->createTemplateAsyncWithHttpInfo($template_document, $template_name)
+        return $this->createTemplateAsyncWithHttpInfo($template_document, $template_name, $template_parent_folder_id)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -2277,14 +2629,15 @@ class PDFApi
      *
      * @param  \SplFileObject $template_document (required)
      * @param  string $template_name (required)
+     * @param  string $template_parent_folder_id (optional)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function createTemplateAsyncWithHttpInfo($template_document, $template_name)
+    public function createTemplateAsyncWithHttpInfo($template_document, $template_name, $template_parent_folder_id = null)
     {
         $returnType = '\FormAPI\Model\PendingTemplate';
-        $request = $this->createTemplateRequest($template_document, $template_name);
+        $request = $this->createTemplateRequest($template_document, $template_name, $template_parent_folder_id);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -2328,11 +2681,12 @@ class PDFApi
      *
      * @param  \SplFileObject $template_document (required)
      * @param  string $template_name (required)
+     * @param  string $template_parent_folder_id (optional)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    protected function createTemplateRequest($template_document, $template_name)
+    protected function createTemplateRequest($template_document, $template_name, $template_parent_folder_id = null)
     {
         // verify the required parameter 'template_document' is set
         if ($template_document === null || (is_array($template_document) && count($template_document) === 0)) {
@@ -2364,6 +2718,10 @@ class PDFApi
         // form params
         if ($template_name !== null) {
             $formParams['template[name]'] = ObjectSerializer::toFormValue($template_name);
+        }
+        // form params
+        if ($template_parent_folder_id !== null) {
+            $formParams['template[parent_folder_id]'] = ObjectSerializer::toFormValue($template_parent_folder_id);
         }
         // body params
         $_tempBody = null;
@@ -2730,6 +3088,360 @@ class PDFApi
         $query = \GuzzleHttp\Psr7\build_query($queryParams);
         return new Request(
             'POST',
+            $this->config->getHost() . $resourcePath . ($query ? "?{$query}" : ''),
+            $headers,
+            $httpBody
+        );
+    }
+
+    /**
+     * Operation deleteFolder
+     *
+     * Delete a folder
+     *
+     * @param  string $folder_id folder_id (required)
+     *
+     * @throws \FormAPI\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return \FormAPI\Model\Folder|\FormAPI\Model\AuthenticationError|\FormAPI\Model\Error|\FormAPI\Model\Error
+     */
+    public function deleteFolder($folder_id)
+    {
+        list($response) = $this->deleteFolderWithHttpInfo($folder_id);
+        return $response;
+    }
+
+    /**
+     * Operation deleteFolderWithHttpInfo
+     *
+     * Delete a folder
+     *
+     * @param  string $folder_id (required)
+     *
+     * @throws \FormAPI\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return array of \FormAPI\Model\Folder|\FormAPI\Model\AuthenticationError|\FormAPI\Model\Error|\FormAPI\Model\Error, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function deleteFolderWithHttpInfo($folder_id)
+    {
+        $request = $this->deleteFolderRequest($folder_id);
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? $e->getResponse()->getBody()->getContents() : null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    $response->getBody()
+                );
+            }
+
+            $responseBody = $response->getBody();
+            switch($statusCode) {
+                case 200:
+                    if ('\FormAPI\Model\Folder' === '\SplFileObject') {
+                        $content = $responseBody; //stream goes to serializer
+                    } else {
+                        $content = $responseBody->getContents();
+                        if ('\FormAPI\Model\Folder' !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\FormAPI\Model\Folder', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 401:
+                    if ('\FormAPI\Model\AuthenticationError' === '\SplFileObject') {
+                        $content = $responseBody; //stream goes to serializer
+                    } else {
+                        $content = $responseBody->getContents();
+                        if ('\FormAPI\Model\AuthenticationError' !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\FormAPI\Model\AuthenticationError', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 404:
+                    if ('\FormAPI\Model\Error' === '\SplFileObject') {
+                        $content = $responseBody; //stream goes to serializer
+                    } else {
+                        $content = $responseBody->getContents();
+                        if ('\FormAPI\Model\Error' !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\FormAPI\Model\Error', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 422:
+                    if ('\FormAPI\Model\Error' === '\SplFileObject') {
+                        $content = $responseBody; //stream goes to serializer
+                    } else {
+                        $content = $responseBody->getContents();
+                        if ('\FormAPI\Model\Error' !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\FormAPI\Model\Error', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+            }
+
+            $returnType = '\FormAPI\Model\Folder';
+            $responseBody = $response->getBody();
+            if ($returnType === '\SplFileObject') {
+                $content = $responseBody; //stream goes to serializer
+            } else {
+                $content = $responseBody->getContents();
+                if ($returnType !== 'string') {
+                    $content = json_decode($content);
+                }
+            }
+
+            return [
+                ObjectSerializer::deserialize($content, $returnType, []),
+                $response->getStatusCode(),
+                $response->getHeaders()
+            ];
+
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\FormAPI\Model\Folder',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+                case 401:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\FormAPI\Model\AuthenticationError',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+                case 404:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\FormAPI\Model\Error',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+                case 422:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\FormAPI\Model\Error',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+            }
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation deleteFolderAsync
+     *
+     * Delete a folder
+     *
+     * @param  string $folder_id (required)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function deleteFolderAsync($folder_id)
+    {
+        return $this->deleteFolderAsyncWithHttpInfo($folder_id)
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /**
+     * Operation deleteFolderAsyncWithHttpInfo
+     *
+     * Delete a folder
+     *
+     * @param  string $folder_id (required)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function deleteFolderAsyncWithHttpInfo($folder_id)
+    {
+        $returnType = '\FormAPI\Model\Folder';
+        $request = $this->deleteFolderRequest($folder_id);
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    $responseBody = $response->getBody();
+                    if ($returnType === '\SplFileObject') {
+                        $content = $responseBody; //stream goes to serializer
+                    } else {
+                        $content = $responseBody->getContents();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    throw new ApiException(
+                        sprintf(
+                            '[%d] Error connecting to the API (%s)',
+                            $statusCode,
+                            $exception->getRequest()->getUri()
+                        ),
+                        $statusCode,
+                        $response->getHeaders(),
+                        $response->getBody()
+                    );
+                }
+            );
+    }
+
+    /**
+     * Create request for operation 'deleteFolder'
+     *
+     * @param  string $folder_id (required)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    protected function deleteFolderRequest($folder_id)
+    {
+        // verify the required parameter 'folder_id' is set
+        if ($folder_id === null || (is_array($folder_id) && count($folder_id) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $folder_id when calling deleteFolder'
+            );
+        }
+
+        $resourcePath = '/folders/{folder_id}';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+
+        // path params
+        if ($folder_id !== null) {
+            $resourcePath = str_replace(
+                '{' . 'folder_id' . '}',
+                ObjectSerializer::toPathValue($folder_id),
+                $resourcePath
+            );
+        }
+
+        // body params
+        $_tempBody = null;
+
+        if ($multipart) {
+            $headers = $this->headerSelector->selectHeadersForMultipart(
+                ['application/json']
+            );
+        } else {
+            $headers = $this->headerSelector->selectHeaders(
+                ['application/json'],
+                []
+            );
+        }
+
+        // for model (json/xml)
+        if (isset($_tempBody)) {
+            // $_tempBody is the method argument, if present
+            $httpBody = $_tempBody;
+            // \stdClass has no __toString(), so we should encode it manually
+            if ($httpBody instanceof \stdClass && $headers['Content-Type'] === 'application/json') {
+                $httpBody = \GuzzleHttp\json_encode($httpBody);
+            }
+        } elseif (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $multipartContents[] = [
+                        'name' => $formParamName,
+                        'contents' => $formParamValue
+                    ];
+                }
+                // for HTTP post (form)
+                $httpBody = new MultipartStream($multipartContents);
+
+            } elseif ($headers['Content-Type'] === 'application/json') {
+                $httpBody = \GuzzleHttp\json_encode($formParams);
+
+            } else {
+                // for HTTP post (form)
+                $httpBody = \GuzzleHttp\Psr7\build_query($formParams);
+            }
+        }
+
+        // this endpoint requires HTTP basic authentication
+        if ($this->config->getUsername() !== null || $this->config->getPassword() !== null) {
+            $headers['Authorization'] = 'Basic ' . base64_encode($this->config->getUsername() . ":" . $this->config->getPassword());
+        }
+
+        $defaultHeaders = [];
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $query = \GuzzleHttp\Psr7\build_query($queryParams);
+        return new Request(
+            'DELETE',
             $this->config->getHost() . $resourcePath . ($query ? "?{$query}" : ''),
             $headers,
             $httpBody
@@ -5446,7 +6158,7 @@ class PDFApi
     /**
      * Operation getTemplate
      *
-     * Check the status of an uploaded template
+     * Get a single template
      *
      * @param  string $template_id template_id (required)
      *
@@ -5463,7 +6175,7 @@ class PDFApi
     /**
      * Operation getTemplateWithHttpInfo
      *
-     * Check the status of an uploaded template
+     * Get a single template
      *
      * @param  string $template_id (required)
      *
@@ -5603,7 +6315,7 @@ class PDFApi
     /**
      * Operation getTemplateAsync
      *
-     * Check the status of an uploaded template
+     * Get a single template
      *
      * @param  string $template_id (required)
      *
@@ -5623,7 +6335,7 @@ class PDFApi
     /**
      * Operation getTemplateAsyncWithHttpInfo
      *
-     * Check the status of an uploaded template
+     * Get a single template
      *
      * @param  string $template_id (required)
      *
@@ -6106,21 +6818,320 @@ class PDFApi
     }
 
     /**
+     * Operation listFolders
+     *
+     * Get a list of all folders
+     *
+     * @param  string $parent_folder_id Filter By Folder Id (optional)
+     *
+     * @throws \FormAPI\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return \FormAPI\Model\Folder[]|\FormAPI\Model\AuthenticationError
+     */
+    public function listFolders($parent_folder_id = null)
+    {
+        list($response) = $this->listFoldersWithHttpInfo($parent_folder_id);
+        return $response;
+    }
+
+    /**
+     * Operation listFoldersWithHttpInfo
+     *
+     * Get a list of all folders
+     *
+     * @param  string $parent_folder_id Filter By Folder Id (optional)
+     *
+     * @throws \FormAPI\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return array of \FormAPI\Model\Folder[]|\FormAPI\Model\AuthenticationError, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function listFoldersWithHttpInfo($parent_folder_id = null)
+    {
+        $request = $this->listFoldersRequest($parent_folder_id);
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? $e->getResponse()->getBody()->getContents() : null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    $response->getBody()
+                );
+            }
+
+            $responseBody = $response->getBody();
+            switch($statusCode) {
+                case 200:
+                    if ('\FormAPI\Model\Folder[]' === '\SplFileObject') {
+                        $content = $responseBody; //stream goes to serializer
+                    } else {
+                        $content = $responseBody->getContents();
+                        if ('\FormAPI\Model\Folder[]' !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\FormAPI\Model\Folder[]', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 401:
+                    if ('\FormAPI\Model\AuthenticationError' === '\SplFileObject') {
+                        $content = $responseBody; //stream goes to serializer
+                    } else {
+                        $content = $responseBody->getContents();
+                        if ('\FormAPI\Model\AuthenticationError' !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\FormAPI\Model\AuthenticationError', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+            }
+
+            $returnType = '\FormAPI\Model\Folder[]';
+            $responseBody = $response->getBody();
+            if ($returnType === '\SplFileObject') {
+                $content = $responseBody; //stream goes to serializer
+            } else {
+                $content = $responseBody->getContents();
+                if ($returnType !== 'string') {
+                    $content = json_decode($content);
+                }
+            }
+
+            return [
+                ObjectSerializer::deserialize($content, $returnType, []),
+                $response->getStatusCode(),
+                $response->getHeaders()
+            ];
+
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\FormAPI\Model\Folder[]',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+                case 401:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\FormAPI\Model\AuthenticationError',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+            }
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation listFoldersAsync
+     *
+     * Get a list of all folders
+     *
+     * @param  string $parent_folder_id Filter By Folder Id (optional)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function listFoldersAsync($parent_folder_id = null)
+    {
+        return $this->listFoldersAsyncWithHttpInfo($parent_folder_id)
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /**
+     * Operation listFoldersAsyncWithHttpInfo
+     *
+     * Get a list of all folders
+     *
+     * @param  string $parent_folder_id Filter By Folder Id (optional)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function listFoldersAsyncWithHttpInfo($parent_folder_id = null)
+    {
+        $returnType = '\FormAPI\Model\Folder[]';
+        $request = $this->listFoldersRequest($parent_folder_id);
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    $responseBody = $response->getBody();
+                    if ($returnType === '\SplFileObject') {
+                        $content = $responseBody; //stream goes to serializer
+                    } else {
+                        $content = $responseBody->getContents();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    throw new ApiException(
+                        sprintf(
+                            '[%d] Error connecting to the API (%s)',
+                            $statusCode,
+                            $exception->getRequest()->getUri()
+                        ),
+                        $statusCode,
+                        $response->getHeaders(),
+                        $response->getBody()
+                    );
+                }
+            );
+    }
+
+    /**
+     * Create request for operation 'listFolders'
+     *
+     * @param  string $parent_folder_id Filter By Folder Id (optional)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    protected function listFoldersRequest($parent_folder_id = null)
+    {
+
+        $resourcePath = '/folders/';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+        // query params
+        if ($parent_folder_id !== null) {
+            $queryParams['parent_folder_id'] = ObjectSerializer::toQueryValue($parent_folder_id);
+        }
+
+
+        // body params
+        $_tempBody = null;
+
+        if ($multipart) {
+            $headers = $this->headerSelector->selectHeadersForMultipart(
+                ['application/json']
+            );
+        } else {
+            $headers = $this->headerSelector->selectHeaders(
+                ['application/json'],
+                []
+            );
+        }
+
+        // for model (json/xml)
+        if (isset($_tempBody)) {
+            // $_tempBody is the method argument, if present
+            $httpBody = $_tempBody;
+            // \stdClass has no __toString(), so we should encode it manually
+            if ($httpBody instanceof \stdClass && $headers['Content-Type'] === 'application/json') {
+                $httpBody = \GuzzleHttp\json_encode($httpBody);
+            }
+        } elseif (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $multipartContents[] = [
+                        'name' => $formParamName,
+                        'contents' => $formParamValue
+                    ];
+                }
+                // for HTTP post (form)
+                $httpBody = new MultipartStream($multipartContents);
+
+            } elseif ($headers['Content-Type'] === 'application/json') {
+                $httpBody = \GuzzleHttp\json_encode($formParams);
+
+            } else {
+                // for HTTP post (form)
+                $httpBody = \GuzzleHttp\Psr7\build_query($formParams);
+            }
+        }
+
+        // this endpoint requires HTTP basic authentication
+        if ($this->config->getUsername() !== null || $this->config->getPassword() !== null) {
+            $headers['Authorization'] = 'Basic ' . base64_encode($this->config->getUsername() . ":" . $this->config->getPassword());
+        }
+
+        $defaultHeaders = [];
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $query = \GuzzleHttp\Psr7\build_query($queryParams);
+        return new Request(
+            'GET',
+            $this->config->getHost() . $resourcePath . ($query ? "?{$query}" : ''),
+            $headers,
+            $httpBody
+        );
+    }
+
+    /**
      * Operation listTemplates
      *
      * Get a list of all templates
      *
      * @param  string $query Search By Name (optional)
+     * @param  string $parent_folder_id Filter By Folder Id (optional)
      * @param  int $page Default: 1 (optional)
      * @param  int $per_page Default: 50 (optional)
      *
      * @throws \FormAPI\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return \FormAPI\Model\Template[]|\FormAPI\Model\AuthenticationError
+     * @return \FormAPI\Model\Template[]|\FormAPI\Model\AuthenticationError|\FormAPI\Model\Error
      */
-    public function listTemplates($query = null, $page = null, $per_page = null)
+    public function listTemplates($query = null, $parent_folder_id = null, $page = null, $per_page = null)
     {
-        list($response) = $this->listTemplatesWithHttpInfo($query, $page, $per_page);
+        list($response) = $this->listTemplatesWithHttpInfo($query, $parent_folder_id, $page, $per_page);
         return $response;
     }
 
@@ -6130,16 +7141,17 @@ class PDFApi
      * Get a list of all templates
      *
      * @param  string $query Search By Name (optional)
+     * @param  string $parent_folder_id Filter By Folder Id (optional)
      * @param  int $page Default: 1 (optional)
      * @param  int $per_page Default: 50 (optional)
      *
      * @throws \FormAPI\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return array of \FormAPI\Model\Template[]|\FormAPI\Model\AuthenticationError, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \FormAPI\Model\Template[]|\FormAPI\Model\AuthenticationError|\FormAPI\Model\Error, HTTP status code, HTTP response headers (array of strings)
      */
-    public function listTemplatesWithHttpInfo($query = null, $page = null, $per_page = null)
+    public function listTemplatesWithHttpInfo($query = null, $parent_folder_id = null, $page = null, $per_page = null)
     {
-        $request = $this->listTemplatesRequest($query, $page, $per_page);
+        $request = $this->listTemplatesRequest($query, $parent_folder_id, $page, $per_page);
 
         try {
             $options = $this->createHttpClientOption();
@@ -6201,6 +7213,21 @@ class PDFApi
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
+                case 404:
+                    if ('\FormAPI\Model\Error' === '\SplFileObject') {
+                        $content = $responseBody; //stream goes to serializer
+                    } else {
+                        $content = $responseBody->getContents();
+                        if ('\FormAPI\Model\Error' !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\FormAPI\Model\Error', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
             }
 
             $returnType = '\FormAPI\Model\Template[]';
@@ -6238,6 +7265,14 @@ class PDFApi
                     );
                     $e->setResponseObject($data);
                     break;
+                case 404:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\FormAPI\Model\Error',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
             }
             throw $e;
         }
@@ -6249,15 +7284,16 @@ class PDFApi
      * Get a list of all templates
      *
      * @param  string $query Search By Name (optional)
+     * @param  string $parent_folder_id Filter By Folder Id (optional)
      * @param  int $page Default: 1 (optional)
      * @param  int $per_page Default: 50 (optional)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function listTemplatesAsync($query = null, $page = null, $per_page = null)
+    public function listTemplatesAsync($query = null, $parent_folder_id = null, $page = null, $per_page = null)
     {
-        return $this->listTemplatesAsyncWithHttpInfo($query, $page, $per_page)
+        return $this->listTemplatesAsyncWithHttpInfo($query, $parent_folder_id, $page, $per_page)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -6271,16 +7307,17 @@ class PDFApi
      * Get a list of all templates
      *
      * @param  string $query Search By Name (optional)
+     * @param  string $parent_folder_id Filter By Folder Id (optional)
      * @param  int $page Default: 1 (optional)
      * @param  int $per_page Default: 50 (optional)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function listTemplatesAsyncWithHttpInfo($query = null, $page = null, $per_page = null)
+    public function listTemplatesAsyncWithHttpInfo($query = null, $parent_folder_id = null, $page = null, $per_page = null)
     {
         $returnType = '\FormAPI\Model\Template[]';
-        $request = $this->listTemplatesRequest($query, $page, $per_page);
+        $request = $this->listTemplatesRequest($query, $parent_folder_id, $page, $per_page);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -6323,13 +7360,14 @@ class PDFApi
      * Create request for operation 'listTemplates'
      *
      * @param  string $query Search By Name (optional)
+     * @param  string $parent_folder_id Filter By Folder Id (optional)
      * @param  int $page Default: 1 (optional)
      * @param  int $per_page Default: 50 (optional)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    protected function listTemplatesRequest($query = null, $page = null, $per_page = null)
+    protected function listTemplatesRequest($query = null, $parent_folder_id = null, $page = null, $per_page = null)
     {
         if ($page !== null && $page < 1) {
             throw new \InvalidArgumentException('invalid value for "$page" when calling PDFApi.listTemplates, must be bigger than or equal to 1.');
@@ -6353,6 +7391,10 @@ class PDFApi
         // query params
         if ($query !== null) {
             $queryParams['query'] = ObjectSerializer::toQueryValue($query);
+        }
+        // query params
+        if ($parent_folder_id !== null) {
+            $queryParams['parent_folder_id'] = ObjectSerializer::toQueryValue($parent_folder_id);
         }
         // query params
         if ($page !== null) {
@@ -6426,6 +7468,923 @@ class PDFApi
         $query = \GuzzleHttp\Psr7\build_query($queryParams);
         return new Request(
             'GET',
+            $this->config->getHost() . $resourcePath . ($query ? "?{$query}" : ''),
+            $headers,
+            $httpBody
+        );
+    }
+
+    /**
+     * Operation moveFolderToFolder
+     *
+     * Move a folder
+     *
+     * @param  string $folder_id folder_id (required)
+     * @param  \FormAPI\Model\MoveFolderData $move_folder_data move_folder_data (required)
+     *
+     * @throws \FormAPI\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return \FormAPI\Model\Folder|\FormAPI\Model\AuthenticationError|\FormAPI\Model\Error
+     */
+    public function moveFolderToFolder($folder_id, $move_folder_data)
+    {
+        list($response) = $this->moveFolderToFolderWithHttpInfo($folder_id, $move_folder_data);
+        return $response;
+    }
+
+    /**
+     * Operation moveFolderToFolderWithHttpInfo
+     *
+     * Move a folder
+     *
+     * @param  string $folder_id (required)
+     * @param  \FormAPI\Model\MoveFolderData $move_folder_data (required)
+     *
+     * @throws \FormAPI\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return array of \FormAPI\Model\Folder|\FormAPI\Model\AuthenticationError|\FormAPI\Model\Error, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function moveFolderToFolderWithHttpInfo($folder_id, $move_folder_data)
+    {
+        $request = $this->moveFolderToFolderRequest($folder_id, $move_folder_data);
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? $e->getResponse()->getBody()->getContents() : null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    $response->getBody()
+                );
+            }
+
+            $responseBody = $response->getBody();
+            switch($statusCode) {
+                case 200:
+                    if ('\FormAPI\Model\Folder' === '\SplFileObject') {
+                        $content = $responseBody; //stream goes to serializer
+                    } else {
+                        $content = $responseBody->getContents();
+                        if ('\FormAPI\Model\Folder' !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\FormAPI\Model\Folder', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 401:
+                    if ('\FormAPI\Model\AuthenticationError' === '\SplFileObject') {
+                        $content = $responseBody; //stream goes to serializer
+                    } else {
+                        $content = $responseBody->getContents();
+                        if ('\FormAPI\Model\AuthenticationError' !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\FormAPI\Model\AuthenticationError', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 404:
+                    if ('\FormAPI\Model\Error' === '\SplFileObject') {
+                        $content = $responseBody; //stream goes to serializer
+                    } else {
+                        $content = $responseBody->getContents();
+                        if ('\FormAPI\Model\Error' !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\FormAPI\Model\Error', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+            }
+
+            $returnType = '\FormAPI\Model\Folder';
+            $responseBody = $response->getBody();
+            if ($returnType === '\SplFileObject') {
+                $content = $responseBody; //stream goes to serializer
+            } else {
+                $content = $responseBody->getContents();
+                if ($returnType !== 'string') {
+                    $content = json_decode($content);
+                }
+            }
+
+            return [
+                ObjectSerializer::deserialize($content, $returnType, []),
+                $response->getStatusCode(),
+                $response->getHeaders()
+            ];
+
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\FormAPI\Model\Folder',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+                case 401:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\FormAPI\Model\AuthenticationError',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+                case 404:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\FormAPI\Model\Error',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+            }
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation moveFolderToFolderAsync
+     *
+     * Move a folder
+     *
+     * @param  string $folder_id (required)
+     * @param  \FormAPI\Model\MoveFolderData $move_folder_data (required)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function moveFolderToFolderAsync($folder_id, $move_folder_data)
+    {
+        return $this->moveFolderToFolderAsyncWithHttpInfo($folder_id, $move_folder_data)
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /**
+     * Operation moveFolderToFolderAsyncWithHttpInfo
+     *
+     * Move a folder
+     *
+     * @param  string $folder_id (required)
+     * @param  \FormAPI\Model\MoveFolderData $move_folder_data (required)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function moveFolderToFolderAsyncWithHttpInfo($folder_id, $move_folder_data)
+    {
+        $returnType = '\FormAPI\Model\Folder';
+        $request = $this->moveFolderToFolderRequest($folder_id, $move_folder_data);
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    $responseBody = $response->getBody();
+                    if ($returnType === '\SplFileObject') {
+                        $content = $responseBody; //stream goes to serializer
+                    } else {
+                        $content = $responseBody->getContents();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    throw new ApiException(
+                        sprintf(
+                            '[%d] Error connecting to the API (%s)',
+                            $statusCode,
+                            $exception->getRequest()->getUri()
+                        ),
+                        $statusCode,
+                        $response->getHeaders(),
+                        $response->getBody()
+                    );
+                }
+            );
+    }
+
+    /**
+     * Create request for operation 'moveFolderToFolder'
+     *
+     * @param  string $folder_id (required)
+     * @param  \FormAPI\Model\MoveFolderData $move_folder_data (required)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    protected function moveFolderToFolderRequest($folder_id, $move_folder_data)
+    {
+        // verify the required parameter 'folder_id' is set
+        if ($folder_id === null || (is_array($folder_id) && count($folder_id) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $folder_id when calling moveFolderToFolder'
+            );
+        }
+        // verify the required parameter 'move_folder_data' is set
+        if ($move_folder_data === null || (is_array($move_folder_data) && count($move_folder_data) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $move_folder_data when calling moveFolderToFolder'
+            );
+        }
+
+        $resourcePath = '/folders/{folder_id}/move';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+
+        // path params
+        if ($folder_id !== null) {
+            $resourcePath = str_replace(
+                '{' . 'folder_id' . '}',
+                ObjectSerializer::toPathValue($folder_id),
+                $resourcePath
+            );
+        }
+
+        // body params
+        $_tempBody = null;
+        if (isset($move_folder_data)) {
+            $_tempBody = $move_folder_data;
+        }
+
+        if ($multipart) {
+            $headers = $this->headerSelector->selectHeadersForMultipart(
+                ['application/json']
+            );
+        } else {
+            $headers = $this->headerSelector->selectHeaders(
+                ['application/json'],
+                ['application/json']
+            );
+        }
+
+        // for model (json/xml)
+        if (isset($_tempBody)) {
+            // $_tempBody is the method argument, if present
+            $httpBody = $_tempBody;
+            // \stdClass has no __toString(), so we should encode it manually
+            if ($httpBody instanceof \stdClass && $headers['Content-Type'] === 'application/json') {
+                $httpBody = \GuzzleHttp\json_encode($httpBody);
+            }
+        } elseif (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $multipartContents[] = [
+                        'name' => $formParamName,
+                        'contents' => $formParamValue
+                    ];
+                }
+                // for HTTP post (form)
+                $httpBody = new MultipartStream($multipartContents);
+
+            } elseif ($headers['Content-Type'] === 'application/json') {
+                $httpBody = \GuzzleHttp\json_encode($formParams);
+
+            } else {
+                // for HTTP post (form)
+                $httpBody = \GuzzleHttp\Psr7\build_query($formParams);
+            }
+        }
+
+        // this endpoint requires HTTP basic authentication
+        if ($this->config->getUsername() !== null || $this->config->getPassword() !== null) {
+            $headers['Authorization'] = 'Basic ' . base64_encode($this->config->getUsername() . ":" . $this->config->getPassword());
+        }
+
+        $defaultHeaders = [];
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $query = \GuzzleHttp\Psr7\build_query($queryParams);
+        return new Request(
+            'POST',
+            $this->config->getHost() . $resourcePath . ($query ? "?{$query}" : ''),
+            $headers,
+            $httpBody
+        );
+    }
+
+    /**
+     * Operation moveTemplateToFolder
+     *
+     * Move Template to folder
+     *
+     * @param  string $template_id template_id (required)
+     * @param  \FormAPI\Model\MoveTemplateData $move_template_data move_template_data (required)
+     *
+     * @throws \FormAPI\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return \FormAPI\Model\Template|\FormAPI\Model\Error
+     */
+    public function moveTemplateToFolder($template_id, $move_template_data)
+    {
+        list($response) = $this->moveTemplateToFolderWithHttpInfo($template_id, $move_template_data);
+        return $response;
+    }
+
+    /**
+     * Operation moveTemplateToFolderWithHttpInfo
+     *
+     * Move Template to folder
+     *
+     * @param  string $template_id (required)
+     * @param  \FormAPI\Model\MoveTemplateData $move_template_data (required)
+     *
+     * @throws \FormAPI\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return array of \FormAPI\Model\Template|\FormAPI\Model\Error, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function moveTemplateToFolderWithHttpInfo($template_id, $move_template_data)
+    {
+        $request = $this->moveTemplateToFolderRequest($template_id, $move_template_data);
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? $e->getResponse()->getBody()->getContents() : null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    $response->getBody()
+                );
+            }
+
+            $responseBody = $response->getBody();
+            switch($statusCode) {
+                case 200:
+                    if ('\FormAPI\Model\Template' === '\SplFileObject') {
+                        $content = $responseBody; //stream goes to serializer
+                    } else {
+                        $content = $responseBody->getContents();
+                        if ('\FormAPI\Model\Template' !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\FormAPI\Model\Template', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 404:
+                    if ('\FormAPI\Model\Error' === '\SplFileObject') {
+                        $content = $responseBody; //stream goes to serializer
+                    } else {
+                        $content = $responseBody->getContents();
+                        if ('\FormAPI\Model\Error' !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\FormAPI\Model\Error', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+            }
+
+            $returnType = '\FormAPI\Model\Template';
+            $responseBody = $response->getBody();
+            if ($returnType === '\SplFileObject') {
+                $content = $responseBody; //stream goes to serializer
+            } else {
+                $content = $responseBody->getContents();
+                if ($returnType !== 'string') {
+                    $content = json_decode($content);
+                }
+            }
+
+            return [
+                ObjectSerializer::deserialize($content, $returnType, []),
+                $response->getStatusCode(),
+                $response->getHeaders()
+            ];
+
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\FormAPI\Model\Template',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+                case 404:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\FormAPI\Model\Error',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+            }
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation moveTemplateToFolderAsync
+     *
+     * Move Template to folder
+     *
+     * @param  string $template_id (required)
+     * @param  \FormAPI\Model\MoveTemplateData $move_template_data (required)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function moveTemplateToFolderAsync($template_id, $move_template_data)
+    {
+        return $this->moveTemplateToFolderAsyncWithHttpInfo($template_id, $move_template_data)
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /**
+     * Operation moveTemplateToFolderAsyncWithHttpInfo
+     *
+     * Move Template to folder
+     *
+     * @param  string $template_id (required)
+     * @param  \FormAPI\Model\MoveTemplateData $move_template_data (required)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function moveTemplateToFolderAsyncWithHttpInfo($template_id, $move_template_data)
+    {
+        $returnType = '\FormAPI\Model\Template';
+        $request = $this->moveTemplateToFolderRequest($template_id, $move_template_data);
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    $responseBody = $response->getBody();
+                    if ($returnType === '\SplFileObject') {
+                        $content = $responseBody; //stream goes to serializer
+                    } else {
+                        $content = $responseBody->getContents();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    throw new ApiException(
+                        sprintf(
+                            '[%d] Error connecting to the API (%s)',
+                            $statusCode,
+                            $exception->getRequest()->getUri()
+                        ),
+                        $statusCode,
+                        $response->getHeaders(),
+                        $response->getBody()
+                    );
+                }
+            );
+    }
+
+    /**
+     * Create request for operation 'moveTemplateToFolder'
+     *
+     * @param  string $template_id (required)
+     * @param  \FormAPI\Model\MoveTemplateData $move_template_data (required)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    protected function moveTemplateToFolderRequest($template_id, $move_template_data)
+    {
+        // verify the required parameter 'template_id' is set
+        if ($template_id === null || (is_array($template_id) && count($template_id) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $template_id when calling moveTemplateToFolder'
+            );
+        }
+        // verify the required parameter 'move_template_data' is set
+        if ($move_template_data === null || (is_array($move_template_data) && count($move_template_data) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $move_template_data when calling moveTemplateToFolder'
+            );
+        }
+
+        $resourcePath = '/templates/{template_id}/move';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+
+        // path params
+        if ($template_id !== null) {
+            $resourcePath = str_replace(
+                '{' . 'template_id' . '}',
+                ObjectSerializer::toPathValue($template_id),
+                $resourcePath
+            );
+        }
+
+        // body params
+        $_tempBody = null;
+        if (isset($move_template_data)) {
+            $_tempBody = $move_template_data;
+        }
+
+        if ($multipart) {
+            $headers = $this->headerSelector->selectHeadersForMultipart(
+                ['application/json']
+            );
+        } else {
+            $headers = $this->headerSelector->selectHeaders(
+                ['application/json'],
+                ['application/json']
+            );
+        }
+
+        // for model (json/xml)
+        if (isset($_tempBody)) {
+            // $_tempBody is the method argument, if present
+            $httpBody = $_tempBody;
+            // \stdClass has no __toString(), so we should encode it manually
+            if ($httpBody instanceof \stdClass && $headers['Content-Type'] === 'application/json') {
+                $httpBody = \GuzzleHttp\json_encode($httpBody);
+            }
+        } elseif (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $multipartContents[] = [
+                        'name' => $formParamName,
+                        'contents' => $formParamValue
+                    ];
+                }
+                // for HTTP post (form)
+                $httpBody = new MultipartStream($multipartContents);
+
+            } elseif ($headers['Content-Type'] === 'application/json') {
+                $httpBody = \GuzzleHttp\json_encode($formParams);
+
+            } else {
+                // for HTTP post (form)
+                $httpBody = \GuzzleHttp\Psr7\build_query($formParams);
+            }
+        }
+
+        // this endpoint requires HTTP basic authentication
+        if ($this->config->getUsername() !== null || $this->config->getPassword() !== null) {
+            $headers['Authorization'] = 'Basic ' . base64_encode($this->config->getUsername() . ":" . $this->config->getPassword());
+        }
+
+        $defaultHeaders = [];
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $query = \GuzzleHttp\Psr7\build_query($queryParams);
+        return new Request(
+            'POST',
+            $this->config->getHost() . $resourcePath . ($query ? "?{$query}" : ''),
+            $headers,
+            $httpBody
+        );
+    }
+
+    /**
+     * Operation renameFolder
+     *
+     * Rename a folder
+     *
+     * @param  string $folder_id folder_id (required)
+     * @param  \FormAPI\Model\RenameFolderData $rename_folder_data rename_folder_data (required)
+     *
+     * @throws \FormAPI\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return void
+     */
+    public function renameFolder($folder_id, $rename_folder_data)
+    {
+        $this->renameFolderWithHttpInfo($folder_id, $rename_folder_data);
+    }
+
+    /**
+     * Operation renameFolderWithHttpInfo
+     *
+     * Rename a folder
+     *
+     * @param  string $folder_id (required)
+     * @param  \FormAPI\Model\RenameFolderData $rename_folder_data (required)
+     *
+     * @throws \FormAPI\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return array of null, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function renameFolderWithHttpInfo($folder_id, $rename_folder_data)
+    {
+        $request = $this->renameFolderRequest($folder_id, $rename_folder_data);
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? $e->getResponse()->getBody()->getContents() : null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    $response->getBody()
+                );
+            }
+
+            return [null, $statusCode, $response->getHeaders()];
+
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 401:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\FormAPI\Model\AuthenticationError',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+            }
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation renameFolderAsync
+     *
+     * Rename a folder
+     *
+     * @param  string $folder_id (required)
+     * @param  \FormAPI\Model\RenameFolderData $rename_folder_data (required)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function renameFolderAsync($folder_id, $rename_folder_data)
+    {
+        return $this->renameFolderAsyncWithHttpInfo($folder_id, $rename_folder_data)
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /**
+     * Operation renameFolderAsyncWithHttpInfo
+     *
+     * Rename a folder
+     *
+     * @param  string $folder_id (required)
+     * @param  \FormAPI\Model\RenameFolderData $rename_folder_data (required)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function renameFolderAsyncWithHttpInfo($folder_id, $rename_folder_data)
+    {
+        $returnType = '';
+        $request = $this->renameFolderRequest($folder_id, $rename_folder_data);
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    return [null, $response->getStatusCode(), $response->getHeaders()];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    throw new ApiException(
+                        sprintf(
+                            '[%d] Error connecting to the API (%s)',
+                            $statusCode,
+                            $exception->getRequest()->getUri()
+                        ),
+                        $statusCode,
+                        $response->getHeaders(),
+                        $response->getBody()
+                    );
+                }
+            );
+    }
+
+    /**
+     * Create request for operation 'renameFolder'
+     *
+     * @param  string $folder_id (required)
+     * @param  \FormAPI\Model\RenameFolderData $rename_folder_data (required)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    protected function renameFolderRequest($folder_id, $rename_folder_data)
+    {
+        // verify the required parameter 'folder_id' is set
+        if ($folder_id === null || (is_array($folder_id) && count($folder_id) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $folder_id when calling renameFolder'
+            );
+        }
+        // verify the required parameter 'rename_folder_data' is set
+        if ($rename_folder_data === null || (is_array($rename_folder_data) && count($rename_folder_data) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $rename_folder_data when calling renameFolder'
+            );
+        }
+
+        $resourcePath = '/folders/{folder_id}/rename';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+
+        // path params
+        if ($folder_id !== null) {
+            $resourcePath = str_replace(
+                '{' . 'folder_id' . '}',
+                ObjectSerializer::toPathValue($folder_id),
+                $resourcePath
+            );
+        }
+
+        // body params
+        $_tempBody = null;
+        if (isset($rename_folder_data)) {
+            $_tempBody = $rename_folder_data;
+        }
+
+        if ($multipart) {
+            $headers = $this->headerSelector->selectHeadersForMultipart(
+                ['application/json']
+            );
+        } else {
+            $headers = $this->headerSelector->selectHeaders(
+                ['application/json'],
+                ['application/json']
+            );
+        }
+
+        // for model (json/xml)
+        if (isset($_tempBody)) {
+            // $_tempBody is the method argument, if present
+            $httpBody = $_tempBody;
+            // \stdClass has no __toString(), so we should encode it manually
+            if ($httpBody instanceof \stdClass && $headers['Content-Type'] === 'application/json') {
+                $httpBody = \GuzzleHttp\json_encode($httpBody);
+            }
+        } elseif (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $multipartContents[] = [
+                        'name' => $formParamName,
+                        'contents' => $formParamValue
+                    ];
+                }
+                // for HTTP post (form)
+                $httpBody = new MultipartStream($multipartContents);
+
+            } elseif ($headers['Content-Type'] === 'application/json') {
+                $httpBody = \GuzzleHttp\json_encode($formParams);
+
+            } else {
+                // for HTTP post (form)
+                $httpBody = \GuzzleHttp\Psr7\build_query($formParams);
+            }
+        }
+
+        // this endpoint requires HTTP basic authentication
+        if ($this->config->getUsername() !== null || $this->config->getPassword() !== null) {
+            $headers['Authorization'] = 'Basic ' . base64_encode($this->config->getUsername() . ":" . $this->config->getPassword());
+        }
+
+        $defaultHeaders = [];
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $query = \GuzzleHttp\Psr7\build_query($queryParams);
+        return new Request(
+            'POST',
             $this->config->getHost() . $resourcePath . ($query ? "?{$query}" : ''),
             $headers,
             $httpBody

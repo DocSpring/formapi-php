@@ -157,6 +157,18 @@ class PDFApiTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test case for createFolder
+     *
+     * Create a folder.
+     *
+     */
+    public function testCreateFolder()
+    {
+      $create_folder_data = new \FormAPI\Model\CreateFolderData(); // \FormAPI\Model\CreateFolderData | 
+      $result = $apiInstance->createFolder($create_folder_data);
+    }
+
+    /**
      * Test case for createTemplate
      *
      * Upload a new PDF template with a file upload.
@@ -166,7 +178,8 @@ class PDFApiTest extends \PHPUnit_Framework_TestCase
     {
       $template_document = "/path/to/file.txt"; // \SplFileObject | 
       $template_name = 'template_name_example'; // string | 
-      $result = $apiInstance->createTemplate($template_document, $template_name);
+      $template_parent_folder_id = 'template_parent_folder_id_example'; // string | 
+      $result = $apiInstance->createTemplate($template_document, $template_name, $template_parent_folder_id);
     }
 
     /**
@@ -179,6 +192,18 @@ class PDFApiTest extends \PHPUnit_Framework_TestCase
     {
       $create_template_data = new \FormAPI\Model\CreateTemplateData(); // \FormAPI\Model\CreateTemplateData | 
       $result = $apiInstance->createTemplateFromUpload($create_template_data);
+    }
+
+    /**
+     * Test case for deleteFolder
+     *
+     * Delete a folder.
+     *
+     */
+    public function testDeleteFolder()
+    {
+      $folder_id = fld_000000000000000001; // string | 
+      $result = $apiInstance->deleteFolder($folder_id);
     }
 
     /**
@@ -282,12 +307,12 @@ class PDFApiTest extends \PHPUnit_Framework_TestCase
     /**
      * Test case for getTemplate
      *
-     * Check the status of an uploaded template.
+     * Get a single template.
      *
      */
     public function testGetTemplate()
     {
-      $template_id = tpl_000000000000000001; // string | 
+      $template_id = tpl_000000000000000011; // string | 
       $result = $apiInstance->getTemplate($template_id);
     }
 
@@ -304,6 +329,18 @@ class PDFApiTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Test case for listFolders
+     *
+     * Get a list of all folders.
+     *
+     */
+    public function testListFolders()
+    {
+      $parent_folder_id = fld_000000000000000002; // string | Filter By Folder Id
+      $result = $apiInstance->listFolders($parent_folder_id);
+    }
+
+    /**
      * Test case for listTemplates
      *
      * Get a list of all templates.
@@ -312,10 +349,49 @@ class PDFApiTest extends \PHPUnit_Framework_TestCase
     public function testListTemplates()
     {
       $query = 2; // string | Search By Name
+      $parent_folder_id = fld_000000000000000001; // string | Filter By Folder Id
       $page = 2; // int | Default: 1
       $per_page = 1; // int | Default: 50
-      $result = $apiInstance->listTemplates($query, $page, $per_page);
+      $result = $apiInstance->listTemplates($query, $parent_folder_id, $page, $per_page);
     }
+
+    /**
+     * Test case for moveFolderToFolder
+     *
+     * Move a folder.
+     *
+     */
+    public function testMoveFolderToFolder()
+    {
+      $folder_id = fld_000000000000000001; // string | 
+      $move_folder_data = new \FormAPI\Model\MoveFolderData(); // \FormAPI\Model\MoveFolderData | 
+      $result = $apiInstance->moveFolderToFolder($folder_id, $move_folder_data);
+    }
+
+    /**
+     * Test case for moveTemplateToFolder
+     *
+     * Move Template to folder.
+     *
+     */
+    public function testMoveTemplateToFolder()
+    {
+      $template_id = tpl_000000000000000001; // string | 
+      $move_template_data = new \FormAPI\Model\MoveTemplateData(); // \FormAPI\Model\MoveTemplateData | 
+      $result = $apiInstance->moveTemplateToFolder($template_id, $move_template_data);
+    }
+
+    /**
+     * Test case for renameFolder
+     *
+     * Rename a folder.
+     *
+     */
+    public function testRenameFolder()
+    {
+      $folder_id = fld_000000000000000001; // string | 
+      $rename_folder_data = new \FormAPI\Model\RenameFolderData(); // \FormAPI\Model\RenameFolderData | 
+      $apiInstance->renameFolder($folder_id, $rename_folder_data);    }
 
     /**
      * Test case for testAuthentication

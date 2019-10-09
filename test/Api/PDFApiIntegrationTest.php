@@ -290,7 +290,7 @@ class PDFApiTest extends \PHPUnit_Framework_TestCase
       $query = 'API Client Test Template 2'; # String | Search By Name
       $page = 1; // int | Default: 1
       $per_page = 10; // int | Default: 50
-      $responses = $this->apiInstance->listTemplates($query, $page, $per_page);
+      $responses = $this->apiInstance->listTemplates($query, null, $page, $per_page);
       $this->assertCount(1, $responses);
       $firstTemplate = $responses[0];
       $this->assertEquals('tpl_000000000000000002', $firstTemplate->getId());
